@@ -1,0 +1,231 @@
+[gd_scene load_steps=13 format=3 uid="uid://dymsy6owlnnt7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byqe4"]
+albedo_color = Color(0.592157, 0.423529, 0.294118, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5ylk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_w165q"]
+sky_material = SubResource("ProceduralSkyMaterial_f5ylk")
+
+[sub_resource type="Environment" id="Environment_8fh0f"]
+background_mode = 2
+sky = SubResource("Sky_w165q")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="GDScript" id="GDScript_6u40t"]
+script/source = "extends CharacterBody3D
+
+var speed
+const WALK_SPEED = 5.0
+const SPRINT_SPEED = 8.0
+const JUMP_VELOCITY = 4.5
+const SENSITIVITY = 0.005
+
+#BOB Variables
+const  BOB_FREQ = 2.0
+const BOB_AMP = 0.08
+var t_bob = 0.0
+
+const BASE_FOV = 75.0
+const FOV_CHANGE = 1.5
+
+var gravity = 9.8
+
+@onready var head = $Head
+@onready var camera = $Head/Camera3D
+
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		head.rotate_y(-event.relative.x * SENSITIVITY)
+		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"jump\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	#Handle spint.
+	if Input.is_action_pressed(\"sprint\"):
+		speed = SPRINT_SPEED
+	else:
+		speed = WALK_SPEED
+
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if is_on_floor():
+		if direction:
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+		else:
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 2)
+			velocity.z = lerp(velocity.y, direction.y * speed, delta * 2)
+		
+	else:
+		velocity.x = lerp(velocity.x, direction.x * speed, delta * 1.0)
+		velocity.z = lerp(velocity.z, direction.x * speed, delta * 1.0)
+		
+	#Head BOB
+	t_bob += delta * velocity.length() * float(is_on_floor())
+	camera.transform.origin = _headbob(t_bob)	
+
+	# FOV
+	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
+	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	
+	move_and_slide()
+	
+func _headbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = sin(time *BOB_FREQ) * BOB_AMP
+	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
+	return pos
+	
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4xhgi"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7ango"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pky5x"]
+albedo_color = Color(1.3236e-06, 0.500679, 0.252206, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6vgw"]
+albedo_color = Color(0.592157, 0.423529, 0.294118, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oveb0"]
+albedo_color = Color(0.592157, 0.423529, 0.294118, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdbcw"]
+albedo_color = Color(0.592157, 0.423529, 0.294118, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1i75"]
+albedo_color = Color(0.593578, 0.42539, 0.292844, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 12)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -50)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -42)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -34)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8fh0f")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544341, 0)
+script = SubResource("GDScript_6u40t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_4xhgi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("ConvexPolygonShape3D_7ango")
+
+[node name="Head" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+
+[node name="GridMap" type="GridMap" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.89771, -0.565622, -17.5908)
+use_collision = true
+size = Vector3(132, 0.001, 133)
+material = SubResource("StandardMaterial3D_pky5x")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29543, 3.86826, 46.3183)
+use_collision = true
+size = Vector3(132, 10, 4)
+material = SubResource("StandardMaterial3D_w6vgw")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 67.1931, 4.30214, -17.7725)
+use_collision = true
+size = Vector3(132, 10, 4)
+material = SubResource("StandardMaterial3D_oveb0")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59085, 3.73651, -82.3633)
+use_collision = true
+size = Vector3(132, 10, 4)
+material = SubResource("StandardMaterial3D_hdbcw")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(4.37114e-08, 0, 0.999999, 0, 1, 0, -0.999999, 0, 4.37114e-08, -61.0343, 3.60427, -17.5794)
+use_collision = true
+size = Vector3(132, 10, 4)
+material = SubResource("StandardMaterial3D_p1i75")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -8)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -28)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, -26)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -39)
+use_collision = true
+size = Vector3(6, 1, 1)
+material = SubResource("StandardMaterial3D_byqe4")

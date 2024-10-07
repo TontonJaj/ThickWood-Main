@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1xj1ffhiofji"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4cvv"]
+albedo_color = Color(0.220685, 0.542741, 0.313537, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ahexr"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.6461, 0, -60.5)
+material_override = SubResource("StandardMaterial3D_m4cvv")
+use_collision = true
+size = Vector3(10, 1, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.146118, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ahexr")
