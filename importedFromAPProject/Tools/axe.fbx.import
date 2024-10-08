@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dl6fxoff77ny0"
-path="res://.godot/imported/usedAxeLPsized.fbx-783d0a10a60667332f2b41522321b75d.scn"
+uid="uid://dpdhbse5oy7io"
+path="res://.godot/imported/axe.fbx-9a5d5476e303a2de80c4540e80cb7753.scn"
 
 [deps]
 
-source_file="res://usedAxeLPsized.fbx"
-dest_files=["res://.godot/imported/usedAxeLPsized.fbx-783d0a10a60667332f2b41522321b75d.scn"]
+source_file="res://Tools/axe.fbx"
+dest_files=["res://.godot/imported/axe.fbx-9a5d5476e303a2de80c4540e80cb7753.scn"]
 
 [params]
 

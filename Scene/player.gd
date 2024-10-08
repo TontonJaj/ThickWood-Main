@@ -19,6 +19,7 @@ const gravity = 9.8
 var picked_object #zefuck
 var picked = Global.picked #zefuck
 #zefuck I understand the idea but notice that this will not work with multiple picked objects neither with multiple users
+#also declared in global which is wacko
 
 const pull_power = 4
 
