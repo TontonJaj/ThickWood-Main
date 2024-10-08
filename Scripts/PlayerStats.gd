@@ -1,6 +1,6 @@
 extends Node
 
-@export
+#@export what ? 
 var pull_power = 4
 var CP : int
 var SP : int
