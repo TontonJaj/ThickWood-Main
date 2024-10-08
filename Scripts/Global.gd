@@ -5,7 +5,8 @@ var SP = 0
 var GP = 0
 var XP = 0
 
-
+@export 
+var picked = false
 	#log value # Replace with function body.
 		
 	
@@ -18,8 +19,9 @@ func _on_sell_button_body_shape_entered(body_rid: RID, body: Node3D, body_shape_
 	var player = $Player
 	var collider = $AdventurerGuildCounter/MeshInstance3D/SellButton/CollisionShape3D/SellZone
 	var collided_item = collider.get_collider()
-	collided_item != null
-	if collided_item.is_in_group("trees"):
-		collided_item.queue_free()
+	if collided_item != null and collided_item is RigidBody3D:
+		if collided_item.is_in_group("trees"):
+			picked = false
+			collided_item.queue_free()
 	else:
 		print("is not a tree")

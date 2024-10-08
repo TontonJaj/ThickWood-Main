@@ -36,6 +36,7 @@ const FOV_CHANGE = 1.5
 var gravity = 9.8
 
 var picked_object
+var picked = Global.picked
 var pull_power = 4
 
 @onready var head = $Head
@@ -52,10 +53,13 @@ func pick_object():
 	var collider = interaction.get_collider()
 	if collider != null and collider is RigidBody3D and collider.is_in_group(\"trees\"):
 		picked_object = collider
+		picked = true
 		
 func drop_object():
-	if picked_object != null:
-		picked_object = null
+	if picked == true:
+		print(\"picked is true\",picked)
+		picked = false
+		print(\"picked is not true\",picked)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -65,10 +69,12 @@ func _unhandled_input(event):
 
 func _input(event):
 	if Input.is_action_just_pressed(\"pick_up\"):
-		if picked_object == null:
+		if picked == false:
 			pick_object()
-		elif picked_object != null:
+			print(\"picked_func\")
+		elif picked == true:
 			drop_object()
+			print(\"droped func\")
 	
 
 func _physics_process(delta):
@@ -113,7 +119,7 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	#movement of the log
-	if picked_object != null:
+	if picked == true:
 		var a = picked_object.global_transform.origin
 		var b = hand.global_transform.origin
 		picked_object.set_linear_velocity((b-a) * pull_power)
