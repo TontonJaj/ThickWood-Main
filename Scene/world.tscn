@@ -57,9 +57,9 @@ func pick_object():
 		
 func drop_object():
 	if picked == true:
-		print(\"picked is true\",picked)
+		print(\"picked is \",picked)
 		picked = false
-		print(\"picked is not true\",picked)
+		print(\"picked is now \",picked)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -119,7 +119,7 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	#movement of the log
-	if picked == true:
+	if picked == true and picked_object != null:
 		var a = picked_object.global_transform.origin
 		var b = hand.global_transform.origin
 		picked_object.set_linear_velocity((b-a) * pull_power)
@@ -257,7 +257,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gjl8g")
 shape = SubResource("ConvexPolygonShape3D_mgs66")
 
 [node name="SellZone" type="RayCast3D" parent="AdventurerGuildCounter/MeshInstance3D/SellButton/CollisionShape3D"]
-transform = Transform3D(38.0435, 0, 0, 0, -0.230471, 0, 0, 0, 36.2303, -0.019444, -0.0289086, 0.000664234)
+transform = Transform3D(-38.0435, -2.01484e-08, 0, -3.32587e-06, 0.230471, 0, 0, 0, 36.2303, -0.019444, 0.138082, 0.000664234)
 debug_shape_thickness = 5
 
 [connection signal="body_shape_entered" from="AdventurerGuildCounter/MeshInstance3D/SellButton" to="." method="_on_sell_button_body_shape_entered"]
