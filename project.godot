@@ -15,6 +15,11 @@ run/main_scene="res://Scene/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+PlayerStats="*res://Scripts/PlayerStats.gd"
+
 [file_customization]
 
 folder_colors={
