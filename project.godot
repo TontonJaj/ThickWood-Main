@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ThickWood Main"
-run/main_scene="res://Scene/world.tscn"
+run/main_scene="res://Scenes/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,7 +24,7 @@ PlayerStats="*res://Scripts/PlayerStats.gd"
 
 folder_colors={
 "res://Assets/": "red",
-"res://Scene/": "orange",
+"res://Scenes/": "orange",
 "res://Scripts/": "yellow"
 }
 

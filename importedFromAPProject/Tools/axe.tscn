@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://covfw3xr2pjoj"]
+
+[ext_resource type="PackedScene" uid="uid://dpdhbse5oy7io" path="res://importedFromAPProject/Tools/axe.fbx" id="1_3ef04"]
+[ext_resource type="Script" path="res://importedFromAPProject/Tools/axe.gd" id="2_f1iug"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frrhn"]
+albedo_color = Color(0.343644, 0.281889, 0.103177, 1)
+metallic = 0.6
+metallic_specular = 0.0
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvo87"]
+albedo_color = Color(0.404511, 0.404511, 0.404511, 1)
+metallic = 0.48
+metallic_specular = 0.0
+roughness = 0.6
+
+[node name="axe" instance=ExtResource("1_3ef04")]
+transform = Transform3D(-0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0)
+script = ExtResource("2_f1iug")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-1.21557e-07, -2.7809, -1.08508e-07, 0, -1.21557e-07, 2.48237, -2.7809, 1.21557e-07, 4.74303e-15, 0.0205414, 0.0240959, -0.00138653)
+surface_material_override/0 = SubResource("StandardMaterial3D_frrhn")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_tvo87")
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="2"]
+transform = Transform3D(1, 1.63021e-08, 8.76788e-08, -8.74135e-08, -0.00272102, 0.9884, 8.86983e-08, -0.186474, -0.0144227, 0.0209225, 0.672697, 1.82911e-09)
+enabled = false
+hit_back_faces = false

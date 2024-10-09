@@ -1,3 +1,7 @@
+#There is something wrong with the movement and the rotations and directions (they have been reversed temporarily)
+#I need to fix that shit, make the rigman simpler
+#also the head is choppy when animation finishes
+
 extends CharacterBody3D
 
 var speed #what 
@@ -16,16 +20,19 @@ const FOV_CHANGE = 1.5
 
 const gravity = 9.8
 
-var picked_object #zefuck
-var picked = Global.picked #zefuck
-#zefuck I understand the idea but notice that this will not work with multiple picked objects neither with multiple users
+var picked_object 
+var picked = Global.picked 
+var is_chopping = false
+#not sure if we're handling these switches correctly
 
 const pull_power = 4
 
-@onready var head = $Head
-@onready var camera = $Head/Camera3D
-@onready var interaction = $Head/Camera3D/Interaction
-@onready var hand = $Head/Camera3D/Hand
+@onready var head = $metarig/Skeleton3D/HeadCamera/Head
+@onready var body = $metarig
+@onready var camera = $metarig/Skeleton3D/HeadCamera/Head/Camera3D
+@onready var interaction = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Interaction
+@onready var hand = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Hand
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
@@ -46,18 +53,20 @@ func drop_object():
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		body.rotate_y(-event.relative.x * SENSITIVITY)
+		#head.rotate_y(-event.relative.x * SENSITIVITY)
+		camera.rotate_x(event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
 func _input(event):
 	if Input.is_action_just_pressed("pick_up"):
 		if picked == false:
 			pickTreeIfTree()
-			print("picked_func")
 		elif picked == true:
 			drop_object()
-			print("droped func")
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			start_chop_animation()
 	
 
 func _physics_process(delta):
@@ -75,15 +84,17 @@ func _physics_process(delta):
 	else:
 		speed = WALK_SPEED
 
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	#var direction = -(body.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = Vector3(-input_dir.x, 0, -input_dir.y)
+	direction = direction.rotated(Vector3.UP, body.rotation.y)
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
+			if not animation_player.is_playing():
+				animation_player.play("metarig|walking")
+				animation_player.set_speed_scale(1.0)
 		else:
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
@@ -115,3 +126,9 @@ func _headbob(time) -> Vector3:
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
 	
+func start_chop_animation():
+	is_chopping = true
+	animation_player.play("metarig|Chop")
+	# Wait for the animation to finish
+	await animation_player.animation_finished
+	is_chopping = false
