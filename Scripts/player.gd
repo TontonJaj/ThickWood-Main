@@ -12,11 +12,11 @@ const SENSITIVITY = 0.005
 
 #BOB Variables
 const  BOB_FREQ = 2.0
-const BOB_AMP = 0.08
+const BOB_AMP = 0.04
 var t_bob = 0.0 # var name not relatable
 
 const BASE_FOV = 75.0
-const FOV_CHANGE = 1.5
+const FOV_CHANGE = 0.1
 
 const gravity = 9.8
 
@@ -25,7 +25,7 @@ var picked = Global.picked
 var is_chopping = false
 #not sure if we're handling these switches correctly
 
-const pull_power = 4
+const pull_power = 8
 
 @onready var head = $metarig/Skeleton3D/HeadCamera/Head
 @onready var body = $metarig
@@ -101,7 +101,7 @@ func _physics_process(delta):
 		
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.x * speed, delta * 2.0)
+		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
 		
 	#Head BOB
 	t_bob += delta * velocity.length() * float(is_on_floor())

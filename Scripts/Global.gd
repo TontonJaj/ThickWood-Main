@@ -1,11 +1,34 @@
 extends Node
 
-# already declared in PlayerStats.gd ?
-#var CP = 0
-#var SP = 0
-#var GP = 0
-#var XP = 0
+var XP = 0
 
+#Update money
+func update_money(revenue):
+	#Money declaraction
+	var cp = $Wallet.CP
+	var sp = $Wallet.SP
+	var gp = $Wallet.GP
+	var pp = $Wallet.PP
+			
+	cp += revenue
+	if cp > 99:
+		sp += int(cp/100) 
+		cp = fmod(cp,100) 
+	if sp > 99:
+		gp += int(sp/100)
+		sp = fmod(sp,100)
+	if gp > 99:
+		pp += int(gp/100)
+		gp = fmod(gp,100)
+	
+	$Wallet.CP = cp
+	$Wallet.SP = sp
+	$Wallet.GP = gp
+	$Wallet.PP = pp
+
+	print("cp",$Wallet.CP,"sp",$Wallet.SP ,"gp",$Wallet.GP, "pp",pp)
+			
+	
 #@export what ? 
 var picked = false #this is global and easy to hack and bug. also see comment @player.gd
 	#log value # Replace with function body. tehfuck
@@ -28,7 +51,7 @@ func _on_sell_button_body_shape_entered(body_rid: RID, body: Node3D, body_shape_
 		Global.picked = false
 		#trying to take size of the wood and * it by value of wood type
 		var bodyvalue = body.mass
-		print(bodyvalue)
+		update_money(bodyvalue)
 		body.queue_free()
 	else:
 		print("is missing a condition (ingrouptree/rigidbody3d)")
