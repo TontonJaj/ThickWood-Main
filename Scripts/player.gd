@@ -1,4 +1,3 @@
-#There is something wrong with the movement and the rotations and directions (they have been reversed temporarily)
 #I need to fix that shit, make the rigman simpler
 #also the head is choppy when animation finishes
 

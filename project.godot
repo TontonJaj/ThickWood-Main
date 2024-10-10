@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Global="*res://Scripts/Global.gd"
 PlayerStats="*res://Scripts/PlayerStats.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [file_customization]
 
 folder_colors={

@@ -2,13 +2,15 @@ extends Node
 
 var XP = 0
 
+
+
 #Update money
 func update_money(revenue):
 	#Money declaraction
-	var cp = $Wallet.CP
-	var sp = $Wallet.SP
-	var gp = $Wallet.GP
-	var pp = $Wallet.PP
+	var cp = $GUI/Control/Wallet.CP
+	var sp = $GUI/Control/Wallet.SP
+	var gp = $GUI/Control/Wallet.GP
+	var pp = $GUI/Control/Wallet.PP
 			
 	cp += revenue
 	if cp > 99:
@@ -21,17 +23,18 @@ func update_money(revenue):
 		pp += int(gp/100)
 		gp = fmod(gp,100)
 	
-	$Wallet.CP = cp
-	$Wallet.SP = sp
-	$Wallet.GP = gp
-	$Wallet.PP = pp
+	$GUI/Control/Wallet.CP = cp
+	$GUI/Control/Wallet.SP = sp
+	$GUI/Control/Wallet.GP = gp
+	$GUI/Control/Wallet.PP = pp
+	$GUI/Control/Wallet.update_money_wallet()
+	
 
-	print("cp",$Wallet.CP,"sp",$Wallet.SP ,"gp",$Wallet.GP, "pp",pp)
+	print("cp",$GUI/Control/Wallet.CP,"sp",$GUI/Control/Wallet.SP ,"gp",$GUI/Control/Wallet.GP, "pp",pp)
 			
 	
 #@export what ? 
 var picked = false #this is global and easy to hack and bug. also see comment @player.gd
-	#log value # Replace with function body. tehfuck
 		
 
 func _ready():
@@ -50,8 +53,11 @@ func _on_sell_button_body_shape_entered(body_rid: RID, body: Node3D, body_shape_
 	if body.is_in_group("trees") and body is RigidBody3D:
 		Global.picked = false
 		#trying to take size of the wood and * it by value of wood type
-		var bodyvalue = body.mass
-		update_money(bodyvalue)
+		var mass = body.mass #get the mass from the RB3D
+		var value_per_mass = body.value_per_mass #access the custom property
+		var total_value = mass * value_per_mass
+		print("Sold the tree total value: ", total_value)
+		update_money(total_value)
 		body.queue_free()
 	else:
 		print("is missing a condition (ingrouptree/rigidbody3d)")
