@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlqwrc6ktt8h7"
-path="res://.godot/imported/crown-coin (4).png-5193158014f928e4710ce4b49654a372.ctex"
+uid="uid://btu4otarreqm2"
+path="res://.godot/imported/CP.png-54b46d76521ade729a3de3a86817f03d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GUI/crown-coin (4).png"
-dest_files=["res://.godot/imported/crown-coin (4).png-5193158014f928e4710ce4b49654a372.ctex"]
+source_file="res://Assets/GUI/CP.png"
+dest_files=["res://.godot/imported/CP.png-54b46d76521ade729a3de3a86817f03d.ctex"]
 
 [params]
 

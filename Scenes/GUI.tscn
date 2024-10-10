@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddrfi243l4qre"]
+[gd_scene load_steps=11 format=3 uid="uid://ddrfi243l4qre"]
 
-[ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/crown-coin (7).png" id="1_aw4v5"]
+[ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/CP.png" id="1_aw4v5"]
 [ext_resource type="Texture2D" uid="uid://kmbldcubu316" path="res://Assets/GUI/crown-coin (5).png" id="2_feo3s"]
 [ext_resource type="Texture2D" uid="uid://cffpbw1lwx3y3" path="res://Assets/GUI/crown-coin (6).png" id="3_18jrs"]
-[ext_resource type="Texture2D" uid="uid://dlqwrc6ktt8h7" path="res://Assets/GUI/crown-coin (4).png" id="4_pemld"]
+[ext_resource type="Texture2D" uid="uid://dlqwrc6ktt8h7" path="res://Assets/GUI/PP.png" id="4_pemld"]
 [ext_resource type="Script" path="res://Scripts/wallet.gd" id="5_c8auf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
@@ -18,6 +18,18 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="LabelSettings" id="LabelSettings_nm4rs"]
+font_size = 33
+
+[sub_resource type="LabelSettings" id="LabelSettings_qqs80"]
+font_size = 33
+
+[sub_resource type="LabelSettings" id="LabelSettings_o11rb"]
+font_size = 33
+
+[sub_resource type="LabelSettings" id="LabelSettings_gpwre"]
+font_size = 33
+
 [node name="GUI" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
@@ -30,11 +42,11 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
-offset_right = 110.0
-offset_bottom = 86.0
+offset_right = 199.0
+offset_bottom = 145.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
-[node name="CC" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="CP" type="TextureRect" parent="Control/PlayerInfoBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -48,7 +60,7 @@ texture = ExtResource("1_aw4v5")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="SC" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="SP" type="TextureRect" parent="Control/PlayerInfoBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -62,7 +74,7 @@ texture = ExtResource("2_feo3s")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="GC" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="GP" type="TextureRect" parent="Control/PlayerInfoBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -92,40 +104,48 @@ stretch_mode = 4
 
 [node name="Wallet" type="ItemList" parent="Control"]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 28.0
-offset_right = 106.0
-offset_bottom = 82.0
+offset_left = 72.0
+offset_top = 30.0
+offset_right = 193.0
+offset_bottom = 139.0
 script = ExtResource("5_c8auf")
 
 [node name="CPQTY" type="Label" parent="Control/Wallet"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = -1.0
-offset_right = 82.0
-offset_bottom = 22.0
+layout_mode = 1
+offset_left = 6.0
+offset_top = 1.0
+offset_right = 178.0
+offset_bottom = 47.0
 scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_nm4rs")
 
 [node name="SPQTY" type="Label" parent="Control/Wallet"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 12.0
-offset_right = 82.0
-offset_bottom = 35.0
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 178.0
+offset_bottom = 72.0
 scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_qqs80")
 
 [node name="GPQTY" type="Label" parent="Control/Wallet"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 25.0
-offset_right = 82.0
-offset_bottom = 48.0
+offset_left = 6.0
+offset_top = 52.0
+offset_right = 178.0
+offset_bottom = 98.0
 scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_o11rb")
 
 [node name="PPQTY" type="Label" parent="Control/Wallet"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 39.0
-offset_right = 82.0
-offset_bottom = 62.0
+offset_left = 6.0
+offset_top = 77.0
+offset_right = 178.0
+offset_bottom = 123.0
 scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_gpwre")
