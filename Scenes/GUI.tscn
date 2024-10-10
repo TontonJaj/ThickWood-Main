@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddrfi243l4qre"]
+[gd_scene load_steps=15 format=3 uid="uid://ddrfi243l4qre"]
 
 [ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/CP.png" id="1_aw4v5"]
 [ext_resource type="Texture2D" uid="uid://kmbldcubu316" path="res://Assets/GUI/crown-coin (5).png" id="2_feo3s"]
 [ext_resource type="Texture2D" uid="uid://cffpbw1lwx3y3" path="res://Assets/GUI/crown-coin (6).png" id="3_18jrs"]
 [ext_resource type="Texture2D" uid="uid://dlqwrc6ktt8h7" path="res://Assets/GUI/PP.png" id="4_pemld"]
 [ext_resource type="Script" path="res://Scripts/wallet.gd" id="5_c8auf"]
+[ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="6_4fwqr"]
+[ext_resource type="Texture2D" uid="uid://gmn6l4nmom4c" path="res://Assets/GUI/imageedit_15_9719256775.png" id="6_shwbf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
 bg_color = Color(0.14253, 0.592584, 0.152126, 1)
@@ -30,15 +32,21 @@ font_size = 33
 [sub_resource type="LabelSettings" id="LabelSettings_gpwre"]
 font_size = 33
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_heg72"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wb1p"]
+bg_color = Color(0.302685, 0.708307, 3.85046e-07, 1)
+
 [node name="GUI" type="CanvasLayer"]
 
-[node name="Control" type="Control" parent="."]
+[node name="PlayerInfo" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlayerInfoBox" type="Panel" parent="Control"]
+[node name="MoneyInfo" type="Panel" parent="PlayerInfo"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
@@ -46,7 +54,7 @@ offset_right = 199.0
 offset_bottom = 145.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
-[node name="CP" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="CP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -60,7 +68,7 @@ texture = ExtResource("1_aw4v5")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="SP" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="SP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -74,7 +82,7 @@ texture = ExtResource("2_feo3s")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="GP" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="GP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -88,7 +96,7 @@ texture = ExtResource("3_18jrs")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="PP" type="TextureRect" parent="Control/PlayerInfoBox"]
+[node name="PP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0552326
@@ -102,7 +110,7 @@ texture = ExtResource("4_pemld")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Wallet" type="ItemList" parent="Control"]
+[node name="Wallet" type="ItemList" parent="PlayerInfo"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 30.0
@@ -110,7 +118,7 @@ offset_right = 193.0
 offset_bottom = 139.0
 script = ExtResource("5_c8auf")
 
-[node name="CPQTY" type="Label" parent="Control/Wallet"]
+[node name="CPQTY" type="Label" parent="PlayerInfo/Wallet"]
 layout_mode = 1
 offset_left = 6.0
 offset_top = 1.0
@@ -120,7 +128,7 @@ scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_nm4rs")
 
-[node name="SPQTY" type="Label" parent="Control/Wallet"]
+[node name="SPQTY" type="Label" parent="PlayerInfo/Wallet"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 26.0
@@ -130,7 +138,7 @@ scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_qqs80")
 
-[node name="GPQTY" type="Label" parent="Control/Wallet"]
+[node name="GPQTY" type="Label" parent="PlayerInfo/Wallet"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 52.0
@@ -140,7 +148,7 @@ scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_o11rb")
 
-[node name="PPQTY" type="Label" parent="Control/Wallet"]
+[node name="PPQTY" type="Label" parent="PlayerInfo/Wallet"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 77.0
@@ -149,3 +157,52 @@ offset_bottom = 123.0
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_gpwre")
+
+[node name="StaminaBar" type="Panel" parent="PlayerInfo"]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 26.0
+offset_right = 1128.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_heg72")
+script = ExtResource("6_4fwqr")
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerInfo/StaminaBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0343915
+anchor_top = 0.235294
+anchor_right = 0.965608
+anchor_bottom = 0.764706
+offset_left = 2.32804
+offset_top = 0.264706
+offset_right = 2.32803
+offset_bottom = 0.264706
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_8wb1p")
+step = 0.1
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/StaminaBar/ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.328
+offset_top = -17.2647
+offset_right = 186.672
+offset_bottom = 16.7353
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_shwbf")
+
+[node name="StaminaRegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
+wait_time = 0.025
+autostart = true
+
+[connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaRegen" to="PlayerInfo/StaminaBar" method="_on_stamina_regen_timeout"]

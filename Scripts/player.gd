@@ -42,7 +42,10 @@ func pickTreeIfTree():
 	var collider = interaction.get_collider()
 	if collider is RigidBody3D and collider.is_in_group("trees"):
 		picked_object = collider
-		picked = true
+		if picked_object.mass / Global.strength < Global.stamina: #condition to pick something, u need to have strength left
+			print ("object mass is :" , picked_object.mass , "stam used: " , picked_object.mass / Global.strength )
+			Global.stamina -= picked_object.mass / Global.strength
+			picked = true
 		
 func drop_object():
 	if picked == true:
@@ -64,7 +67,8 @@ func _input(event):
 		elif picked == true:
 			drop_object()
 	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and Global.stamina>=10:#stamina>10 for the moment but will need to be > than required stamina, determined by axe_stamina_requirement
+			#lose_stamina()#depend on the axe used in this case
 			start_chop_animation()
 	
 
@@ -114,7 +118,7 @@ func _physics_process(delta):
 	#movement of the log
 	if picked == true and picked_object != null:
 		var a = picked_object.global_transform.origin
-		var b = hand.global_transform.origin
+		var b = hand.global_transform.origin 
 		picked_object.set_linear_velocity((b-a) * pull_power)
 		
 	move_and_slide()

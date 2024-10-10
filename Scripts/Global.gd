@@ -2,15 +2,18 @@ extends Node
 
 var XP = 0
 
-
+#player caracteristic
+@export
+var strength : int = 10
+var stamina : float = 80
 
 #Update money
 func update_money(revenue):
 	#Money declaraction
-	var cp = $GUI/Control/Wallet.CP
-	var sp = $GUI/Control/Wallet.SP
-	var gp = $GUI/Control/Wallet.GP
-	var pp = $GUI/Control/Wallet.PP
+	var cp = $GUI/PlayerInfo/Wallet.CP
+	var sp = $GUI/PlayerInfo/Wallet.SP
+	var gp = $GUI/PlayerInfo/Wallet.GP
+	var pp = $GUI/PlayerInfo/Wallet.PP
 			
 	cp += revenue
 	if cp > 99:
@@ -23,23 +26,25 @@ func update_money(revenue):
 		pp += int(gp/100)
 		gp = fmod(gp,100)
 	
-	$GUI/Control/Wallet.CP = cp
-	$GUI/Control/Wallet.SP = sp
-	$GUI/Control/Wallet.GP = gp
-	$GUI/Control/Wallet.PP = pp
-	$GUI/Control/Wallet.update_money_wallet()
+	$GUI/PlayerInfo/Wallet.CP = cp
+	$GUI/PlayerInfo/Wallet.SP = sp
+	$GUI/PlayerInfo/Wallet.GP = gp
+	$GUI/PlayerInfo/Wallet.PP = pp
+	$GUI/PlayerInfo/Wallet.update_money_wallet()
 	
 
-	print("cp",$GUI/Control/Wallet.CP,"sp",$GUI/Control/Wallet.SP ,"gp",$GUI/Control/Wallet.GP, "pp",pp)
+	print("cp",$GUI/PlayerInfo/Wallet.CP,"sp",$GUI/PlayerInfo/Wallet.SP ,"gp",$GUI/PlayerInfo/Wallet.GP, "pp",pp)
 			
 	
 #@export what ? 
 var picked = false #this is global and easy to hack and bug. also see comment @player.gd
 		
 
-func _ready():
-	# Initialize your game here
+func _ready()-> void:
 	pass
+
+	 
+	
 
 func _input(event):
 	# Check for 'end' input every frame
