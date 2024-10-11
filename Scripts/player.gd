@@ -19,8 +19,7 @@ const FOV_CHANGE = 0.1
 
 const gravity = 9.8
 
-var picked_object 
-var picked = Global.picked 
+var picked_object  
 var is_chopping = false
 #not sure if we're handling these switches correctly
 
@@ -45,13 +44,17 @@ func pickTreeIfTree():
 		if picked_object.mass / Global.strength < Global.stamina: #condition to pick something, u need to have strength left
 			print ("object mass is :" , picked_object.mass , "stam used: " , picked_object.mass / Global.strength )
 			Global.stamina -= picked_object.mass / Global.strength
-			picked = true
+			Global.picked = true
+			$".."/GUI/PlayerInfo/StaminaBar.update_stamina_bar()
+			$".."/GUI/PlayerInfo/StaminaBar.timer_control()
+			
 		
 func drop_object():
-	if picked == true:
-		print("picked is ",picked)
-		picked = false
-		print("picked is now ",picked)
+	if Global.picked == true:
+		print("picked is ",Global.picked)
+		Global.picked = false
+		$".."/GUI/PlayerInfo/StaminaBar.timer_control()
+		print("picked is now ",Global.picked)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -62,9 +65,9 @@ func _unhandled_input(event):
 
 func _input(event):
 	if Input.is_action_just_pressed("pick_up"):
-		if picked == false:
+		if Global.picked == false:
 			pickTreeIfTree()
-		elif picked == true:
+		elif Global.picked == true:
 			drop_object()
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and Global.stamina>=10:#stamina>10 for the moment but will need to be > than required stamina, determined by axe_stamina_requirement
@@ -116,7 +119,7 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	#movement of the log
-	if picked == true and picked_object != null:
+	if Global.picked == true and picked_object != null:
 		var a = picked_object.global_transform.origin
 		var b = hand.global_transform.origin 
 		picked_object.set_linear_velocity((b-a) * pull_power)

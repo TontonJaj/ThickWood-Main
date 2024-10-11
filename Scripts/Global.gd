@@ -6,7 +6,7 @@ var XP = 0
 @export
 var strength : int = 10
 var stamina : float = 100
-
+var picked : bool = false
 #Update money
 func update_money(revenue):
 	#Money declaraction
@@ -37,7 +37,7 @@ func update_money(revenue):
 			
 	
 #@export what ? 
-var picked = false #this is global and easy to hack and bug. also see comment @player.gd
+ #this is global and easy to hack and bug. also see comment @player.gd
 		
 
 func _ready()-> void:

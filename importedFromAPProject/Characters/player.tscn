@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cleknh6qql4e8"]
+[gd_scene load_steps=12 format=4 uid="uid://cleknh6qql4e8"]
 
 [ext_resource type="PackedScene" uid="uid://covfw3xr2pjoj" path="res://importedFromAPProject/Tools/axe.tscn" id="1_xks40"]
 
@@ -106,6 +106,12 @@ bind/23/pose = Transform3D(0.991981, -0.120008, -0.0460052, -0.12636, -0.947679,
 bind/24/name = &"toe.R"
 bind/24/bone = -1
 bind/24/pose = Transform3D(-0.998703, -0.0466645, -0.02362, 0.0477281, -0.997317, -0.0643368, -0.0177036, -0.0563135, 1.15901, -0.0017015, -0.000817635, -0.000329996)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e23en"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_knsr6"]
+radius = 0.05
+height = 0.05
 
 [sub_resource type="Animation" id="Animation_yr7w4"]
 length = 0.001
@@ -732,6 +738,11 @@ bones/31/scale = Vector3(1, 1, 1)
 [node name="Cube" type="MeshInstance3D" parent="metarig/Skeleton3D"]
 mesh = SubResource("ArrayMesh_hfo64")
 skin = SubResource("Skin_i4bbn")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="metarig/Skeleton3D/Cube"]
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_e23en")
+draw_pass_1 = SubResource("SphereMesh_knsr6")
 
 [node name="ToolAttachment" type="BoneAttachment3D" parent="metarig/Skeleton3D"]
 transform = Transform3D(-0.452016, -0.472411, -0.756644, 0.170107, -0.87833, 0.446765, -0.87564, 0.0732344, 0.47738, -0.0042836, -0.000717681, 0.0118664)
