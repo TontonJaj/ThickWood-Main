@@ -5,7 +5,7 @@ var XP = 0
 #player caracteristic
 @export
 var strength : int = 10
-var stamina : float = 80
+var stamina : float = 100
 
 #Update money
 func update_money(revenue):

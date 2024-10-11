@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ddrfi243l4qre"]
+[gd_scene load_steps=18 format=3 uid="uid://ddrfi243l4qre"]
 
 [ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/CP.png" id="1_aw4v5"]
 [ext_resource type="Texture2D" uid="uid://kmbldcubu316" path="res://Assets/GUI/crown-coin (5).png" id="2_feo3s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/wallet.gd" id="5_c8auf"]
 [ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="6_4fwqr"]
 [ext_resource type="Texture2D" uid="uid://gmn6l4nmom4c" path="res://Assets/GUI/imageedit_15_9719256775.png" id="6_shwbf"]
+[ext_resource type="Script" path="res://Scripts/caracteristic_panel.gd" id="8_hcgq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
 bg_color = Color(0.14253, 0.592584, 0.152126, 1)
@@ -37,6 +38,22 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wb1p"]
 bg_color = Color(0.302685, 0.708307, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s3ip"]
+bg_color = Color(0.942114, 0.842112, 0.739063, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flara"]
+bg_color = Color(0.933913, 0.805819, 0.675461, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer"]
 
@@ -202,7 +219,81 @@ grow_vertical = 2
 texture = ExtResource("6_shwbf")
 
 [node name="StaminaRegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
-wait_time = 0.025
+wait_time = 0.05
 autostart = true
+
+[node name="CaracteristicPanel" type="Panel" parent="PlayerInfo"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 177.0
+offset_right = 244.0
+offset_bottom = 608.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4s3ip")
+script = ExtResource("8_hcgq1")
+
+[node name="Panel" type="Panel" parent="PlayerInfo/CaracteristicPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 127.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_flara")
+
+[node name="Label" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 4.0
+offset_right = 106.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "JAJ"
+
+[node name="Label2" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+offset_left = 58.0
+offset_top = 44.0
+offset_right = 98.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+
+[node name="Label3" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+offset_left = 51.0
+offset_top = 91.0
+offset_right = 215.0
+offset_bottom = 114.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "The new guy"
+
+[node name="Label5" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 61.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Name :"
+
+[node name="Label6" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+offset_left = 4.0
+offset_top = 44.0
+offset_right = 53.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Level :"
+
+[node name="Label7" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+offset_left = 4.0
+offset_top = 86.0
+offset_right = 44.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Title :"
+
+[node name="Panel2" type="Panel" parent="PlayerInfo/CaracteristicPanel"]
+offset_left = 12.0
+offset_top = 142.0
+offset_right = 210.0
+offset_bottom = 419.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_flara")
 
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaRegen" to="PlayerInfo/StaminaBar" method="_on_stamina_regen_timeout"]

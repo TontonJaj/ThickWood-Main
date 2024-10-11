@@ -54,5 +54,8 @@ func end_swing() -> void:
 	if collision_points.size() >= 2:
 		create_cutting_plane()
 
+func create_cpuparticles_3d()->void:
+	pass
+
 func create_cutting_plane() -> void:
 	pass

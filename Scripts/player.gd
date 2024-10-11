@@ -120,7 +120,18 @@ func _physics_process(delta):
 		var a = picked_object.global_transform.origin
 		var b = hand.global_transform.origin 
 		picked_object.set_linear_velocity((b-a) * pull_power)
-		
+	
+	#Opening Gui
+	
+	
+			
+
+			 
+
+			
+			#$GUI/PlayerInfo/CaracteristicPanel.visible = false
+	
+			
 	move_and_slide()
 	
 func _headbob(time) -> Vector3:
