@@ -19,12 +19,16 @@ const FOV_CHANGE = 0.1
 
 const gravity = 9.8
 
-var picked_object  
+var picked_object = null
 var is_chopping = false
 #not sure if we're handling these switches correctly
 
+#MOST DEFINITIVIELY SOMETHING TO CARE FOR !!!! WHEN THE FUCKING OBJECT GETS OUT OF CONTROL OF PICKING
+#OR IS SOLD WITHOUT PRESSING 'E' OR CALLING DROP_OBJECT THERE IS NO REINITIALISATION OF STATES!
+
 const pull_power = 8
 
+#CHARACTER onreadys
 @onready var head = $metarig/Skeleton3D/HeadCamera/Head
 @onready var body = $metarig
 @onready var camera = $metarig/Skeleton3D/HeadCamera/Head/Camera3D
@@ -32,6 +36,8 @@ const pull_power = 8
 @onready var hand = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Hand
 @onready var animation_player = $AnimationPlayer
 
+#GUI onreadys
+@onready var staminaBar = $"../GUI/PlayerInfo/StaminaBar"
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -45,15 +51,14 @@ func pickTreeIfTree():
 			print ("object mass is :" , picked_object.mass , "stam used: " , picked_object.mass / Global.strength )
 			Global.stamina -= picked_object.mass / Global.strength
 			Global.picked = true
-			$".."/GUI/PlayerInfo/StaminaBar.update_stamina_bar()
-			$".."/GUI/PlayerInfo/StaminaBar.timer_control()
+			staminaBar.update_stamina_bar()
+			staminaBar.timer_control()
 			
 		
 func drop_object():
 	if Global.picked == true:
-		print("picked is ",Global.picked)
 		Global.picked = false
-		$".."/GUI/PlayerInfo/StaminaBar.timer_control()
+		staminaBar.timer_control()
 		print("picked is now ",Global.picked)
 
 func _unhandled_input(event):
@@ -76,6 +81,7 @@ func _input(event):
 	
 
 func _physics_process(delta):
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta

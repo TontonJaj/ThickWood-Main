@@ -224,6 +224,7 @@ autostart = true
 
 [node name="StaminaDegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
 wait_time = 0.05
+autostart = true
 
 [node name="CaracteristicPanel" type="Panel" parent="PlayerInfo"]
 layout_mode = 0

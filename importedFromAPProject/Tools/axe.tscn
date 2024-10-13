@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://covfw3xr2pjoj"]
 
 [ext_resource type="PackedScene" uid="uid://dpdhbse5oy7io" path="res://importedFromAPProject/Tools/axe.fbx" id="1_3ef04"]
-[ext_resource type="Script" path="res://importedFromAPProject/Tools/axe.gd" id="2_f1iug"]
+[ext_resource type="Script" path="res://Scripts/axe.gd" id="2_f1iug"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frrhn"]
 albedo_color = Color(0.343644, 0.281889, 0.103177, 1)
@@ -31,13 +31,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_frrhn")
 [node name="Cube_001" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_tvo87")
 
-[node name="RayCast3D" type="RayCast3D" parent="." index="2"]
-transform = Transform3D(1, 1.63021e-08, 8.76788e-08, -8.74135e-08, -0.00272102, 0.9884, 8.86983e-08, -0.186474, -0.0144227, 0.0209225, 0.672697, 1.82911e-09)
-enabled = false
-hit_back_faces = false
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="RayCast3D" index="0"]
-transform = Transform3D(1, -1.84271e-07, -3.13633e-07, 4.73092e-07, -0.078235, -5.36153, 3.32066e-08, 1.01152, -0.0147601, 0.00421759, -1.00274, 0.031624)
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, -9.68575e-08, -4.02331e-07, -5.58794e-08, 0.999999, -5.21541e-08, 2.13163e-14, -5.58794e-08, 0.999999, 0.0251017, 0.706683, 0.186173)
+visible = false
 emitting = false
 lifetime = 0.22
 one_shot = true
@@ -54,3 +50,17 @@ spread = 2.5
 initial_velocity_min = 4.0
 initial_velocity_max = 4.0
 color = Color(0.76, 0, 0.0126665, 1)
+
+[node name="Raycasts" type="Node" parent="." index="3"]
+
+[node name="RayCast3DBottom" type="RayCast3D" parent="Raycasts" index="0"]
+transform = Transform3D(-0.75, 1.13406e-08, 2.86603e-15, 0, -5.67028e-09, 0.75, 6.55671e-08, 0.129721, 3.27835e-08, -0.0159856, 0.407275, 0.0360206)
+hit_back_faces = false
+
+[node name="RayCast3DDepth" type="RayCast3D" parent="Raycasts" index="1"]
+transform = Transform3D(-0.75, 1.43501e-08, 2.86603e-15, 0, -7.17503e-09, 0.75, 6.55671e-08, 0.164145, 3.27835e-08, -0.0159856, 0.481219, 0.0237835)
+hit_back_faces = false
+
+[node name="RayCast3DTop" type="RayCast3D" parent="Raycasts" index="2"]
+transform = Transform3D(-0.75, 1.35441e-08, 2.86603e-15, 0, -6.77204e-09, 0.75, 6.55671e-08, 0.154926, 3.27835e-08, -0.0165235, 0.539506, 0.0406258)
+hit_back_faces = false

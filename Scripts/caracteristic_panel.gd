@@ -5,7 +5,7 @@ var is_open = false
 func _ready():
 	close_panel() 
 
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	if Input.is_action_pressed("openingtab"):
 		if is_open:
 			close_panel()

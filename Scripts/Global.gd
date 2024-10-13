@@ -3,10 +3,11 @@ extends Node
 var XP = 0
 
 #player caracteristic
-@export
+#@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man
 var strength : int = 10
 var stamina : float = 100
 var picked : bool = false
+
 #Update money
 func update_money(revenue):
 	#Money declaraction
@@ -17,8 +18,8 @@ func update_money(revenue):
 			
 	cp += revenue
 	if cp > 99:
-		sp += int(cp/100) 
-		cp = fmod(cp,100) 
+		sp += int(cp/100)
+		cp = fmod(cp,100)
 	if sp > 99:
 		gp += int(sp/100)
 		sp = fmod(sp,100)
@@ -40,10 +41,26 @@ func update_money(revenue):
  #this is global and easy to hack and bug. also see comment @player.gd
 		
 
+func list_node_and_children(node: Node, indent: int = 0, is_last: bool = true):
+	# Create the indentation string
+	var indentation = ""
+	for i in range(indent - 1):
+		indentation += "│  " if i < indent - 1 else "   "
+	
+	if indent > 0:
+		indentation += "└─ " if is_last else "├─ "
+	
+	# Print the current node's name with indentation for hierarchy
+	print(indentation + node.name)
+	
+	# Iterate over each child and recursively call the function
+	var children = node.get_children()
+	for i in range(children.size()):
+		var child = children[i]
+		list_node_and_children(child, indent + 1, i == children.size() - 1)
+
 func _ready()-> void:
 	pass
-
-	 
 	
 
 func _input(event):
@@ -53,7 +70,7 @@ func _input(event):
 		get_tree().quit()
 
 #selling wood if wood is wood ~ this should have it's own script (eg : 'sellbutton.gd')
-func _on_sell_button_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_sell_button_body_shape_entered(_body_rid: RID, body: Node3D, _body_shape_index: int, _local_shape_index: int) -> void:
 	print(str(body) + "has entered the selling button")
 	if body.is_in_group("trees") and body is RigidBody3D:
 		Global.picked = false
