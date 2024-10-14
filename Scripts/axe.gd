@@ -3,7 +3,20 @@ extends Node3D
 @onready var animation_player = $"../../../../../AnimationPlayer"
 @onready var raycasts = $Raycasts
 
-var is_swinging := false
+var is_swinging = false
+var collidedTreeDictionnary = {
+	"collider": null,
+	"bottom": null,
+	"depth": null,
+	"top": null
+}
+var choppedAlready = false
+
+func clearcollidedTreeDictionnary() -> void:
+	collidedTreeDictionnary.collider = null
+	collidedTreeDictionnary.top = null
+	collidedTreeDictionnary.depth = null
+	collidedTreeDictionnary.bottom = null
 
 func _ready() -> void:
 	disable_all_raycasts()
@@ -23,6 +36,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func start_swing() -> void:
 	is_swinging = true
 	enable_all_raycasts()
+	clearcollidedTreeDictionnary()
+	choppedAlready = false
 
 func end_swing() -> void:
 	is_swinging = false
@@ -39,35 +54,37 @@ func disable_all_raycasts() -> void:
 			raycast.enabled = false
 
 func collision_all_raycasts_on_tree() -> void:
-	var collidedRaycasts = []
+	if !choppedAlready and collidedTreeDictionnary.top and collidedTreeDictionnary.depth and collidedTreeDictionnary.bottom:
+		handle_tree_collision()
+		return
 	for raycast in raycasts.get_children():
-		if raycast is RayCast3D and raycast.is_colliding(): #and raycast.get_collider().name == "DeadTree":
-			print(raycast.get_collider().name)
-			collidedRaycasts.append(raycast)
-			
-	if collidedRaycasts.size() == 3:
-		handle_tree_collision(collidedRaycasts)
+		if raycast is RayCast3D and raycast.is_colliding() and raycast.get_collider().name == "DeadTreeStatic":
+			if !collidedTreeDictionnary.collider:
+				collidedTreeDictionnary.collider = raycast.get_collider()
+			if raycast.name == "RayCast3DTop" and !collidedTreeDictionnary.top:
+				collidedTreeDictionnary.top = raycast.get_collision_point()
+			if raycast.name == "RayCast3DDepth" and !collidedTreeDictionnary.depth:
+				collidedTreeDictionnary.depth = raycast.get_collision_point()
+			if raycast.name == "RayCast3DBottom" and !collidedTreeDictionnary.bottom:
+				collidedTreeDictionnary.bottom = raycast.get_collision_point()
 
-func handle_tree_collision(treeCollidedRaycasts) -> void:
+func handle_tree_collision() -> void:
+	choppedAlready = true
 	print('madeittocollision')
-	for raycast in treeCollidedRaycasts:
-		if raycast.name == "RayCast3DTop":
-			print("FoundTopBoy: " + raycast.name)
-		elif raycast.name == "RayCast3DDepth":
-			print("FoundDepthBoy: " + raycast.name)
-		elif raycast.name == "RayCast3DBottom":
-			print("FoundBottomBoy: " + raycast.name)
-#	var collision_point = raycast.get_collision_point()
-#	
-#	collision_point = to_global(collision_point)
-#	print("Axe hit the %s at global position: %s" % [collider.name, collision_point])
-#	collision_points.append(collision_point)
-#	visualize_collision_point(collision_point)  # Add this line for debug visualization
+	if collidedTreeDictionnary.top:
+		visualize_collision_point(collidedTreeDictionnary.top)
+	if collidedTreeDictionnary.depth:
+		visualize_collision_point(collidedTreeDictionnary.depth)
+	if collidedTreeDictionnary.bottom:
+		visualize_collision_point(collidedTreeDictionnary.bottom)
+	collidedTreeDictionnary.collider.find_parent("Trees").add_vertices_to_tree_mesh(collidedTreeDictionnary)
+	
 
 func visualize_collision_point(collisionPos: Vector3) -> void:
 	var sphere = CSGSphere3D.new()
-	sphere.radius = 0.05
-	sphere.global_position = position
+	sphere.name = "Node_" + str(Time.get_ticks_msec())
+	sphere.radius = 0.01
+	sphere.global_position = collisionPos
 	get_tree().root.add_child(sphere)
 
 func create_cpuparticles_3d()->void:

@@ -19,19 +19,21 @@ func timer_control():
 		$ProgressBar/StaminaRegen.start()
 
 func _on_stamina_regen_timeout() :
-	if Global.stamina < 99.7: 
-		Global.stamina += 0.3 #one day, 4 will bee(Bzz, bzzzz) the stamina_regen_stat of the player
+	if Global.stamina < (100-Global.staminaRegenStat): 
+		Global.stamina += Global.staminaRegenStat #one day, 4 will bee(Bzz, bzzzz) the stamina_regen_stat of the player
 		update_stamina_bar()
+	elif Global.stamina == 100:
+		Global.staminaFull = true
+		$ProgressBar/StaminaRegen.stop()
 #		if Global.stamina > 100: #Thats very cursed. 
 #			Global.stamina = 100 #you can't just go from 101 to 100 every tick. Inappropriate.
 #	if Global.stamina <= 0: #Even worse, it shouldn't be needed ever
 #		Global.stamina = 0 #Waste of cpu and weird calculations when timing off
 # I'm wtfing it all
 		
-
 func _on_stamina_degen_timeout() -> void:
-	if Global.stamina > 0.5: 
-		Global.stamina -= 0.5
+	if Global.stamina > Global.staminaDegenStat: 
+		Global.stamina -= Global.staminaDegenStat
 		update_stamina_bar()
 	else:
 		player.drop_object()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ddrfi243l4qre"]
+[gd_scene load_steps=21 format=3 uid="uid://ddrfi243l4qre"]
 
 [ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/CP.png" id="1_aw4v5"]
 [ext_resource type="Texture2D" uid="uid://kmbldcubu316" path="res://Assets/GUI/crown-coin (5).png" id="2_feo3s"]
@@ -10,16 +10,19 @@
 [ext_resource type="Script" path="res://Scripts/caracteristic_panel.gd" id="8_hcgq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
-bg_color = Color(0.14253, 0.592584, 0.152126, 1)
+bg_color = Color(0.343898, 0.24326, 0.0288124, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.010131, 0.220936, 4.33177e-07, 1)
+border_color = Color(0.236166, 0.160594, 0.0367937, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2unfk"]
+blend_mode = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_nm4rs"]
 font_size = 33
@@ -37,7 +40,12 @@ font_size = 33
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wb1p"]
-bg_color = Color(0.302685, 0.708307, 3.85046e-07, 1)
+bg_color = Color(0.948019, 0.380459, 0.481297, 1)
+
+[sub_resource type="Theme" id="Theme_swy74"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sy064"]
+blend_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s3ip"]
 bg_color = Color(0.942114, 0.842112, 0.739063, 1)
@@ -71,6 +79,29 @@ offset_right = 199.0
 offset_bottom = 145.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
+[node name="MoneyInfo" type="Panel" parent="PlayerInfo/MoneyInfo"]
+offset_top = 34.0
+offset_right = 175.0
+offset_bottom = 155.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
+
+[node name="Wallet" type="ItemList" parent="PlayerInfo/MoneyInfo/MoneyInfo"]
+offset_left = 7.0
+offset_top = -27.0
+offset_right = 168.0
+offset_bottom = -4.0
+
+[node name="Title" type="Label" parent="PlayerInfo/MoneyInfo/MoneyInfo/Wallet"]
+material = SubResource("CanvasItemMaterial_2unfk")
+layout_mode = 1
+offset_left = 13.0
+offset_top = -4.0
+offset_right = 185.0
+offset_bottom = 42.0
+scale = Vector2(0.65, 0.65)
+text = "Wallet"
+label_settings = SubResource("LabelSettings_nm4rs")
+
 [node name="CP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
 layout_mode = 1
 anchors_preset = -1
@@ -78,8 +109,10 @@ anchor_left = 0.0552326
 anchor_top = 0.0645161
 anchor_right = 0.142442
 anchor_bottom = 0.306452
-offset_left = 2.25
-offset_right = 10.2564
+offset_left = 1.3343
+offset_top = 33.1936
+offset_right = 16.0726
+offset_bottom = 33.9193
 grow_vertical = 2
 texture = ExtResource("1_aw4v5")
 expand_mode = 2
@@ -92,8 +125,10 @@ anchor_left = 0.0552326
 anchor_top = 0.274194
 anchor_right = 0.142442
 anchor_bottom = 0.516129
-offset_left = 2.25
-offset_right = 10.2563
+offset_left = 1.3343
+offset_top = 33.1936
+offset_right = 16.0726
+offset_bottom = 33.9194
 grow_vertical = 2
 texture = ExtResource("2_feo3s")
 expand_mode = 2
@@ -106,8 +141,10 @@ anchor_left = 0.0552326
 anchor_top = 0.483871
 anchor_right = 0.142442
 anchor_bottom = 0.725806
-offset_left = 2.25
-offset_right = 10.2563
+offset_left = 1.3343
+offset_top = 33.1936
+offset_right = 16.0726
+offset_bottom = 33.9194
 grow_vertical = 2
 texture = ExtResource("3_18jrs")
 expand_mode = 2
@@ -120,8 +157,10 @@ anchor_left = 0.0552326
 anchor_top = 0.693548
 anchor_right = 0.142442
 anchor_bottom = 0.935484
-offset_left = 2.25
-offset_right = 10.2564
+offset_left = 1.3343
+offset_top = 33.1936
+offset_right = 16.0726
+offset_bottom = 33.9193
 grow_vertical = 2
 texture = ExtResource("4_pemld")
 expand_mode = 2
@@ -129,10 +168,10 @@ stretch_mode = 4
 
 [node name="Wallet" type="ItemList" parent="PlayerInfo"]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 30.0
-offset_right = 193.0
-offset_bottom = 139.0
+offset_left = 71.0
+offset_top = 64.0
+offset_right = 191.0
+offset_bottom = 172.0
 script = ExtResource("5_c8auf")
 
 [node name="CPQTY" type="Label" parent="PlayerInfo/Wallet"]
@@ -216,6 +255,7 @@ offset_right = 186.672
 offset_bottom = 16.7353
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_swy74")
 texture = ExtResource("6_shwbf")
 
 [node name="StaminaRegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
@@ -225,12 +265,26 @@ autostart = true
 [node name="StaminaDegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
 wait_time = 0.05
 
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerInfo/StaminaBar/ProgressBar"]
+material = SubResource("CanvasItemMaterial_sy064")
+layout_mode = 0
+offset_left = 25.0
+offset_top = -3.0
+offset_right = 352.0
+offset_bottom = 17.0
+text = "Arms stamina"
+scroll_active = false
+autowrap_mode = 2
+tab_size = 1
+shortcut_keys_enabled = false
+text_direction = 1
+
 [node name="CaracteristicPanel" type="Panel" parent="PlayerInfo"]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 177.0
-offset_right = 244.0
-offset_bottom = 608.0
+offset_left = 26.0
+offset_top = 205.0
+offset_right = 246.0
+offset_bottom = 636.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4s3ip")
 script = ExtResource("8_hcgq1")
 

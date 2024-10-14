@@ -3,9 +3,13 @@ extends Node
 var XP = 0
 
 #player caracteristic
-#@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man
+#@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man..
 var strength : int = 10
 var stamina : float = 100
+var staminaRegenStat = 0.3
+var staminaDegenStat = 0.5
+var staminaFull : bool = true
+
 var picked : bool = false
 
 #Update money
