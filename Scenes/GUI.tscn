@@ -80,12 +80,14 @@ offset_bottom = 145.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
 [node name="MoneyInfo" type="Panel" parent="PlayerInfo/MoneyInfo"]
+layout_mode = 0
 offset_top = 34.0
 offset_right = 175.0
 offset_bottom = 155.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
 [node name="Wallet" type="ItemList" parent="PlayerInfo/MoneyInfo/MoneyInfo"]
+layout_mode = 0
 offset_left = 7.0
 offset_top = -27.0
 offset_right = 168.0
