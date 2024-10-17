@@ -1,188 +1,166 @@
 extends Node
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func visualize_collision_point(collisionPos: Vector3) -> void:
+	if not is_inside_tree():
+		print("Warning: Attempting to visualize collision point while not in scene tree.")
+		return
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+	var sphere = CSGSphere3D.new()
+	sphere.name = "Node_" + str(Time.get_ticks_msec())
+	sphere.radius = 0.015
 
-func convert_to_array_mesh(mesh_instance: MeshInstance3D) -> ArrayMesh:
-	# Get the original mesh
+	# Create a new material
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color.WEB_PURPLE
+	
+	# Assign the material to the sphere
+	sphere.material = material
+
+	# Add the sphere to the scene first
+	get_tree().current_scene.add_child(sphere)
+
+	# Then set its position
+	sphere.global_transform.origin = collisionPos
+
+func handleChop(chopDict: Dictionary) -> void:
+	#Can only dynamically modify arrayMeshes in GDScript
+	#need a function out of handleChop to get the arrayMesh properly and the reference to the meshInstance
+	#Right now I'm deleting (QUEUE_FREE) but I should keep it and refresh its' mesh
+	var treeArrayMesh = null
+	var originalTreeTransform = null
+	if chopDict.collider is ArrayMesh:
+		treeArrayMesh = chopDict.collider
+		originalTreeTransform = treeArrayMesh.global_transform
+		#I'm repeating myself twice here, WRONG!
+	elif chopDict.collider is MeshInstance3D:
+		originalTreeTransform = chopDict.collider.global_transform
+		treeArrayMesh = convert_instance_to_array_mesh(chopDict.collider)
+		chopDict.collider.queue_free()
+	else:
+		var parent_mesh_instance = find_meshinstance3d_parent(chopDict.collider)
+		if parent_mesh_instance:
+			originalTreeTransform = parent_mesh_instance.global_transform
+			treeArrayMesh = convert_instance_to_array_mesh(parent_mesh_instance)
+			parent_mesh_instance.queue_free()
+	
+	if not (treeArrayMesh is ArrayMesh):
+		print('handleChop failing on type')
+		return
+	
+	visualize_collision_point(chopDict.top)
+	visualize_collision_point(chopDict.depth)
+	visualize_collision_point(chopDict.bottom)
+	#treeArrayMesh = addVerticesToCollisions(treeArrayMesh, chopDict)
+	add_skeleton_to_scene(originalTreeTransform, treeArrayMesh)
+	add_transparent_to_scene(originalTreeTransform, treeArrayMesh)
+	
+func addVerticesToCollisions(treeArrayMesh, chopDict):
+	var st = SurfaceTool.new()
+	st.create_from(treeArrayMesh, 0)  # Assuming the tree is on the first surface
+	#I really need to make that func work
+	
+func add_transparent_to_scene(originalTreeTransform, treeArrayMesh):
+	# Create the transparent tree mesh
+	var tree_instance = MeshInstance3D.new()
+	var tree_material = StandardMaterial3D.new()
+
+	# Set up the tree material
+	tree_material.albedo_color = Color(0.9, 0.8, 0.7, 0.35)  # Light tan color with 50% opacity
+	tree_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	tree_material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides of the faces
+
+	# Assign the mesh and material
+	tree_instance.mesh = treeArrayMesh
+	tree_instance.material_override = tree_material
+
+	# Add the tree mesh instance to the scene
+	add_child(tree_instance)
+
+	# Set the transform for the tree
+	tree_instance.global_transform = originalTreeTransform
+	
+func add_skeleton_to_scene(originalTreeTransform, treeArrayMesh):
+	var new_mesh_instance = MeshInstance3D.new()
+	var immediate_mesh = ImmediateMesh.new()
+	var material = ORMMaterial3D.new()
+
+	# Set up the material
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = Color.BLACK
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+	material.render_priority = 1  # Ensure it renders after the transparent tree
+
+	# Create the immediate mesh
+	new_mesh_instance.mesh = immediate_mesh
+	new_mesh_instance.material_override = material
+
+	# Add the mesh instance to the scene
+	add_child(new_mesh_instance)
+
+	# Set the transform
+	new_mesh_instance.global_transform = originalTreeTransform
+
+	# Draw the vertices and edges
+	immediate_mesh.clear_surfaces()
+	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	for i in range(treeArrayMesh.get_surface_count()):
+		var arrays = treeArrayMesh.surface_get_arrays(i)
+		var vertices = arrays[Mesh.ARRAY_VERTEX]
+		var indices = arrays[Mesh.ARRAY_INDEX]
+		
+		for j in range(0, indices.size(), 3):
+			var v1 = vertices[indices[j]]
+			var v2 = vertices[indices[j+1]]
+			var v3 = vertices[indices[j+2]]
+			
+			immediate_mesh.surface_add_vertex(v1)
+			immediate_mesh.surface_add_vertex(v2)
+			
+			immediate_mesh.surface_add_vertex(v2)
+			immediate_mesh.surface_add_vertex(v3)
+			
+			immediate_mesh.surface_add_vertex(v3)
+			immediate_mesh.surface_add_vertex(v1)
+
+	immediate_mesh.surface_end()
+	
+func convert_instance_to_array_mesh(mesh_instance: MeshInstance3D) -> ArrayMesh:
+	if not mesh_instance or not mesh_instance.mesh:
+		return null
+		
 	var original_mesh = mesh_instance.mesh
-	
-	# Check if the original mesh is already an ArrayMesh
-	if original_mesh is ArrayMesh:
-		return original_mesh
-	
-	# If it's not an ArrayMesh, we need to create one
 	var array_mesh = ArrayMesh.new()
 	
-	# Get the surface count of the original mesh
-	var surface_count = original_mesh.get_surface_count()
-	
-	# Iterate through each surface
-	for surface_index in range(surface_count):
-		# Get the array of the current surface
-		var arrays = original_mesh.surface_get_arrays(surface_index)
-		
-		# Get the material of the current surface
-		var material = original_mesh.surface_get_material(surface_index)
-		
-		# Add the surface to the new ArrayMesh
+	for surface_idx in range(original_mesh.get_surface_count()):
+		# Get the arrays and material from the original mesh
+		var arrays = original_mesh.surface_get_arrays(surface_idx)
+		var material = mesh_instance.get_surface_override_material(surface_idx)
+		if material == null:
+			material = original_mesh.surface_get_material(surface_idx)
+			
+		# Add the surface with the same format as the original
 		array_mesh.add_surface_from_arrays(
-			original_mesh.surface_get_primitive_type(surface_index),
+			original_mesh.surface_get_primitive_type(surface_idx),
 			arrays
 		)
 		
-		# Set the material for the new surface
-		array_mesh.surface_set_material(surface_index, material)
+		# Apply the material to the new surface
+		if material:
+			array_mesh.surface_set_material(surface_idx, material)
 	
 	return array_mesh
 
-func visualize_array_mesh(array_mesh: ArrayMesh, original_tree_mesh: MeshInstance3D):
-	# Create a new MeshInstance3D to display the ArrayMesh
-	var new_mesh_instance = MeshInstance3D.new()
-	new_mesh_instance.mesh = array_mesh
 
-	# Set a new material to make it distinct
-	var new_material = StandardMaterial3D.new()
-	new_material.albedo_color = Color(210.0/255.0, 180.0/255.0, 140.0/255.0, 0.9)
-	new_material.flags_transparent = true
-	new_mesh_instance.material_override = new_material
-
-	# Add the new MeshInstance3D to the scene
-	add_child(new_mesh_instance)
-
-	# Match the transform of the original tree mesh
-	new_mesh_instance.global_transform = original_tree_mesh.global_transform
-
-	# Offset the position to make it appear deeper in the tree
-	var offset = original_tree_mesh.global_transform.basis.z * -1  # Adjust this value as needed
-	new_mesh_instance.global_translate(offset)
-
-func visualize_vertices(vertices: Array, original_tree_mesh: MeshInstance3D):
-	var vertex_mesh = ImmediateMesh.new()
-	var vertex_instance = MeshInstance3D.new()
-	vertex_instance.mesh = vertex_mesh
-
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.BLACK
-	material.flags_unshaded = true
-	material.vertex_color_use_as_albedo = true
-	vertex_instance.material_override = material
-
-	vertex_mesh.clear_surfaces()
-	vertex_mesh.surface_begin(Mesh.PRIMITIVE_POINTS, material)
-	
-	for vertex in vertices:
-		vertex_mesh.surface_add_vertex(vertex)
-
-	vertex_mesh.surface_end()
-
-	add_child(vertex_instance)
-	vertex_instance.global_transform = original_tree_mesh.global_transform
-
-	# Make points larger for visibility
-	vertex_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	vertex_instance.extra_cull_margin = 16384  # This makes the points always visible
-	RenderingServer.global_shader_parameter_set("point_size", 10.0)  # Adjust size as needed
-	
-		# Offset the position to make it appear deeper in the tree
-	var offset = original_tree_mesh.global_transform.basis.z * -1  # Adjust this value as needed
-	vertex_instance.global_translate(offset)
-
-func add_vertices_to_tree_mesh(treeDictionary) -> void:
-	var original_tree_mesh = treeDictionary.collider.get_parent()
-	var tree_arrayMesh = convert_to_array_mesh(original_tree_mesh)
-	var surface_arrays = tree_arrayMesh.surface_get_arrays(0)
-	var vertices = surface_arrays[Mesh.ARRAY_VERTEX]
-	var indices = surface_arrays[Mesh.ARRAY_INDEX]
-
-	# Find the closest existing vertices to the new points
-	var closest_indices = find_closest_vertices(vertices, [treeDictionary.top, treeDictionary.bottom])
-
-	# Add new vertices for the cut
-	var new_vertex_start = vertices.size()
-	vertices.append(treeDictionary.top)
-	vertices.append(treeDictionary.depth)
-	vertices.append(treeDictionary.bottom)
-
-	# Create new faces
-	# Top triangle
-	indices.append(closest_indices[0])
-	indices.append(new_vertex_start)  # top
-	indices.append(new_vertex_start + 1)  # depth
-
-	# Bottom triangle
-	indices.append(closest_indices[1])
-	indices.append(new_vertex_start + 1)  # depth
-	indices.append(new_vertex_start + 2)  # bottom
-
-	# Side triangles
-	indices.append(closest_indices[0])
-	indices.append(new_vertex_start + 1)  # depth
-	indices.append(closest_indices[1])
-
-	indices.append(closest_indices[0])
-	indices.append(new_vertex_start + 2)  # bottom
-	indices.append(new_vertex_start)  # top
-
-	# Create a new ArrayMesh
-	var new_array_mesh = ArrayMesh.new()
-	var new_arrays = []
-	new_arrays.resize(Mesh.ARRAY_MAX)
-	new_arrays[Mesh.ARRAY_VERTEX] = vertices
-	new_arrays[Mesh.ARRAY_INDEX] = indices
-
-	# If the original mesh had normals, we should recalculate them
-	if surface_arrays[Mesh.ARRAY_NORMAL]:
-		new_arrays[Mesh.ARRAY_NORMAL] = recalculate_normals(vertices, indices)
-
-	# Add the surface to the new ArrayMesh
-	new_array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, new_arrays)
-
-	# Copy materials from the original mesh
-	for i in range(tree_arrayMesh.get_surface_count()):
-		var material = tree_arrayMesh.surface_get_material(i)
-		new_array_mesh.surface_set_material(i, material)
-
-	# Visualize the new vertices
-	var new_vertices = [treeDictionary.top, treeDictionary.depth, treeDictionary.bottom]
-	visualize_vertices(new_vertices, original_tree_mesh)
-
-	# Visualize the new ArrayMesh
-	visualize_array_mesh(new_array_mesh, original_tree_mesh)
-
-func find_closest_vertices(vertices: Array, target_points: Array) -> Array:
-	var closest_indices = []
-	for point in target_points:
-		var closest_index = 0
-		var closest_distance = INF
-		for i in range(vertices.size()):
-			var distance = vertices[i].distance_to(point)
-			if distance < closest_distance:
-				closest_distance = distance
-				closest_index = i
-		closest_indices.append(closest_index)
-	return closest_indices
-
-func recalculate_normals(vertices: PackedVector3Array, indices: PackedInt32Array) -> PackedVector3Array:
-	var normals = PackedVector3Array()
-	normals.resize(vertices.size())
-
-	for i in range(0, indices.size(), 3):
-		var a = vertices[indices[i]]
-		var b = vertices[indices[i+1]]
-		var c = vertices[indices[i+2]]
-		var normal = (b - a).cross(c - a).normalized()
-
-		normals[indices[i]] += normal
-		normals[indices[i+1]] += normal
-		normals[indices[i+2]] += normal
-
-	for i in range(normals.size()):
-		normals[i] = normals[i].normalized()
-
-	return normals
+func find_meshinstance3d_parent(node: Node) -> Node:
+	var current_node = node.get_parent()
+	while current_node:
+		# Stop searching if we reach the "Trees" node
+		if current_node.name == "Trees":
+			return null
+		# Check if the current node is of the target type
+		if current_node is MeshInstance3D:
+			return current_node
+		current_node = current_node.get_parent()
+	return null
