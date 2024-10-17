@@ -93,7 +93,7 @@ func visualize_collision_point(collisionPos: Vector3) -> void:
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color.WEB_PURPLE
 	
-	# Assign the material to the sphere
+	# Assign the material to the sphere"one_shot"
 	sphere.material = material
 
 	# Add the sphere to the scene first
@@ -104,3 +104,12 @@ func visualize_collision_point(collisionPos: Vector3) -> void:
 
 func create_cpuparticles_3d()->void:
 	pass
+
+
+func _on_area_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	var collider = $Cube_001/Area3D/RayCast3D.get_collider()
+	if collider is Node3D and is_swinging == true:
+			print("yesbaby")
+			$Cube_001/Area3D/CPUParticles3D.emitting = true
+			$Cube_001/Area3D/Pop.playing = true
+		

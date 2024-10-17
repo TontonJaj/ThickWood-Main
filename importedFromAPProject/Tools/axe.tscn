@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://covfw3xr2pjoj"]
+[gd_scene load_steps=9 format=3 uid="uid://covfw3xr2pjoj"]
 
 [ext_resource type="PackedScene" uid="uid://dpdhbse5oy7io" path="res://importedFromAPProject/Tools/axe.fbx" id="1_3ef04"]
 [ext_resource type="Script" path="res://Scripts/axe.gd" id="2_f1iug"]
+[ext_resource type="AudioStream" uid="uid://cy86e5snyeoy7" path="res://Assets/Sound/POP.mp3" id="3_xkxsu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frrhn"]
 albedo_color = Color(0.343644, 0.281889, 0.103177, 1)
@@ -15,10 +16,17 @@ metallic = 0.48
 metallic_specular = 0.0
 roughness = 0.6
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_524ry"]
+size = Vector3(0.0193443, 0.00282288, 0.0136414)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d087o"]
+albedo_color = Color(0.703412, 0.273284, 0.0076524, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_x4hjp"]
 lightmap_size_hint = Vector2i(2, 2)
-radius = 0.01
-height = 0.01
+material = SubResource("StandardMaterial3D_d087o")
+radius = 0.02
+height = 0.02
 
 [node name="axe" instance=ExtResource("1_3ef04")]
 transform = Transform3D(-0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0)
@@ -31,9 +39,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_frrhn")
 [node name="Cube_001" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_tvo87")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="." index="2"]
-transform = Transform3D(1, -9.68575e-08, -4.02331e-07, -5.58794e-08, 0.999999, -5.21541e-08, 2.13163e-14, -5.58794e-08, 0.999999, 0.0251017, 0.706683, 0.186173)
-visible = false
+[node name="Area3D" type="Area3D" parent="Cube_001" index="0"]
+transform = Transform3D(2.005, 7.10543e-15, 0, -7.10543e-15, 2.005, -3.47103e-14, 0, 0, 2.005, -0.0549739, 1.86265e-09, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_001/Area3D" index="0"]
+transform = Transform3D(1, 1.77636e-14, 0, 1.77636e-14, 1, -3.15419e-15, 0, 6.31569e-20, 1, 0.00032364, -3.82117e-05, -8.71159e-05)
+shape = SubResource("BoxShape3D_524ry")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Cube_001/Area3D" index="1"]
+transform = Transform3D(5.39681e-09, 2.09127e-08, -0.181087, -0.198551, 1.33139e-08, 6.80485e-08, -4.65585e-09, 0.0833195, -1.86234e-09, -0.0287608, -0.000815565, 0.0057356)
 emitting = false
 lifetime = 0.22
 one_shot = true
@@ -47,11 +61,19 @@ emission_normals = PackedVector3Array(-0.896887, 0.0271328, -0.441426, 0.0364485
 emission_colors = PackedColorArray(0.889255, 0, 0.235222, 1, 0.823264, 0.298207, 0, 1)
 direction = Vector3(1, -1, 1)
 spread = 2.5
-initial_velocity_min = 4.0
+initial_velocity_min = 2.0
 initial_velocity_max = 4.0
 color = Color(0.76, 0, 0.0126665, 1)
 
-[node name="Raycasts" type="Node3D" parent="." index="3"]
+[node name="RayCast3D" type="RayCast3D" parent="Cube_001/Area3D" index="2"]
+transform = Transform3D(3.37966e-08, 0.0378212, 7.15333e-09, -1, 1.23361e-09, 7.15331e-09, 1.37123e-08, -5.18617e-10, 0.521673, 0.00157348, 0, 0.000443321)
+
+[node name="Pop" type="AudioStreamPlayer" parent="Cube_001/Area3D" index="3"]
+stream = ExtResource("3_xkxsu")
+max_polyphony = 3
+bus = &"Record"
+
+[node name="Raycasts" type="Node3D" parent="." index="2"]
 transform = Transform3D(-1.33333, 0, 1.16564e-07, 0, 1.33333, 0, -1.16564e-07, 0, -1.33333, 0, 0, 0)
 
 [node name="RayCast3DTop" type="RayCast3D" parent="Raycasts" index="0"]
@@ -65,3 +87,5 @@ hit_back_faces = false
 [node name="RayCast3DBottom" type="RayCast3D" parent="Raycasts" index="2"]
 transform = Transform3D(-0.75, 3.77034e-09, 2.86603e-15, 0, -1.88516e-09, 0.75, 6.55671e-08, 0.0431275, 3.27835e-08, -0.0159856, 0.407275, -0.087464)
 hit_back_faces = false
+
+[connection signal="body_shape_entered" from="Cube_001/Area3D" to="." method="_on_area_3d_body_shape_entered"]

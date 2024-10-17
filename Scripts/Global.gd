@@ -3,14 +3,19 @@ extends Node
 var XP = 0
 
 #player caracteristic
-#@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man..
+#@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man..je me repend au sein de lesprit de la grande sainteté ammen
 var strength : int = 10
 var stamina : float = 100
+#var speed : int = 10 for animation speed ? faster cut cut and also better penetration if we create a damage dealt per hit variable or something
 var staminaRegenStat = 0.3
-var staminaDegenStat = 0.5
+var staminaDegenStat = 0.1
 var staminaFull : bool = true
 
+@onready var staminaBar = $GUI/PlayerInfo/StaminaBar
+
+
 var picked : bool = false
+
 
 #Update money
 func update_money(revenue):
@@ -78,6 +83,8 @@ func _on_sell_button_body_shape_entered(_body_rid: RID, body: Node3D, _body_shap
 	print(str(body) + "has entered the selling button")
 	if body.is_in_group("trees") and body is RigidBody3D:
 		Global.picked = false
+		staminaBar.timer_control() # to fix not regening the stam when selling the object witout droping it
+		
 		#trying to take size of the wood and * it by value of wood type
 		var mass = body.mass #get the mass from the RB3D
 		var value_per_mass = body.value_per_mass #access the custom property
@@ -85,5 +92,7 @@ func _on_sell_button_body_shape_entered(_body_rid: RID, body: Node3D, _body_shap
 		print("Sold the tree total value: ", total_value)
 		update_money(total_value)
 		body.queue_free()
+		$AdventurerGuildCounter/SellButton/Queching.playing = true
+		
 	else:
 		print("is missing a condition (ingrouptree/rigidbody3d)")
