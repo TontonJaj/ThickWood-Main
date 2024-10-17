@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/caracteristic_panel.gd" id="8_hcgq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
-bg_color = Color(0.343898, 0.24326, 0.0288124, 1)
+bg_color = Color(0.933333, 0.803922, 0.67451, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -80,12 +80,14 @@ offset_bottom = 145.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
 [node name="MoneyInfo" type="Panel" parent="PlayerInfo/MoneyInfo"]
+layout_mode = 0
 offset_top = 34.0
 offset_right = 175.0
 offset_bottom = 155.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
 
 [node name="Wallet" type="ItemList" parent="PlayerInfo/MoneyInfo/MoneyInfo"]
+layout_mode = 0
 offset_left = 7.0
 offset_top = -27.0
 offset_right = 168.0
@@ -272,7 +274,7 @@ offset_left = 25.0
 offset_top = -3.0
 offset_right = 352.0
 offset_bottom = 17.0
-text = "Arms stamina"
+text = "Stamina"
 scroll_active = false
 autowrap_mode = 2
 tab_size = 1
