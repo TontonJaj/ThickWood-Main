@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ddrfi243l4qre"]
+[gd_scene load_steps=28 format=3 uid="uid://ddrfi243l4qre"]
 
 [ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/CP.png" id="1_aw4v5"]
 [ext_resource type="Texture2D" uid="uid://kmbldcubu316" path="res://Assets/GUI/crown-coin (5).png" id="2_feo3s"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="6_4fwqr"]
 [ext_resource type="Texture2D" uid="uid://gmn6l4nmom4c" path="res://Assets/GUI/imageedit_15_9719256775.png" id="6_shwbf"]
 [ext_resource type="Script" path="res://Scripts/caracteristic_panel.gd" id="8_hcgq1"]
+[ext_resource type="Texture2D" uid="uid://nkj3d567uegu" path="res://Assets/GUI/Unpressed_button-removebg-preview.png" id="9_0svvb"]
+[ext_resource type="Shader" path="res://Scenes/GUI.gdshader" id="9_2oc24"]
+[ext_resource type="Texture2D" uid="uid://dt22jm43iywo0" path="res://Assets/GUI/Pressed_button-removebg-preview.png" id="10_gt65h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
 bg_color = Color(0.933333, 0.803922, 0.67451, 1)
@@ -55,6 +58,10 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xjtp"]
+shader = ExtResource("9_2oc24")
+shader_parameter/lod = 0.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flara"]
 bg_color = Color(0.933913, 0.805819, 0.675461, 1)
 border_width_left = 1
@@ -63,9 +70,119 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_xsgjm"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.103]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mb5jl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgt2p"]
+_data = {
+"RESET": SubResource("Animation_mb5jl"),
+"blur": SubResource("Animation_xsgjm")
+}
+
 [node name="GUI" type="CanvasLayer"]
 
 [node name="PlayerInfo" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -270,9 +387,9 @@ wait_time = 0.05
 [node name="RichTextLabel" type="RichTextLabel" parent="PlayerInfo/StaminaBar/ProgressBar"]
 material = SubResource("CanvasItemMaterial_sy064")
 layout_mode = 0
-offset_left = 25.0
+offset_left = 15.0
 offset_top = -3.0
-offset_right = 352.0
+offset_right = 342.0
 offset_bottom = 17.0
 text = "Stamina"
 scroll_active = false
@@ -282,6 +399,7 @@ shortcut_keys_enabled = false
 text_direction = 1
 
 [node name="CaracteristicPanel" type="Panel" parent="PlayerInfo"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 26.0
 offset_top = 205.0
@@ -289,6 +407,15 @@ offset_right = 246.0
 offset_bottom = 636.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4s3ip")
 script = ExtResource("8_hcgq1")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerInfo/CaracteristicPanel"]
+material = SubResource("ShaderMaterial_7xjtp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="PlayerInfo/CaracteristicPanel"]
 layout_mode = 0
@@ -298,7 +425,7 @@ offset_right = 210.0
 offset_bottom = 127.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_flara")
 
-[node name="Label" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+[node name="PlayerName" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
 layout_mode = 0
 offset_left = 66.0
 offset_top = 4.0
@@ -307,7 +434,7 @@ offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "JAJ"
 
-[node name="Label2" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+[node name="Level" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = 44.0
@@ -316,7 +443,7 @@ offset_bottom = 67.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
 
-[node name="Label3" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+[node name="PlayerTitle" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
 layout_mode = 0
 offset_left = 51.0
 offset_top = 91.0
@@ -326,7 +453,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "The new guy"
 
-[node name="Label5" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+[node name="TitleName" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
@@ -335,7 +462,7 @@ offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name :"
 
-[node name="Label6" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+[node name="TitleLevel" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 44.0
@@ -344,7 +471,7 @@ offset_bottom = 67.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Level :"
 
-[node name="Label7" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+[node name="TitlePlayerTitle" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 86.0
@@ -360,6 +487,133 @@ offset_top = 142.0
 offset_right = 210.0
 offset_bottom = 419.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_flara")
+
+[node name="Strength" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 86.0
+offset_top = 6.0
+offset_right = 166.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="Stamina" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 80.0
+offset_top = 47.0
+offset_right = 166.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="Charisma" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 93.0
+offset_top = 88.0
+offset_right = 166.0
+offset_bottom = 111.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="TitleStrength" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 61.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Strength :"
+
+[node name="TitleStamina" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 4.0
+offset_top = 44.0
+offset_right = 53.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Stamina :"
+
+[node name="TitleCharisma" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 4.0
+offset_top = 86.0
+offset_right = 44.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Charisma :"
+
+[node name="TitleAgility" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 6.0
+offset_top = 125.0
+offset_right = 66.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Agility :"
+
+[node name="Agility" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 66.0
+offset_top = 127.0
+offset_right = 166.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="TitleStatsPoints" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 5.0
+offset_top = 250.0
+offset_right = 105.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Stats Points :"
+
+[node name="StatsPoints" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 110.0
+offset_top = 250.0
+offset_right = 181.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 1
+
+[node name="TextureButton1" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 4.0
+offset_right = 582.0
+offset_bottom = 310.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="TextureButton2" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 154.0
+offset_top = 44.0
+offset_right = 582.0
+offset_bottom = 350.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="TextureButton3" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 154.0
+offset_top = 86.0
+offset_right = 582.0
+offset_bottom = 392.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="TextureButton4" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/Panel2"]
+offset_left = 154.0
+offset_top = 125.0
+offset_right = 582.0
+offset_bottom = 431.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerInfo/CaracteristicPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_mgt2p")
+}
 
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaRegen" to="PlayerInfo/StaminaBar" method="_on_stamina_regen_timeout"]
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaDegen" to="PlayerInfo/StaminaBar" method="_on_stamina_degen_timeout"]

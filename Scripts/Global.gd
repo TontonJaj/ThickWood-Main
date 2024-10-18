@@ -1,21 +1,62 @@
 extends Node
 
 var XP = 0
+var staminaValue : float = 100
 
 #player caracteristic
 #@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man..je me repend au sein de lesprit de la grande sainteté ammen
 var strength : int = 10
-var stamina : float = 100
+var stamina : int = 10
+var charisma : int = 10
+var agility : int = 10
+
+var statspoints : int = 10
+
+#LEVELING SYSTEM
+var level : int = 1
+
+var experience = 0
+var experience_total = 0
+var experience_required = get_required_experience(level +1)
+
+
+	
+
 #var speed : int = 10 for animation speed ? faster cut cut and also better penetration if we create a damage dealt per hit variable or something
 var staminaRegenStat = 0.3
 var staminaDegenStat = 0.1
 var staminaFull : bool = true
+var sprintDegenValue = 0.2
 
 @onready var staminaBar = $GUI/PlayerInfo/StaminaBar
 
 
 var picked : bool = false
+var is_chopping = false
+var is_sprinting = false
+var locked = false  #prevent player looking around while using the rotation motion on a log
 
+
+func _ready() -> void:
+	pass
+	
+	
+	
+func get_required_experience(level):
+	return round(pow(level, 2) + level * 4)  #https://www.desmos.com/calculator/0r0mrngda2?lang=fr     
+
+func gain_experience(amount):
+	experience_total += amount
+	experience+= amount
+	while experience >= experience_required:
+		experience -= experience_required
+		level_up()
+	
+func level_up(): 
+	level += 1
+	experience_required = get_required_experience(level + 1)
+	statspoints = statspoints + 3
+	print("you have now : ", statspoints," stats points")
 
 #Update money
 func update_money(revenue):
@@ -68,8 +109,7 @@ func list_node_and_children(node: Node, indent: int = 0, is_last: bool = true):
 		var child = children[i]
 		list_node_and_children(child, indent + 1, i == children.size() - 1)
 
-func _ready()-> void:
-	pass
+
 	
 
 func _input(event):
@@ -96,3 +136,10 @@ func _on_sell_button_body_shape_entered(_body_rid: RID, body: Node3D, _body_shap
 		
 	else:
 		print("is missing a condition (ingrouptree/rigidbody3d)")
+		
+func pause():
+	get_tree().paused = true
+
+func resume():
+	get_tree().paused = false #Used for pausing and depausing when in the caraC MENU  rn but someday it will only be for pause menu
+	

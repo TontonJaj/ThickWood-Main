@@ -7,11 +7,11 @@ func _ready():
 # Called when the node enters the scene tree for the first time.
 
 func update_stamina_bar():	
-	$ProgressBar.value = Global.stamina
+	$ProgressBar.value = Global.staminaValue
 		
 
 func timer_control():
-	if Global.picked == true:
+	if Global.picked == true or Global.is_sprinting == true or Global.is_chopping == true:  #if doing difficult activities
 		$ProgressBar/StaminaRegen.stop()
 		$ProgressBar/StaminaDegen.start()
 	elif Global.picked == false:
@@ -19,10 +19,10 @@ func timer_control():
 		$ProgressBar/StaminaRegen.start()
 
 func _on_stamina_regen_timeout() :
-	if Global.stamina < (100-Global.staminaRegenStat): 
-		Global.stamina += Global.staminaRegenStat #one day, 4 will bee(Bzz, bzzzz) the stamina_regen_stat of the player
+	if Global.staminaValue < (100-Global.staminaRegenStat): 
+		Global.staminaValue += Global.staminaRegenStat #one day, 4 will bee(Bzz, bzzzz) the stamina_regen_stat of the player
 		update_stamina_bar()
-	elif Global.stamina == 100:
+	elif Global.staminaValue == 100:
 		Global.staminaFull = true
 		$ProgressBar/StaminaRegen.stop()
 #		if Global.stamina > 100: #Thats very cursed. 
@@ -32,8 +32,8 @@ func _on_stamina_regen_timeout() :
 # I'm wtfing it all
 		
 func _on_stamina_degen_timeout() -> void:
-	if Global.stamina > Global.staminaDegenStat: 
-		Global.stamina -= Global.staminaDegenStat
+	if Global.staminaValue > Global.staminaDegenStat: 
+		Global.staminaValue -= Global.staminaDegenStat
 		update_stamina_bar()
 	else:
 		player.drop_object()

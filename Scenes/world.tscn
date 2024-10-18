@@ -178,8 +178,9 @@ shape = SubResource("BoxShape3D_nlboh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5.45202)
 mass = 150.0
 script = ExtResource("2_lrooi")
+value_per_mass = 1.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TestBoxes/tree4" groups=["trees"]]
+[node name="MeshInstance3DGOLD" type="MeshInstance3D" parent="TestBoxes/tree4" groups=["trees"]]
 mesh = SubResource("BoxMesh_jgvvr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestBoxes/tree4" groups=["trees"]]

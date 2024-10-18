@@ -20,7 +20,7 @@ const FOV_CHANGE = 0.1
 const gravity = 9.8
 
 var picked_object = null
-var is_chopping = false
+var rotation_power = 0.05
 #not sure if we're handling these switches correctly
 
 #MOST DEFINITIVIELY SOMETHING TO CARE FOR !!!! WHEN THE FUCKING OBJECT GETS OUT OF CONTROL OF PICKING
@@ -35,6 +35,8 @@ const pull_power = 8
 @onready var interaction = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Interaction
 @onready var hand = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Hand
 @onready var animation_player = $AnimationPlayer
+@onready var joint = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Generic6DOFJoint3D
+@onready var staticbody = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/StaticBody3D
 
 #GUI onreadys
 @onready var staminaBar = $"../GUI/PlayerInfo/StaminaBar"
@@ -47,9 +49,10 @@ func pickTreeIfTree():
 	var collider = interaction.get_collider()
 	if collider is RigidBody3D and collider.is_in_group("trees"):
 		picked_object = collider
-		if picked_object.mass / Global.strength < Global.stamina: #condition to pick something, u need to have strength left
+		if picked_object.mass / Global.strength < Global.staminaValue: #condition to pick something, u need to have strength left
 			print ("object mass is :" , picked_object.mass , "stam used: " , picked_object.mass / Global.strength )
-			Global.stamina -= picked_object.mass / Global.strength
+			Global.staminaValue -= picked_object.mass / Global.strength
+			joint.set_node_b(picked_object.get_path()) #glue the object to generic6DOjoint3D, acting like an anchor that is attached to the player hand
 			Global.picked = true
 			staminaBar.update_stamina_bar()
 			staminaBar.timer_control()
@@ -58,11 +61,19 @@ func pickTreeIfTree():
 func drop_object():
 	if Global.picked == true:
 		Global.picked = false
+		joint.set_node_b(joint.get_path())
 		staminaBar.timer_control()
 		print("picked is now ",Global.picked)
 
+func rotate_object(event):
+	if picked_object != null:
+		if event is InputEventMouseMotion:
+			staticbody.rotate_x(deg_to_rad(event.relative.y * rotation_power))
+			staticbody.rotate_y(deg_to_rad(event.relative.x * rotation_power))
+
+
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and !Global.locked:
 		body.rotate_y(-event.relative.x * SENSITIVITY)
 		#head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(event.relative.y * SENSITIVITY)
@@ -75,9 +86,18 @@ func _input(event):
 		elif Global.picked == true:
 			drop_object()
 	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and Global.stamina>=10:#stamina>10 for the moment but will need to be > than required stamina, determined by axe_stamina_requirement
-			#lose_stamina()#depend on the axe used in this case
-			start_chop_animation()
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and Global.staminaValue>=5:#stamina>10 for the moment but will need to be > than required stamina, determined by axe_stamina_requirement
+			if Global.is_chopping == false:
+				start_chop_animation() 
+				Global.staminaValue -= 5#lose_stamina()#depend on the axe used in this case
+				staminaBar.update_stamina_bar()
+				
+	if Input.is_action_pressed("rotate"):
+		Global.locked = true
+		rotate_object(event)
+	if Input.is_action_just_released("rotate"):
+		Global.locked = false
+
 	
 
 func _physics_process(delta):
@@ -92,8 +112,17 @@ func _physics_process(delta):
 		$Jump.playing = true
 
 	#Handle sprint.
-	if Input.is_action_pressed("sprint"):
+	if Input.is_action_just_pressed("sprint"):
 		speed = SPRINT_SPEED
+		Global.is_sprinting = true
+		Global.staminaDegenStat += Global.sprintDegenValue
+		staminaBar.timer_control()
+	
+	if Input.is_action_just_released("sprint"):
+		speed = WALK_SPEED
+		Global.is_sprinting = false
+		Global.staminaDegenStat -= Global.sprintDegenValue
+		staminaBar.timer_control()
 	else:
 		speed = WALK_SPEED
 
@@ -151,8 +180,9 @@ func _headbob(time) -> Vector3:
 	return pos
 	
 func start_chop_animation():
-	is_chopping = true
+	Global.is_chopping = true
 	animation_player.play("metarig|Chop")
 	# Wait for the animation to finish
 	await animation_player.animation_finished
-	is_chopping = false
+	Global.is_chopping = false
+	staminaBar.timer_control()
