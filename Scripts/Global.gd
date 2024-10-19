@@ -1,90 +1,14 @@
 extends Node
 
-var XP = 0
-var staminaValue : float = 100
+
 
 #player caracteristic
 #@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man..je me repend au sein de lesprit de la grande sainteté ammen
-var strength : int = 10
-var stamina : int = 10
-var charisma : int = 10
-var agility : int = 10
 
-var statspoints : int = 10
-
-#LEVELING SYSTEM
-var level : int = 1
-
-var experience = 0
-var experience_total = 0
-var experience_required = get_required_experience(level +1)
-
-
-	
-
-#var speed : int = 10 for animation speed ? faster cut cut and also better penetration if we create a damage dealt per hit variable or something
-var staminaRegenStat = 0.3
-var staminaDegenStat = 0.1
-var staminaFull : bool = true
-var sprintDegenValue = 0.2
-
-@onready var staminaBar = $GUI/PlayerInfo/StaminaBar
-
-
-var picked : bool = false
-var is_chopping = false
-var is_sprinting = false
-var locked = false  #prevent player looking around while using the rotation motion on a log
 
 
 func _ready() -> void:
 	pass
-	
-	
-	
-func get_required_experience(level):
-	return round(pow(level, 2) + level * 4)  #https://www.desmos.com/calculator/0r0mrngda2?lang=fr     
-
-func gain_experience(amount):
-	experience_total += amount
-	experience+= amount
-	while experience >= experience_required:
-		experience -= experience_required
-		level_up()
-	
-func level_up(): 
-	level += 1
-	experience_required = get_required_experience(level + 1)
-	statspoints = statspoints + 3
-	print("you have now : ", statspoints," stats points")
-
-#Update money
-func update_money(revenue):
-	#Money declaraction
-	var cp = $GUI/PlayerInfo/Wallet.CP
-	var sp = $GUI/PlayerInfo/Wallet.SP
-	var gp = $GUI/PlayerInfo/Wallet.GP
-	var pp = $GUI/PlayerInfo/Wallet.PP
-			
-	cp += revenue
-	if cp > 99:
-		sp += int(cp/100)
-		cp = fmod(cp,100)
-	if sp > 99:
-		gp += int(sp/100)
-		sp = fmod(sp,100)
-	if gp > 99:
-		pp += int(gp/100)
-		gp = fmod(gp,100)
-	
-	$GUI/PlayerInfo/Wallet.CP = cp
-	$GUI/PlayerInfo/Wallet.SP = sp
-	$GUI/PlayerInfo/Wallet.GP = gp
-	$GUI/PlayerInfo/Wallet.PP = pp
-	$GUI/PlayerInfo/Wallet.update_money_wallet()
-	
-
-	print("cp",$GUI/PlayerInfo/Wallet.CP,"sp",$GUI/PlayerInfo/Wallet.SP ,"gp",$GUI/PlayerInfo/Wallet.GP, "pp",pp)
 			
 	
 #@export what ? 
@@ -119,23 +43,7 @@ func _input(event):
 		get_tree().quit()
 
 #selling wood if wood is wood ~ this should have it's own script (eg : 'sellbutton.gd')
-func _on_sell_button_body_shape_entered(_body_rid: RID, body: Node3D, _body_shape_index: int, _local_shape_index: int) -> void:
-	print(str(body) + "has entered the selling button")
-	if body.is_in_group("trees") and body is RigidBody3D:
-		Global.picked = false
-		staminaBar.timer_control() # to fix not regening the stam when selling the object witout droping it
-		
-		#trying to take size of the wood and * it by value of wood type
-		var mass = body.mass #get the mass from the RB3D
-		var value_per_mass = body.value_per_mass #access the custom property
-		var total_value = mass * value_per_mass
-		print("Sold the tree total value: ", total_value)
-		update_money(total_value)
-		body.queue_free()
-		$AdventurerGuildCounter/SellButton/Queching.playing = true
-		
-	else:
-		print("is missing a condition (ingrouptree/rigidbody3d)")
+	
 		
 func pause():
 	get_tree().paused = true

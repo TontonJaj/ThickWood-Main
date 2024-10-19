@@ -222,4 +222,4 @@ shape = SubResource("ConcavePolygonShape3D_jivty")
 [node name="Trees Temp Script" type="Node" parent="Trees"]
 script = ExtResource("10_rbl3q")
 
-[connection signal="body_shape_entered" from="AdventurerGuildCounter/SellButton" to="." method="_on_sell_button_body_shape_entered"]
+[connection signal="body_shape_entered" from="AdventurerGuildCounter/SellButton" to="Player" method="_on_sell_button_body_shape_entered"]

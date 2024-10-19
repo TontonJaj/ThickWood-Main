@@ -70,7 +70,8 @@ func collision_all_raycasts_on_tree() -> void:
 
 func handle_tree_collision() -> void:
 	choppedAlready = true
-	print('madeittocollision')
+	$Cube_001/Area3D/CPUParticles3D.emitting = true
+	$Cube_001/Area3D/Pop.playing = true
 	#if collidedTreeDictionnary.top:
 		#visualize_collision_point(collidedTreeDictionnary.top)
 	#if collidedTreeDictionnary.depth:
@@ -106,10 +107,6 @@ func create_cpuparticles_3d()->void:
 	pass
 
 
-func _on_area_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	var collider = $Cube_001/Area3D/RayCast3D.get_collider()
-	if collider is Node3D and is_swinging == true:
-			print("yesbaby")
-			$Cube_001/Area3D/CPUParticles3D.emitting = true
-			$Cube_001/Area3D/Pop.playing = true
+
+	
 		
