@@ -48,6 +48,8 @@ var staminaRegenStat = 0.3
 var staminaDegenStat = 0.1
 var staminaFull : bool = true
 var sprintDegenValue = 0.2
+var staminaValue : float = 100
+
 
 var picked : bool = false
 var is_chopping = false
@@ -55,7 +57,6 @@ var is_sprinting = false
 var locked = false  #prevent player looking around while using the rotation motion on a log
 
 var XP = 0
-var staminaValue : float = 100
 
 #CHARACTER onreadys
 @onready var head = $metarig/Skeleton3D/HeadCamera/Head
