@@ -499,6 +499,7 @@ text = "1"
 horizontal_alignment = 2
 
 [node name="Stamina" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 47.0
 offset_right = 166.0

@@ -3,7 +3,7 @@
 
 extends CharacterBody3D
 
-var speed #what 
+var speed : float = WALK_SPEED #what 
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.5
@@ -167,11 +167,11 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("sprint"):
 		speed = WALK_SPEED
+		print("whattheheck2")
 		is_sprinting = false
 		staminaDegenStat -= sprintDegenValue
 		staminaBar.timer_control()
-	else:
-		speed = SPRINT_SPEED
+
 
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	#var direction = -(body.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
