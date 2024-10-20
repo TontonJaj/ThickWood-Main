@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var animation_player = $"../../../../../AnimationPlayer"
 @onready var raycasts = $Raycasts
+@onready var player = $"../../../../../"
 
 var is_swinging = false
 var collidedTreeDictionnary = {
@@ -34,10 +35,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		end_swing()
 
 func start_swing() -> void:
-	is_swinging = true
-	enable_all_raycasts()
-	clearcollidedTreeDictionnary()
-	choppedAlready = false
+	if player.playerFixed != true:
+		is_swinging = true
+		enable_all_raycasts()
+		clearcollidedTreeDictionnary()
+		choppedAlready = false
 
 func end_swing() -> void:
 	is_swinging = false

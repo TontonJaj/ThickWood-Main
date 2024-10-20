@@ -52,7 +52,7 @@ var sprintDegenValue = 0.2
 var holdDegenValue = 0.2
 var staminaValue : float = 100
 
-
+var playerFixed = false
 var picked : bool = false
 var is_chopping = false
 var is_sprinting = false
@@ -87,7 +87,7 @@ func gain_experience(amount):
 func level_up(): 
 	level += 1
 	experience_required = get_required_experience(level + 1)
-	statspoints = statspoints + 3
+	statspoints += 3
 	print("you have now : ", statspoints," stats points")
 
 
@@ -145,7 +145,7 @@ func _input(event):
 			drop_object()
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and staminaValue>=5:#stamina>10 for the moment but will need to be > than required stamina, determined by axe_stamina_requirement
-			if is_chopping == false:
+			if is_chopping == false and playerFixed != true:
 				start_chop_animation() 
 				staminaValue -= 5#lose_stamina()#depend on the axe used in this case
 				staminaBar.update_stamina_bar()
@@ -165,7 +165,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor() and playerFixed != true and staminaValue >= 15:
 		velocity.y = JUMP_VELOCITY
 		$Jump.playing = true
 		is_jumping = true
@@ -196,20 +196,22 @@ func _physics_process(delta):
 	#var direction = -(body.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var direction = Vector3(-input_dir.x, 0, -input_dir.y)
 	direction = direction.rotated(Vector3.UP, body.rotation.y)
-	if is_on_floor():
-		if direction:
+	
+	if playerFixed != true: #cant move if for exemple is in caracteristic menu
+		if is_on_floor() and direction:
+			
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 			if not animation_player.is_playing():
 				animation_player.play("metarig|walking")
 				animation_player.set_speed_scale(1.0)
 		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
-		
-	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
+			
+	else: #gradually reduce velocity when player is fixed
+		velocity.x = lerp(velocity.x, 0.0, delta * 5.0)
+		velocity.z = lerp(velocity.z, 0.0, delta * 5.0)
 		
 	#Head BOB
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -226,8 +228,7 @@ func _physics_process(delta):
 		var b = hand.global_transform.origin 
 		picked_object.set_linear_velocity((b-a) * pull_power)
 	
-	#Opening Gui
-	
+
 	
 			
 
@@ -238,6 +239,7 @@ func _physics_process(delta):
 	
 			
 	move_and_slide()
+
 	
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

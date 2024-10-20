@@ -583,7 +583,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
 horizontal_alignment = 1
 
-[node name="TextureButton1" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+[node name="UpButtonStrength" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
 layout_mode = 0
 offset_left = 154.0
 offset_top = 4.0
@@ -593,7 +593,7 @@ scale = Vector2(0.0800006, 0.0800006)
 texture_normal = ExtResource("9_0svvb")
 texture_pressed = ExtResource("10_gt65h")
 
-[node name="TextureButton2" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+[node name="UpButtonStamina" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
 layout_mode = 0
 offset_left = 154.0
 offset_top = 44.0
@@ -603,7 +603,7 @@ scale = Vector2(0.0800006, 0.0800006)
 texture_normal = ExtResource("9_0svvb")
 texture_pressed = ExtResource("10_gt65h")
 
-[node name="TextureButton3" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+[node name="UpButtonCharisma" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
 layout_mode = 0
 offset_left = 154.0
 offset_top = 86.0
@@ -613,7 +613,7 @@ scale = Vector2(0.0800006, 0.0800006)
 texture_normal = ExtResource("9_0svvb")
 texture_pressed = ExtResource("10_gt65h")
 
-[node name="TextureButton4" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+[node name="UpButtonAgility" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
 layout_mode = 0
 offset_left = 154.0
 offset_top = 125.0
@@ -630,3 +630,4 @@ libraries = {
 
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaRegen" to="PlayerInfo/StaminaBar" method="_on_stamina_regen_timeout"]
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaDegen" to="PlayerInfo/StaminaBar" method="_on_stamina_degen_timeout"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonStrength" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_strength_button_up"]

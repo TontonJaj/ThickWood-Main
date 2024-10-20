@@ -14,18 +14,15 @@ func update_stamina_bar():
 		
 
 func timer_control():
-	var is_chopping = player.is_chopping
-	var picked = player.picked
-	var is_sprinting = player.is_sprinting
-	var is_jumping = player.is_jumping
 
-	if picked or is_sprinting or is_chopping or is_jumping:  #if doing difficult activities
+	if player.picked or player.is_sprinting or player.is_chopping or player.is_jumping:  #if doing difficult activities
 		$ProgressBar/StaminaRegen.stop()
 		$ProgressBar/StaminaDegen.start()
-	elif not picked:
+	elif not player.picked:
 		$ProgressBar/StaminaDegen.stop()
 		await get_tree().create_timer(1.0).timeout
-		$ProgressBar/StaminaRegen.start()
+		if !player.picked:
+			$ProgressBar/StaminaRegen.start()
 
 func _on_stamina_regen_timeout() :
 	if player.staminaValue < (100-player.staminaRegenStat): 
