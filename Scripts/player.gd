@@ -7,7 +7,8 @@ var speed : float = WALK_SPEED #what
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.005
+const SENSITIVITY = 0.003
+var camera_pitch = 0.0  # Variable to track the camera's pitch (vertical rotation tracker)
 
 var statspoints : int = 10
 
@@ -45,9 +46,10 @@ var agility : int = 10
 
 #var speed : int = 10 for animation speed ? faster cut cut and also better penetration if we create a damage dealt per hit variable or something
 var staminaRegenStat = 0.3
-var staminaDegenStat = 0.1
+var staminaDegenStat = 0
 var staminaFull : bool = true
 var sprintDegenValue = 0.2
+var holdDegenValue = 0.2
 var staminaValue : float = 100
 
 
@@ -55,6 +57,7 @@ var picked : bool = false
 var is_chopping = false
 var is_sprinting = false
 var locked = false  #prevent player looking around while using the rotation motion on a log
+var is_jumping = false
 
 var XP = 0
 
@@ -102,6 +105,7 @@ func pickTreeIfTree():
 			staminaValue -= picked_object.mass / strength
 			joint.set_node_b(picked_object.get_path()) #glue the object to generic6DOjoint3D, acting like an anchor that is attached to the player hand
 			picked = true
+			staminaDegenStat += holdDegenValue
 			staminaBar.update_stamina_bar()
 			staminaBar.timer_control()
 			
@@ -110,6 +114,7 @@ func drop_object():
 	if picked == true:
 		picked = false
 		joint.set_node_b(joint.get_path())
+		staminaDegenStat -= holdDegenValue
 		staminaBar.timer_control()
 		print("picked is now ",picked)
 
@@ -124,8 +129,13 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion and !locked:
 		body.rotate_y(-event.relative.x * SENSITIVITY)
 		#head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		
+		# Update the camera pitch based on mouse movement (up/down)
+		camera_pitch -= event.relative.y * SENSITIVITY
+		camera_pitch = clamp(camera_pitch, deg_to_rad(-40), deg_to_rad(60))
+
+		# Instead of directly modifying camera.rotation.x, we first update camera_pitch based on mouse movement and then clamp it.
+		camera.rotation.x = camera_pitch
 
 func _input(event):
 	if Input.is_action_just_pressed("pick_up"):
@@ -158,6 +168,13 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$Jump.playing = true
+		is_jumping = true
+		staminaValue -= 15
+		staminaBar.update_stamina_bar()
+		staminaBar.timer_control()
+		is_jumping = false
+		staminaBar.timer_control()
+
 
 	#Handle sprint.
 	if Input.is_action_just_pressed("sprint"):
@@ -165,6 +182,7 @@ func _physics_process(delta):
 		is_sprinting = true
 		staminaDegenStat += sprintDegenValue
 		staminaBar.timer_control()
+		
 	
 	if Input.is_action_just_released("sprint"):
 		speed = WALK_SPEED
@@ -229,6 +247,8 @@ func _headbob(time) -> Vector3:
 	
 func start_chop_animation():
 	is_chopping = true
+	staminaBar.timer_control()
+
 	animation_player.play("metarig|Chop")
 	# Wait for the animation to finish
 	await animation_player.animation_finished
@@ -238,16 +258,21 @@ func start_chop_animation():
 
 func _on_sell_button_body_shape_entered(_body_rid: RID, body3D: Node3D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if body3D.is_in_group("trees") and body3D is RigidBody3D:
-		picked = false
-		staminaBar.timer_control() # to fix not regening the stam when selling the object witout droping it
-		
 		#trying to take size of the wood and * it by value of wood type
 		var mass = body3D.mass #get the mass from the RB3D
 		var value_per_mass = body3D.value_per_mass #access the custom property
 		var total_value = mass * value_per_mass
+		
 		wallet.update_money(total_value)
 		body3D.queue_free()
+		staminaBar.timer_control() # to fix not regening the stam when selling the object witout droping it
+
+		picked = false
+
 		$"../AdventurerGuildCounter/SellButton/Queching".playing = true
+		staminaDegenStat -= holdDegenValue
+		staminaBar.timer_control()
+
 		
 	else:
 		print("is missing a condition (ingrouptree/rigidbody3d)")

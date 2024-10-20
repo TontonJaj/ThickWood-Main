@@ -17,12 +17,14 @@ func timer_control():
 	var is_chopping = player.is_chopping
 	var picked = player.picked
 	var is_sprinting = player.is_sprinting
-	
-	if picked or is_sprinting or is_chopping:  #if doing difficult activities
+	var is_jumping = player.is_jumping
+
+	if picked or is_sprinting or is_chopping or is_jumping:  #if doing difficult activities
 		$ProgressBar/StaminaRegen.stop()
 		$ProgressBar/StaminaDegen.start()
 	elif not picked:
 		$ProgressBar/StaminaDegen.stop()
+		await get_tree().create_timer(1.0).timeout
 		$ProgressBar/StaminaRegen.start()
 
 func _on_stamina_regen_timeout() :
