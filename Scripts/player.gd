@@ -206,8 +206,8 @@ func _physics_process(delta):
 				animation_player.play("metarig|walking")
 				animation_player.set_speed_scale(1.0)
 		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 5.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 5.0)
 			
 	else: #gradually reduce velocity when player is fixed
 		velocity.x = lerp(velocity.x, 0.0, delta * 5.0)

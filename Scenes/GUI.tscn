@@ -631,3 +631,6 @@ libraries = {
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaRegen" to="PlayerInfo/StaminaBar" method="_on_stamina_regen_timeout"]
 [connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaDegen" to="PlayerInfo/StaminaBar" method="_on_stamina_degen_timeout"]
 [connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonStrength" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_strength_button_up"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonStamina" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_stamina_button_up"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonCharisma" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_charisma_button_up"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonAgility" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_agility_button_up"]

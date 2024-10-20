@@ -1,12 +1,16 @@
 extends Panel
 
 @onready var player = $"../../../Player"
+@onready var progressbar = $ProgressBar
 
 
 func _ready():
-	pass
+	update_stamina_max_value()
 # Called when the node enters the scene tree for the first time.
 
+func update_stamina_max_value():
+	progressbar.max_value = float(player.stamina * 10)
+	timer_control()
 
 func update_stamina_bar():	
 	$ProgressBar.value = player.staminaValue
@@ -25,10 +29,10 @@ func timer_control():
 			$ProgressBar/StaminaRegen.start()
 
 func _on_stamina_regen_timeout() :
-	if player.staminaValue < (100-player.staminaRegenStat): 
+	if player.staminaValue < (progressbar.max_value-player.staminaRegenStat): 
 		player.staminaValue += player.staminaRegenStat #one day, 4 will bee(Bzz, bzzzz) the stamina_regen_stat of the player
 		update_stamina_bar()
-	elif player.staminaValue >= 100:
+	elif player.staminaValue >= progressbar.max_value:
 		player.staminaFull = true
 		$ProgressBar/StaminaRegen.stop()
 #		if Global.stamina > 100: #Thats very cursed. 
