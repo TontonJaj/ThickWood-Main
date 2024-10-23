@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cs64j8766k17x"
+path="res://.godot/imported/wall_straight_gate.obj-095979eacc4a368c173e941046ff0375.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_straight_gate.obj-095979eacc4a368c173e941046ff0375.mesh"]
+
+source_file="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/buildings/neutral/wall_straight_gate.obj"
+dest_files=["res://.godot/imported/wall_straight_gate.obj-095979eacc4a368c173e941046ff0375.mesh", "res://.godot/imported/wall_straight_gate.obj-095979eacc4a368c173e941046ff0375.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

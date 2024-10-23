@@ -25,6 +25,10 @@ PlayerStats="*res://Scripts/PlayerStats.gd"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/terraincrafter/plugin.cfg")
+
 [file_customization]
 
 folder_colors={

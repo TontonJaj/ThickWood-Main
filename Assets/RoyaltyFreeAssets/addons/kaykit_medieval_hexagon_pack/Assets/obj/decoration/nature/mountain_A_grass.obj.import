@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b0s3473nxm0ag"
+path="res://.godot/imported/mountain_A_grass.obj-30b223b4c14abaea976c88da59206efd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mountain_A_grass.obj-30b223b4c14abaea976c88da59206efd.mesh"]
+
+source_file="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/decoration/nature/mountain_A_grass.obj"
+dest_files=["res://.godot/imported/mountain_A_grass.obj-30b223b4c14abaea976c88da59206efd.mesh", "res://.godot/imported/mountain_A_grass.obj-30b223b4c14abaea976c88da59206efd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

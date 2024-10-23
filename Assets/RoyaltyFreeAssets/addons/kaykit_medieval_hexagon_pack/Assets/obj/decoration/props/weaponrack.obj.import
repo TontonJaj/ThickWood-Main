@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqrpid85c5uf4"
+path="res://.godot/imported/weaponrack.obj-145cb16b2efaf6e52ea44ca930d2790f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/weaponrack.obj-145cb16b2efaf6e52ea44ca930d2790f.mesh"]
+
+source_file="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/decoration/props/weaponrack.obj"
+dest_files=["res://.godot/imported/weaponrack.obj-145cb16b2efaf6e52ea44ca930d2790f.mesh", "res://.godot/imported/weaponrack.obj-145cb16b2efaf6e52ea44ca930d2790f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

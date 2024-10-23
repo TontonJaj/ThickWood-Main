@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c7dr2emec3def"
+path="res://.godot/imported/building_archeryrange_green.obj-0b0769922be5c4bc074225c4b8f6d9b0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building_archeryrange_green.obj-0b0769922be5c4bc074225c4b8f6d9b0.mesh"]
+
+source_file="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/buildings/green/building_archeryrange_green.obj"
+dest_files=["res://.godot/imported/building_archeryrange_green.obj-0b0769922be5c4bc074225c4b8f6d9b0.mesh", "res://.godot/imported/building_archeryrange_green.obj-0b0769922be5c4bc074225c4b8f6d9b0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2jr0hitj6d8q"
+path="res://.godot/imported/wall_straight.obj-84edd39384d6dc6effb6e4ad2c91b029.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_straight.obj-84edd39384d6dc6effb6e4ad2c91b029.mesh"]
+
+source_file="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/buildings/neutral/wall_straight.obj"
+dest_files=["res://.godot/imported/wall_straight.obj-84edd39384d6dc6effb6e4ad2c91b029.mesh", "res://.godot/imported/wall_straight.obj-84edd39384d6dc6effb6e4ad2c91b029.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

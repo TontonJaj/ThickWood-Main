@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://fix35vk7cgry"
+path="res://.godot/imported/building_stage_A.obj-23dc084814bb6eccf74e19823ac71f2d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building_stage_A.obj-23dc084814bb6eccf74e19823ac71f2d.mesh"]
+
+source_file="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/buildings/neutral/building_stage_A.obj"
+dest_files=["res://.godot/imported/building_stage_A.obj-23dc084814bb6eccf74e19823ac71f2d.mesh", "res://.godot/imported/building_stage_A.obj-23dc084814bb6eccf74e19823ac71f2d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

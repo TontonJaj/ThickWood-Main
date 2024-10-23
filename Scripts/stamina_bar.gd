@@ -22,7 +22,7 @@ func timer_control():
 	if player.picked or player.is_sprinting or player.is_chopping or player.is_jumping:  #if doing difficult activities
 		$ProgressBar/StaminaRegen.stop()
 		$ProgressBar/StaminaDegen.start()
-	elif not player.picked:
+	elif !player.picked:
 		$ProgressBar/StaminaDegen.stop()
 		await get_tree().create_timer(1.0).timeout
 		if !player.picked:
@@ -45,6 +45,5 @@ func _on_stamina_degen_timeout() :
 	if player.staminaValue > player.staminaDegenStat: 
 		player.staminaValue -= player.staminaDegenStat
 		update_stamina_bar()
-		print(player.staminaValue)
 	else:
 		player.drop_object()
