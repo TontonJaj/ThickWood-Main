@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b3aetjrenha6r"
-path="res://.godot/imported/RigMan.fbx-a35930d86ac92a6006568df09602205e.scn"
+uid="uid://dpdhbse5oy7io"
+path="res://.godot/imported/axe.fbx-a218b387e8975ba95b15b5b3e2839f4f.scn"
 
 [deps]
 
-source_file="res://importedFromAPProject/Characters/RigMan.fbx"
-dest_files=["res://.godot/imported/RigMan.fbx-a35930d86ac92a6006568df09602205e.scn"]
+source_file="res://Assets/axe/axe.fbx"
+dest_files=["res://.godot/imported/axe.fbx-a218b387e8975ba95b15b5b3e2839f4f.scn"]
 
 [params]
 

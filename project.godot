@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Assets/Sound/default_bus_layout.tres"
+
 [autoload]
 
 Global="*res://Scripts/Global.gd"

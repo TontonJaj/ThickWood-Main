@@ -33,12 +33,15 @@ func update_money(revenue):
 			
 	cp += revenue
 	if cp > 99:
+		@warning_ignore("integer_division") #IT IS INTENDED TO DISCARD THE DECIMAL PART IN THIS CASE
 		sp += int(cp/100)
 		cp = fmod(cp,100)
 	if sp > 99:
+		@warning_ignore("integer_division") #IT IS INTENDED TO DISCARD THE DECIMAL PART IN THIS CASE
 		gp += int(sp/100)
 		sp = fmod(sp,100)
 	if gp > 99:
+		@warning_ignore("integer_division") #IT IS INTENDED TO DISCARD THE DECIMAL PART IN THIS CASE
 		pp += int(gp/100)
 		gp = fmod(gp,100)
 	
@@ -49,5 +52,5 @@ func update_money(revenue):
 	update_money_wallet()
 	
 
-	print("cp",CP,"sp",SP ,"gp",GP, "pp",pp)
+	#print("CP: ",CP,"SP: ",SP ,"GP: ",GP, "PP: ",pp)
 	
