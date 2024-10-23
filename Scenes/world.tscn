@@ -126,7 +126,7 @@ script = ExtResource("4_tjpco")
 [node name="Static" type="Node" parent="."]
 
 [node name="Rockbench" type="MeshInstance3D" parent="Static"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8.92557, 0.000501633, -0.860254)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8.99807, 0.0580702, -0.908476)
 mesh = ExtResource("12_5ncuy")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ojp41")

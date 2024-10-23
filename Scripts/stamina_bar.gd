@@ -40,6 +40,6 @@ func _on_stamina_degen_timeout() :
 	if player.staminaValue > player.staminaDegenStat: 
 		player.staminaValue -= player.staminaDegenStat
 		update_stamina_bar()
-		print(player.staminaValue)
+		#print(player.staminaValue)
 	else:
 		player.drop_object()
