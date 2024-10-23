@@ -35,11 +35,6 @@ func _on_stamina_regen_timeout() :
 	elif player.staminaValue >= progressbar.max_value:
 		player.staminaFull = true
 		$ProgressBar/StaminaRegen.stop()
-#		if Global.stamina > 100: #Thats very cursed. 
-#			Global.stamina = 100 #you can't just go from 101 to 100 every tick. Inappropriate.
-#	if Global.stamina <= 0: #Even worse, it shouldn't be needed ever
-#		Global.stamina = 0 #Waste of cpu and weird calculations when timing off
-# I'm wtfing it all
 		
 func _on_stamina_degen_timeout() :
 	if player.staminaValue > player.staminaDegenStat: 

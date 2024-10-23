@@ -57,8 +57,8 @@ func _on_up_button_strength_button_up():
 	if player.statspoints >= 1:
 		player.strength += 1
 		player.statspoints -= 1
-		print(player.statspoints)
-		print(player.strength)
+		#print(player.statspoints)
+		#print(player.strength)
 		update_caracteristics_displayed()
 
 
@@ -66,8 +66,8 @@ func _on_up_button_stamina_button_up():
 	if player.statspoints >= 1:
 			player.stamina += 1
 			player.statspoints -= 1
-			print(player.statspoints)
-			print(player.stamina)
+			#print(player.statspoints)
+			#print(player.stamina)
 			update_caracteristics_displayed()
 			staminabar.update_stamina_max_value()
 
@@ -75,14 +75,14 @@ func _on_up_button_charisma_button_up():
 	if player.statspoints >= 1:
 		player.charisma += 1
 		player.statspoints -= 1
-		print(player.statspoints)
-		print(player.charisma)
+		#print(player.statspoints)
+		#print(player.charisma)
 		update_caracteristics_displayed()
 
 func _on_up_button_agility_button_up():
 	if player.statspoints >= 1:
 		player.agility += 1
 		player.statspoints -= 1
-		print(player.statspoints)
-		print(player.agility)
+		#print(player.statspoints)
+		#print(player.agility)
 		update_caracteristics_displayed()

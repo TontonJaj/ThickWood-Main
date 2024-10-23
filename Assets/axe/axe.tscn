@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://covfw3xr2pjoj"]
 
-[ext_resource type="PackedScene" uid="uid://dpdhbse5oy7io" path="res://importedFromAPProject/Tools/axe.fbx" id="1_3ef04"]
+[ext_resource type="PackedScene" uid="uid://dpdhbse5oy7io" path="res://Assets/axe/axe.fbx" id="1_3ef04"]
 [ext_resource type="Script" path="res://Scripts/axe.gd" id="2_f1iug"]
 [ext_resource type="AudioStream" uid="uid://cy86e5snyeoy7" path="res://Assets/Sound/POP.mp3" id="3_xkxsu"]
 

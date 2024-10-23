@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=4 uid="uid://cleknh6qql4e8"]
 
-[ext_resource type="PackedScene" uid="uid://covfw3xr2pjoj" path="res://importedFromAPProject/Tools/axe.tscn" id="1_xks40"]
+[ext_resource type="PackedScene" uid="uid://covfw3xr2pjoj" path="res://Assets/axe/axe.tscn" id="1_xks40"]
 [ext_resource type="AudioStream" uid="uid://dqgjg2xucriwc" path="res://Assets/Sound/Jump.mp3" id="2_p4usw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6i0fa"]

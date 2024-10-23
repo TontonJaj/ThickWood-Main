@@ -74,8 +74,8 @@ var XP = 0
 #GUI onreadys
 @onready var staminaBar = $"../GUI/PlayerInfo/StaminaBar"
 
-func get_required_experience(level):
-	return round(pow(level, 2) + level * 4)  #https://www.desmos.com/calculator/0r0mrngda2?lang=fr     
+func get_required_experience(levelIn):
+	return round(pow(levelIn, 2) + levelIn * 4)  #https://www.desmos.com/calculator/0r0mrngda2?lang=fr     
 
 func gain_experience(amount):
 	experience_total += amount
@@ -116,7 +116,6 @@ func drop_object():
 		joint.set_node_b(joint.get_path())
 		staminaDegenStat -= holdDegenValue
 		staminaBar.timer_control()
-		print("picked is now ",picked)
 
 func rotate_object(event):
 	if picked_object != null:
@@ -256,25 +255,3 @@ func start_chop_animation():
 	await animation_player.animation_finished
 	is_chopping = false
 	staminaBar.timer_control()
-
-
-func _on_sell_button_body_shape_entered(_body_rid: RID, body3D: Node3D, _body_shape_index: int, _local_shape_index: int) -> void:
-	if body3D.is_in_group("trees") and body3D is RigidBody3D:
-		#trying to take size of the wood and * it by value of wood type
-		var mass = body3D.mass #get the mass from the RB3D
-		var value_per_mass = body3D.value_per_mass #access the custom property
-		var total_value = mass * value_per_mass
-		
-		wallet.update_money(total_value)
-		body3D.queue_free()
-		staminaBar.timer_control() # to fix not regening the stam when selling the object witout droping it
-
-		picked = false
-
-		$"../AdventurerGuildCounter/SellButton/Queching".playing = true
-		staminaDegenStat -= holdDegenValue
-		staminaBar.timer_control()
-
-		
-	else:
-		print("is missing a condition (ingrouptree/rigidbody3d)")

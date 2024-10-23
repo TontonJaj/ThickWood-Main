@@ -1,63 +1,74 @@
 extends Node
 
-func visualize_collision_point(collisionPos: Vector3) -> void:
-	if not is_inside_tree():
-		print("Warning: Attempting to visualize collision point while not in scene tree.")
-		return
-
-	var sphere = CSGSphere3D.new()
-	sphere.name = "Node_" + str(Time.get_ticks_msec())
-	sphere.radius = 0.015
-
-	# Create a new material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.WEB_PURPLE
-	
-	# Assign the material to the sphere
-	sphere.material = material
-
-	# Add the sphere to the scene first
-	get_tree().current_scene.add_child(sphere)
-
-	# Then set its position
-	sphere.global_transform.origin = collisionPos
-
 func handleChop(chopDict: Dictionary) -> void:
 	#Can only dynamically modify arrayMeshes in GDScript
-	#need a function out of handleChop to get the arrayMesh properly and the reference to the meshInstance
 	#Right now I'm deleting (QUEUE_FREE) but I should keep it and refresh its' mesh
-	var treeArrayMesh = null
-	var originalTreeTransform = null
-	if chopDict.collider is ArrayMesh:
-		treeArrayMesh = chopDict.collider
-		originalTreeTransform = treeArrayMesh.global_transform
-		#I'm repeating myself twice here, WRONG!
-	elif chopDict.collider is MeshInstance3D:
-		originalTreeTransform = chopDict.collider.global_transform
-		treeArrayMesh = convert_instance_to_array_mesh(chopDict.collider)
-		chopDict.collider.queue_free()
-	else:
-		var parent_mesh_instance = find_meshinstance3d_parent(chopDict.collider)
-		if parent_mesh_instance:
-			originalTreeTransform = parent_mesh_instance.global_transform
-			treeArrayMesh = convert_instance_to_array_mesh(parent_mesh_instance)
-			parent_mesh_instance.queue_free()
-	
-	if not (treeArrayMesh is ArrayMesh):
-		print('handleChop failing on type')
+	var arrayMeshAndTransform = get_array_mesh_and_transform(chopDict.collider) #this is queue_freeing() don't forget to update instead in future
+	if arrayMeshAndTransform.array_mesh == null or arrayMeshAndTransform.transform == null:
 		return
+	var treeArrayMesh = arrayMeshAndTransform.array_mesh
+	var originalTreeTransform = arrayMeshAndTransform.transform
 	
-	visualize_collision_point(chopDict.top)
-	visualize_collision_point(chopDict.depth)
-	visualize_collision_point(chopDict.bottom)
+	treeArrayMesh = addVerticesFromCollisions(originalTreeTransform, treeArrayMesh, chopDict)
+	
+	
+	
+	visualize_collision_point(chopDict.top, Color.WEB_PURPLE)
+	visualize_collision_point(chopDict.depth, Color.PALE_VIOLET_RED)
+	visualize_collision_point(chopDict.bottom, Color.LIGHT_PINK)
 	#treeArrayMesh = addVerticesToCollisions(treeArrayMesh, chopDict)
 	add_skeleton_to_scene(originalTreeTransform, treeArrayMesh)
 	add_transparent_to_scene(originalTreeTransform, treeArrayMesh)
 	
-func addVerticesToCollisions(treeArrayMesh, chopDict):
+func addVerticesFromCollisions(originalTreeTransform, treeArrayMesh, chopDict):
+	# Get both vertices and indices from the first surface
+	var arrays = treeArrayMesh.surface_get_arrays(0)
+	var vertices = arrays[Mesh.ARRAY_VERTEX]
+	var indices = arrays[Mesh.ARRAY_INDEX]
+	
+	print("Vertices before adding: ", vertices.size())
+	
+	# Store the current vertex count before adding new ones
+	var baseIndex = vertices.size()
+	
+	# Add new vertices to the array
+	var localTop = originalTreeTransform.affine_inverse() * chopDict.top
+	var localDepth = originalTreeTransform.affine_inverse() * chopDict.depth
+	var localBottom = originalTreeTransform.affine_inverse() * chopDict.bottom
+	
+	vertices.append(localTop)
+	vertices.append(localDepth)
+	vertices.append(localBottom)
+	
+	# Add indices for the new triangle
+	indices.append(baseIndex)      # localTop
+	indices.append(baseIndex + 1)  # localDepth
+	indices.append(baseIndex + 2)  # localBottom
+	
+	# Create a new surface with the updated vertices and indices
 	var st = SurfaceTool.new()
-	st.create_from(treeArrayMesh, 0)  # Assuming the tree is on the first surface
-	#I really need to make that func work
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	# First, add all vertices
+	for i in range(vertices.size()):
+		st.add_vertex(vertices[i])
+	
+	# Then add all indices to define the triangles
+	for i in range(0, indices.size(), 3):
+		st.add_index(indices[i])
+		st.add_index(indices[i + 1])
+		st.add_index(indices[i + 2])
+	
+	# Commit the changes to a new mesh
+	var newMesh = st.commit()
+	
+	# Clear the original mesh and add the new surface
+	treeArrayMesh.clear_surfaces()
+	treeArrayMesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, newMesh.surface_get_arrays(0))
+	
+	print("Vertices after adding: ", vertices.size())
+	print(str(treeArrayMesh))
+	return treeArrayMesh
 	
 func add_transparent_to_scene(originalTreeTransform, treeArrayMesh):
 	# Create the transparent tree mesh
@@ -126,6 +137,34 @@ func add_skeleton_to_scene(originalTreeTransform, treeArrayMesh):
 
 	immediate_mesh.surface_end()
 	
+func get_array_mesh_and_transform(collider) -> Dictionary:
+	var result = {
+		"array_mesh": null,
+		"transform": null
+	}
+
+	if collider is ArrayMesh:
+		result.array_mesh = collider
+		result.transform = collider.global_transform
+	elif collider is MeshInstance3D:
+		result.transform = collider.global_transform
+		result.array_mesh = convert_instance_to_array_mesh(collider)
+		collider.queue_free()
+	else:
+		var parent_mesh_instance = find_meshinstance3d_parent(collider)
+		if parent_mesh_instance:
+			result.transform = parent_mesh_instance.global_transform
+			result.array_mesh = convert_instance_to_array_mesh(parent_mesh_instance)
+			parent_mesh_instance.queue_free()
+			
+	if not (result.array_mesh is ArrayMesh):
+		print('handleChop failing: Invalid ArrayMesh')
+
+	if not (result.transform is Transform3D):
+		print('handleChop failing: Invalid Transform')
+
+	return result
+	
 func convert_instance_to_array_mesh(mesh_instance: MeshInstance3D) -> ArrayMesh:
 	if not mesh_instance or not mesh_instance.mesh:
 		return null
@@ -164,3 +203,41 @@ func find_meshinstance3d_parent(node: Node) -> Node:
 			return current_node
 		current_node = current_node.get_parent()
 	return null
+
+func visualize_collision_point(collisionPos: Vector3, color: Color) -> void:
+	if not is_inside_tree():
+		print("Warning: Attempting to visualize collision point while not in scene tree.")
+		return
+
+	var sphere = CSGSphere3D.new()
+	sphere.name = "Node_" + str(Time.get_ticks_msec())
+	sphere.radius = 0.015
+
+	# Create a new material
+	var material = StandardMaterial3D.new()
+	material.albedo_color = color
+	
+	# Assign the material to the sphere
+	sphere.material = material
+
+	# Add the sphere to the scene first
+	get_tree().current_scene.add_child(sphere)
+
+	# Then set its position
+	sphere.global_transform.origin = collisionPos
+	
+	# Create a Timer node
+	var timer = Timer.new()
+	timer.set_wait_time(4.0)  # Set the timer for 6 seconds
+	timer.set_one_shot(true)  # Make it a one-shot timer
+	timer.connect("timeout", Callable(self, "_on_visualization_timer_timeout").bind(sphere))
+	
+	# Add the timer to the sphere
+	sphere.add_child(timer)
+	
+	# Start the timer
+	timer.start()
+
+func _on_visualization_timer_timeout(sphere: CSGSphere3D) -> void:
+	if is_instance_valid(sphere):
+		sphere.queue_free()
