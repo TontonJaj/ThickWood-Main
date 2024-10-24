@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var animation_player = $"../../../../../AnimationPlayer"
-@onready var raycasts = $Raycasts
+@onready var raycasts = $Cube_001/Area3D/RayCast3D
 @onready var player = $"../../../../../"
 
 var is_swinging = false

@@ -1,14 +1,38 @@
-[gd_scene load_steps=8 format=4 uid="uid://d1b4gih2qvuec"]
+[gd_scene load_steps=10 format=4 uid="uid://d1b4gih2qvuec"]
 
-[ext_resource type="Texture2D" uid="uid://6wm6tsjedb8b" path="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/props/hexagons_medieval.png" id="2_71k0s"]
-[ext_resource type="ArrayMesh" uid="uid://cco2sgl83u253" path="res://Assets/RoyaltyFreeAssets/addons/kaykit_medieval_hexagon_pack/Assets/obj/tiles/base/hex_grass.obj" id="2_lfdau"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_prman"]
+load_path = "res://.godot/imported/hexagons_medieval.png-c44c9cfbb5cb6f9f2f5240d6fe692a98.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5x7y"]
+resource_name = "hexagons_medieval"
+albedo_texture = SubResource("CompressedTexture2D_prman")
+metallic = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ulyck"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.1547, 2, 1, 2.3094),
+"attribute_data": PackedByteArray("pN5TPRqGMz+k3lM9ILIkP01KQT0ahjM/TUpBPSCyJD/8cmY9GoYzP/xyZj0gsiQ//HJmPRqGMz/8cmY9ILIkP01KQT0ahjM/TUpBPSCyJD9NSkE9GoYzP01KQT0gsiQ/pN5TPRqGMz+k3lM9ILIkP/xyZj0ahjM//HJmPSCyJD9NSkE9GoYzP01KQT0gsiQ/pN5TPRqGMz+k3lM9ILIkPz85ij0gshg/a4OTPSCyGD8/OYo9kX4XP+0Mkz2Rfhc/a4OTPSCyGD9rg5M9ILIYP+0Mkz2Rfhc/7QyTPZF+Fz9rg5M9ILIYPz85ij0gshg/7QyTPZF+Fz8/OYo9kX4XPz85ij0gshg/mu+APSCyGD8/OYo9kX4XPxdmgT2Rfhc/mu+APSCyGD+a74A9ILIYPxdmgT2Rfhc/F2aBPZF+Fz+a74A9ILIYPz85ij0gshg/F2aBPZF+Fz8/OYo9kX4XP/xyZj0ahjM//HJmPSCyJD+k3lM9GoYzP6TeUz0gsiQ/pN5TPT81Nj+k3lM9PzU2P/xyZj0/NTY/zsVfPT81Nj/8cmY9PzU2P6TeUz0/NTY/TUpBPT81Nj9790c9PzU2P01KQT0/NTY/2lazPZF+Ez/FkrI9kX4TP7KDqj2RfhM/2lazPZF+Ez+yg6o9kX4TP7KDqj2RfhM/irChPZF+Ez8ZdKI9kX4TP4qwoT2RfhM/"),
+"format": 34359742487,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8AMAAxADIAMgAzADQANAAzADUANQAxADYANgA3ADgAOAA3ADAAOQA6ADsAPAA6ADkAPQA+ADwAPwBAAD0AQQBAAD8AOwA+AEEA"),
+"material": SubResource("StandardMaterial3D_x5x7y"),
+"name": "hexagons_medieval",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("AAAAAAAAgL82zZO/AAAAAM3MTL02zZO/AACAvwAAgL82zRO/AACAv83MTL02zRO/AACAPwAAgL82zRM/AACAP83MTL02zRM/AACAPwAAgL82zRO/AACAP83MTL02zRO/AACAvwAAgL82zRO/AACAv83MTL02zRO/AACAvwAAgL82zRM/AACAv83MTL02zRM/AAAAAAAAgL82zZM/AAAAAM3MTL02zZM/AACAPwAAgL82zRM/AACAP83MTL02zRM/AACAvwAAgL82zRM/AACAv83MTL02zRM/AAAAAAAAgL82zZM/AAAAAM3MTL02zZM/AAAAAM3MTL02zZO/AACAP83MTL02zRO/AAAAAAAAAABZaYy/MzNzPwAAAABRaQy/AACAP83MTL02zRO/AACAP83MTL02zRM/MzNzPwAAAABRaQy/MzNzPwAAAABiaQw/AACAP83MTL02zRM/AAAAAM3MTL02zZM/MzNzPwAAAABiaQw/AAAAAAAAAABZaYw/AAAAAM3MTL02zZM/AACAv83MTL02zRM/AAAAAAAAAABZaYw/MzNzvwAAAABRaQw/AACAv83MTL02zRM/AACAv83MTL02zRO/MzNzvwAAAABRaQw/MzNzvwAAAABRaQy/AACAv83MTL02zRO/AAAAAM3MTL02zZO/MzNzvwAAAABRaQy/AAAAAAAAAABZaYy/AACAPwAAgL82zRO/AACAP83MTL02zRO/AAAAAAAAgL82zZO/AAAAAM3MTL02zZO/AAAAAAAAgL82zZO/AAAAAAAAgL8AAAAAAACAPwAAgL82zRO/AAAAAAAAgL8AAAAAAACAPwAAgL82zRM/AAAAAAAAgL82zZM/AACAvwAAgL82zRM/AAAAAAAAgL8AAAAAAACAvwAAgL82zRO/MzNzPwAAAABRaQy/AAAAAAAAAAAAAAAAAAAAAAAAAABZaYy/MzNzPwAAAABiaQw/AAAAAAAAAABZaYw/AAAAAAAAAAAAAAAAMzNzvwAAAABRaQw/AAAAAAAAAAAAAAAAMzNzvwAAAABRaQy/AAAl0f//kigAACXR//+SKAAAJdH//5IoAAAl0f//kij///9/////v////3////+/////f////7////9/////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+/2a7/f///bNfZrv9///9s19mu/3///2zX2a7/f///bNclUf9/JdH/vyVR/38l0f+/JVH/fyXR/78lUf9/JdH/v+bJ8eQk0f8/5snx5CTR/z/myfHkJNH/P+bJ8eQk0f8//7//v////7//v/+/////v/+//7////+//7//v////78Mmxe2/v+SqAybF7b+/5KoDJsXtv7/kqgMmxe2/v+SqPJkF7Yk0f+/8mQXtiTR/7/yZBe2JNH/v/JkF7Yk0f+//z//v////7//P/+/////v/8//7////+//z//v////78YNvHk/v+SKBg28eT+/5IoGDbx5P7/kigYNvHk/v+SKP//JdEl0f8///8l0SXR/z///yXRJdH/P///JdEl0f8//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}]
+blend_shape_mode = 0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4yugs"]
 data = PackedVector3Array(0, -1, -1.1547, 0, -0.05, -1.1547, -1, -1, -0.5774, -1, -1, -0.5774, 0, -0.05, -1.1547, -1, -0.05, -0.5774, 1, -1, 0.5774, 1, -0.05, 0.5774, 1, -1, -0.5774, 1, -1, -0.5774, 1, -0.05, 0.5774, 1, -0.05, -0.5774, -1, -1, -0.5774, -1, -0.05, -0.5774, -1, -1, 0.5774, -1, -1, 0.5774, -1, -0.05, -0.5774, -1, -0.05, 0.5774, 0, -1, 1.1547, 0, -0.05, 1.1547, 1, -1, 0.5774, 1, -1, 0.5774, 0, -0.05, 1.1547, 1, -0.05, 0.5774, -1, -1, 0.5774, -1, -0.05, 0.5774, 0, -1, 1.1547, 0, -1, 1.1547, -1, -0.05, 0.5774, 0, -0.05, 1.1547, 0, -0.05, -1.1547, 1, -0.05, -0.5774, 0, 0, -1.097, 0, 0, -1.097, 1, -0.05, -0.5774, 0.95, 0, -0.5485, 1, -0.05, -0.5774, 1, -0.05, 0.5774, 0.95, 0, -0.5485, 0.95, 0, -0.5485, 1, -0.05, 0.5774, 0.95, 0, 0.5485, 1, -0.05, 0.5774, 0, -0.05, 1.1547, 0.95, 0, 0.5485, 0.95, 0, 0.5485, 0, -0.05, 1.1547, 0, 0, 1.097, 0, -0.05, 1.1547, -1, -0.05, 0.5774, 0, 0, 1.097, 0, 0, 1.097, -1, -0.05, 0.5774, -0.95, 0, 0.5485, -1, -0.05, 0.5774, -1, -0.05, -0.5774, -0.95, 0, 0.5485, -0.95, 0, 0.5485, -1, -0.05, -0.5774, -0.95, 0, -0.5485, -1, -0.05, -0.5774, 0, -0.05, -1.1547, -0.95, 0, -0.5485, -0.95, 0, -0.5485, 0, -0.05, -1.1547, 0, 0, -1.097, 1, -1, -0.5774, 1, -0.05, -0.5774, 0, -1, -1.1547, 0, -1, -1.1547, 1, -0.05, -0.5774, 0, -0.05, -1.1547, 0, -1, -1.1547, 0, -1, 0, 1, -1, -0.5774, 1, -1, -0.5774, 0, -1, 0, 1, -1, 0.5774, 1, -1, 0.5774, 0, -1, 0, 0, -1, 1.1547, 0, -1, 1.1547, 0, -1, 0, -1, -1, 0.5774, -1, -1, 0.5774, 0, -1, 0, -1, -1, -0.5774, -1, -1, -0.5774, 0, -1, 0, 0, -1, -1.1547, 0.95, 0, -0.5485, 0, 0, 0, 0, 0, -1.097, 0.95, 0, 0.5485, 0, 0, 0, 0.95, 0, -0.5485, 0, 0, 1.097, 0, 0, 0, 0.95, 0, 0.5485, -0.95, 0, 0.5485, 0, 0, 0, 0, 0, 1.097, -0.95, 0, -0.5485, 0, 0, 0, -0.95, 0, 0.5485, 0, 0, -1.097, 0, 0, 0, -0.95, 0, -0.5485)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w67sq"]
+load_path = "res://.godot/imported/hexagons_medieval.png-77edbf9d030ac9e9bc1947163371485f.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cq46t"]
 resource_name = "hexagons_medieval"
-albedo_texture = ExtResource("2_71k0s")
+albedo_texture = SubResource("CompressedTexture2D_w67sq")
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tbm8o"]
@@ -50,7 +74,7 @@ points = PackedVector3Array(-0.00469773, 0.0511396, -0.0980707, 0.00172467, 0.16
 
 [node name="HexGrass" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 19)
-mesh = ExtResource("2_lfdau")
+mesh = SubResource("ArrayMesh_ulyck")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="HexGrass"]
 
