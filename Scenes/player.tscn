@@ -499,6 +499,9 @@ _data = {
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e23en"]
+emission_shape = 4
+emission_point_count = 1
+inherit_velocity_ratio = 0.205
 
 [sub_resource type="SphereMesh" id="SphereMesh_knsr6"]
 radius = 0.05
@@ -792,7 +795,9 @@ libraries = {
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(-100, 8.74228e-06, 3.28012e-13, -7.2706e-20, -4.37114e-06, 85.8361, 8.74228e-06, 100, 3.75201e-06, 0, 0, 0)
-amount = 2
+lifetime = 0.5
+explosiveness = 1.0
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_e23en")
 draw_pass_1 = SubResource("SphereMesh_knsr6")
 

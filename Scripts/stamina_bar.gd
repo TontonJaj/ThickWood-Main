@@ -6,6 +6,8 @@ extends Panel
 
 func _ready():
 	update_stamina_max_value()
+	
+	
 # Called when the node enters the scene tree for the first time.
 
 func update_stamina_max_value():
@@ -13,6 +15,10 @@ func update_stamina_max_value():
 	timer_control()
 
 func update_stamina_bar():	
+	if player.staminaValue >= progressbar.max_value:
+		player.staminaValue = progressbar.max_value
+	elif player.staminaValue <= 0:
+		player.staminaValue = 0
 	$ProgressBar.value = player.staminaValue
 
 		

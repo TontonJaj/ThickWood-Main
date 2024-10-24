@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://gbll1d70yqnq"]
+[gd_scene load_steps=7 format=4 uid="uid://gbll1d70yqnq"]
 
 [ext_resource type="Shader" uid="uid://bvu78n1j7k5fo" path="res://Assets/DoneByJaj/newmap/first_campNoColor.tres" id="1_e6n2o"]
+[ext_resource type="PackedScene" uid="uid://co7mmoe8je7pc" path="res://Scenes/Maps/first_camp_PATHS.tscn" id="2_nprn0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tyqws"]
 render_priority = 0
@@ -54,3 +55,6 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e3tta")
+
+[node name="first_camp_PATHS" parent="Plane/StaticBody3D" instance=ExtResource("2_nprn0")]
+transform = Transform3D(0.0333333, 0, 0, 0, 1, 0, 0, 0, 0.0333333, 0, 0.001, 0)
