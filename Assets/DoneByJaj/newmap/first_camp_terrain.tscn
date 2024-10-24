@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvffkh1ncdcgw"]
-
-[ext_resource type="PackedScene" uid="uid://uqhj7a3ssi4i" path="res://Assets/DoneByJaj/newmap/first_campNoColor.glb" id="1_2b2vd"]
-
-[node name="first_campTerrain" instance=ExtResource("1_2b2vd")]

@@ -1,12 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://dymsy6owlnnt7"]
+[gd_scene load_steps=18 format=3 uid="uid://dymsy6owlnnt7"]
 
 [ext_resource type="Script" path="res://Scripts/Global.gd" id="1_k5w1b"]
 [ext_resource type="PackedScene" uid="uid://dvu2gasjnc0xn" path="res://Scenes/test_tree.tscn" id="2_8magj"]
 [ext_resource type="AudioStream" uid="uid://bvmpqiidnuahf" path="res://Assets/Sound/Queching.mp3" id="4_g84j0"]
+[ext_resource type="PackedScene" uid="uid://gbll1d70yqnq" path="res://Scenes/Maps/first_camp.tscn" id="7_41opg"]
 [ext_resource type="PackedScene" uid="uid://ddrfi243l4qre" path="res://Scenes/GUI.tscn" id="8_h47ps"]
 [ext_resource type="PackedScene" uid="uid://xlamdf1enuv0" path="res://Scenes/player.tscn" id="8_hfw0x"]
 [ext_resource type="Script" path="res://Scripts/Trees.gd" id="8_n57h2"]
-[ext_resource type="PackedScene" uid="uid://crt06j5v4sylf" path="res://Assets/DoneByJaj/newmap/first_campNoColor.tscn" id="13_6l30r"]
+[ext_resource type="Script" path="res://Scenes/grid_map.gd" id="9_mwcm3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5ylk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,16 +51,12 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8fh0f")
 
-[node name="GridMap" type="GridMap" parent="."]
-data = {
-"cells": PackedInt32Array(1, 65530, 7, 65461, 2, 7, 65488, 65489, 44)
-}
-
 [node name="AdventurerGuildCounter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.441181, -5.74832)
 
 [node name="MetalBox" type="MeshInstance3D" parent="AdventurerGuildCounter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441655, 0)
+visible = false
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="AdventurerGuildCounter/MetalBox"]
@@ -162,6 +159,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.441181, 0.361202)
 
 [node name="MetalBox" type="MeshInstance3D" parent="AdventurerGuildCounter2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441655, 0)
+visible = false
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="AdventurerGuildCounter2/MetalBox"]
@@ -176,8 +174,15 @@ transform = Transform3D(0.704257, 0, 0, 0, 1, 0, 0, 0, 0.702894, 0.0643392, 0.56
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AdventurerGuildCounter2/MetalBox/StaticBody3D/SellButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441655, 0)
 
-[node name="First_camp" parent="." instance=ExtResource("13_6l30r")]
-transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 1, -3, -2)
-
 [node name="Player" parent="." instance=ExtResource("8_hfw0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544341, 0)
+
+[node name="first_camp" parent="." instance=ExtResource("7_41opg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 3)
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_scale = 3.0
+data = {
+"cells": PackedInt32Array(1, 65530, 7, 65461, 2, 7, 65488, 65489, 44, 8, 65527, 10, 8, 65528, 10, 7, 65528, 10, 7, 65529, 10, 6, 65529, 10, 5, 65530, 10, 5, 65531, 10, 4, 65531, 10, 4, 65532, 10, 3, 65532, 10)
+}
+script = ExtResource("9_mwcm3")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
