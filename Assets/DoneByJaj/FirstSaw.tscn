@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=4 uid="uid://hglbwfbuebi7"]
+[gd_scene load_steps=29 format=4 uid="uid://hglbwfbuebi7"]
 
+[ext_resource type="Script" path="res://Assets/DoneByJaj/Sawmill.gd" id="1_qs0q0"]
 [ext_resource type="Texture2D" uid="uid://b4chac2c46fy2" path="res://Assets/GUI/wood-beam.png" id="1_y188r"]
 [ext_resource type="PhysicsMaterial" uid="uid://deh81y4yn1mnh" path="res://Assets/Physic Material/conveyor.tres" id="2_tycyi"]
 [ext_resource type="Script" path="res://Assets/DoneByJaj/conveyor_belt.gd" id="2_u1uet"]
 [ext_resource type="Script" path="res://Assets/DoneByJaj/red_button.gd" id="4_e6afn"]
+[ext_resource type="AudioStream" uid="uid://cueoavovdh3hx" path="res://Assets/Sound/audio.mp3" id="6_fhdvh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enbb1"]
 resource_name = "Material.002"
@@ -200,6 +202,7 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048239, -0.16828, -0.385652)
 mesh = SubResource("ArrayMesh_r08gt")
 skeleton = NodePath("")
+script = ExtResource("1_qs0q0")
 
 [node name="Sawmill" type="StaticBody3D" parent="."]
 
@@ -258,6 +261,11 @@ script = ExtResource("4_e6afn")
 libraries = {
 "": SubResource("AnimationLibrary_rpmhb")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048239, 0.16828, 0.385652)
+stream = ExtResource("6_fhdvh")
+max_distance = 10.0
 
 [connection signal="body_entered" from="ConveyorBelt/Area3D" to="ConveyorBelt" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="ConveyorBelt/Area3D" to="ConveyorBelt" method="_on_area_3d_body_exited"]
