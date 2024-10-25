@@ -100,7 +100,9 @@ func pickTreeIfTree():
 	var collider = interaction.get_collider()
 	if collider is RigidBody3D and collider.is_in_group("trees"):
 		picked_object = collider
+		print("eee")
 		if picked_object.mass / strength < staminaValue: #condition to pick something, u need to have strength left
+			print("222")
 			print ("object mass is :" , picked_object.mass , "stam used: " , picked_object.mass / strength )
 			staminaValue -= picked_object.mass / strength
 			joint.set_node_b(picked_object.get_path()) #glue the object to generic6DOjoint3D, acting like an anchor that is attached to the player hand
@@ -158,6 +160,10 @@ func _input(event):
 	
 
 func _physics_process(delta):
+	
+	if interaction.is_colliding():
+		var collider = interaction.get_collider()
+		print("Collider detected: ", collider.name)
 	
 	# Add the gravity.
 	if not is_on_floor():
