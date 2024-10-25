@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://tk53k7blx22i"
+path="res://.godot/imported/rockbench.obj-a94d89799c4831da5e30856bae96ae67.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rockbench.obj-a94d89799c4831da5e30856bae96ae67.mesh"]
+
+source_file="res://Assets/Static/RockBench collection/rockbench.obj"
+dest_files=["res://.godot/imported/rockbench.obj-a94d89799c4831da5e30856bae96ae67.mesh", "res://.godot/imported/rockbench.obj-a94d89799c4831da5e30856bae96ae67.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dymsy6owlnnt7"]
+[gd_scene load_steps=21 format=3 uid="uid://dymsy6owlnnt7"]
 
 [ext_resource type="Script" path="res://Scripts/Global.gd" id="1_k5w1b"]
 [ext_resource type="AudioStream" uid="uid://bvmpqiidnuahf" path="res://Assets/Sound/Queching.mp3" id="4_g84j0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://xlamdf1enuv0" path="res://Scenes/player.tscn" id="8_hfw0x"]
 [ext_resource type="Script" path="res://Scripts/Trees.gd" id="8_n57h2"]
 [ext_resource type="PackedScene" uid="uid://hglbwfbuebi7" path="res://Assets/DoneByJaj/FirstSaw.tscn" id="9_hf427"]
+[ext_resource type="ArrayMesh" uid="uid://tk53k7blx22i" path="res://Assets/Static/RockBench collection/rockbench.obj" id="10_1d5r4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5ylk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -196,3 +197,7 @@ max_random_size = Vector3(1, 1.4, 1)
 
 [node name="Sawmill" parent="." instance=ExtResource("9_hf427")]
 transform = Transform3D(0.0960156, 0.00890107, -0.99534, -0.000854674, 0.99996, 0.00885992, 0.99538, -3.64089e-10, 0.0960194, -7.06857, 0.760673, 10.2556)
+
+[node name="Rockbench" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.73511, 0.154601, 12.0499)
+mesh = ExtResource("10_1d5r4")
