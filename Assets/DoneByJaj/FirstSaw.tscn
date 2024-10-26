@@ -1,11 +1,14 @@
-[gd_scene load_steps=29 format=4 uid="uid://hglbwfbuebi7"]
+[gd_scene load_steps=35 format=4 uid="uid://hglbwfbuebi7"]
 
 [ext_resource type="Script" path="res://Assets/DoneByJaj/Sawmill.gd" id="1_qs0q0"]
 [ext_resource type="Texture2D" uid="uid://b4chac2c46fy2" path="res://Assets/GUI/wood-beam.png" id="1_y188r"]
 [ext_resource type="PhysicsMaterial" uid="uid://deh81y4yn1mnh" path="res://Assets/Physic Material/conveyor.tres" id="2_tycyi"]
 [ext_resource type="Script" path="res://Assets/DoneByJaj/conveyor_belt.gd" id="2_u1uet"]
 [ext_resource type="Script" path="res://Assets/DoneByJaj/red_button.gd" id="4_e6afn"]
+[ext_resource type="Script" path="res://Assets/DoneByJaj/security_garage_door.gd" id="5_nftug"]
 [ext_resource type="AudioStream" uid="uid://cueoavovdh3hx" path="res://Assets/Sound/audio.mp3" id="6_fhdvh"]
+[ext_resource type="Script" path="res://Assets/DoneByJaj/wood_drop.gd" id="7_1dvre"]
+[ext_resource type="AudioStream" uid="uid://dddcwu4vqin3" path="res://Assets/Sound/SawingBlades.mp3" id="7_got7k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enbb1"]
 resource_name = "Material.002"
@@ -116,26 +119,15 @@ material = SubResource("StandardMaterial3D_mog14")
 [sub_resource type="BoxShape3D" id="BoxShape3D_f45jn"]
 size = Vector3(0.403076, 0.0198975, 2.17767)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mee1o"]
+points = PackedVector3Array(-0.507937, -0.507937, -0.00793651, 0.507937, 0.507937, 0.00793651, 0.507937, 0.507937, -0.00793651, -0.507937, 0.507937, 0.00793651, 0.507937, -0.507937, 0.00793651, 0.507937, -0.507937, -0.00793651, -0.507937, 0.507937, -0.00793651, -0.507937, -0.507937, 0.00793651)
+
+[sub_resource type="QuadMesh" id="QuadMesh_estjl"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_ul34a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nf2x"]
 albedo_color = Color(0.7849, 0.37145, 0.205977, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_estjl"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mee1o"]
-points = PackedVector3Array(-0.507937, -0.507937, -0.00793651, 0.507937, 0.507937, 0.00793651, 0.507937, 0.507937, -0.00793651, -0.507937, 0.507937, 0.00793651, 0.507937, -0.507937, 0.00793651, 0.507937, -0.507937, -0.00793651, -0.507937, 0.507937, -0.00793651, -0.507937, -0.507937, 0.00793651)
-
-[sub_resource type="BoxMesh" id="BoxMesh_aro7i"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61r7a"]
-albedo_color = Color(1.622, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_50pf6"]
-material = SubResource("StandardMaterial3D_61r7a")
-top_radius = 0.05
-bottom_radius = 0.04
-height = 0.3
 
 [sub_resource type="Animation" id="Animation_ifjfb"]
 resource_name = "Color change"
@@ -191,15 +183,111 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-0.547752, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../DoorDrop/Hinge:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.475677, 0, 0.000193506)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../DoorDrop/Hinge:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.13163e-14, 8.73115e-11, 4.37491e-18)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../../SecurityGarageDoor:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0362242, 0.077903, -1.73526)]
+}
+
+[sub_resource type="Animation" id="Animation_ujq55"]
+resource_name = "Sawmill Doors close_open"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../SecurityGarageDoor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0362242, 0.077903, -1.73526), Vector3(-0.0366605, 1.0779, -1.73526)]
+}
+
+[sub_resource type="Animation" id="Animation_bgx10"]
+resource_name = "DroptheWood"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../DoorDrop/Hinge:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.475677, 0, 0.000193506), Vector3(0.475676, 0, 0.000193506)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../DoorDrop/Hinge:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.13163e-14, 8.73115e-11, 4.37491e-18), Vector3(-1.90146e-08, -1.5708, -1.90146e-08)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rpmhb"]
 _data = {
 "Color change": SubResource("Animation_ifjfb"),
-"RESET": SubResource("Animation_ksicn")
+"DroptheWood": SubResource("Animation_bgx10"),
+"RESET": SubResource("Animation_ksicn"),
+"Securitygaragedoorclose": SubResource("Animation_ujq55")
 }
 
+[sub_resource type="BoxMesh" id="BoxMesh_aro7i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61r7a"]
+albedo_color = Color(1.622, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_50pf6"]
+material = SubResource("StandardMaterial3D_61r7a")
+top_radius = 0.05
+bottom_radius = 0.04
+height = 0.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a5qu6"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
 [node name="Sawmill" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048239, -0.16828, -0.385652)
+transform = Transform3D(1, 0.000436332, 0, -0.000436332, 1, 0, 0, 0, 1, 0.048239, -0.16828, -0.385652)
 mesh = SubResource("ArrayMesh_r08gt")
 skeleton = NodePath("")
 script = ExtResource("1_qs0q0")
@@ -233,31 +321,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72529e-09, -0.613169, -5.96
 transform = Transform3D(2.29885, 0, 0, 0, 2.29885, 0, 0, 0, 2.29885, -0.038, 0.162, 0.774)
 shape = SubResource("BoxShape3D_f45jn")
 
-[node name="SecurityGarageDoor" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.911173, 3.3882e-15, 1.11022e-16, 0, -0.953695, 0, -5.13604e-15, 3.39588e-08, -0.037247, -0.0362242, 0.077903, -1.73526)
-mesh = SubResource("BoxMesh_ul34a")
-surface_material_override/0 = SubResource("StandardMaterial3D_6nf2x")
-
-[node name="WoodDrop" type="MeshInstance3D" parent="."]
+[node name="DoorDrop" type="Node3D" parent="."]
 transform = Transform3D(0.932333, 0, 0, 0, -1.00485e-07, 1, 0, -2.29883, -4.37114e-08, -0.0409611, 0.563846, -0.618721)
-mesh = SubResource("QuadMesh_estjl")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="WoodDrop"]
+[node name="Hinge" type="Node3D" parent="DoorDrop"]
+transform = Transform3D(0.999999, -4.37491e-18, 8.73115e-11, 4.37491e-18, 1, -2.13163e-14, -8.73115e-11, 2.13163e-14, 0.999999, 0.475677, 0, 0.000193506)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WoodDrop/StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="DoorDrop/Hinge"]
+transform = Transform3D(1, 3.46945e-18, -8.73115e-11, 3.40938e-19, 1, 1.77636e-15, -1.16415e-10, -7.10543e-15, 1, -0.475677, 0, -0.000193626)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorDrop/Hinge/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_mee1o")
 
-[node name="StartButton" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0547974, 0, 0, 0, 0.304909, 0, 0, 0, 0.250442, -0.570214, 0.579192, -1.53391)
-mesh = SubResource("BoxMesh_aro7i")
+[node name="WoodDrop" type="MeshInstance3D" parent="DoorDrop/Hinge/StaticBody3D"]
+transform = Transform3D(1, -2.96583e-18, 5.82077e-11, -2.66549e-18, 1, 1.77636e-15, 1.45519e-10, 2.13163e-14, 1, 0, 0, 0)
+mesh = SubResource("QuadMesh_estjl")
+skeleton = NodePath("../../../..")
+script = ExtResource("7_1dvre")
 
-[node name="RedButton" type="MeshInstance3D" parent="StartButton"]
-transform = Transform3D(5.43864e-07, -3.64981, 0, 3.27966, 1.95483e-08, 0, 0, 0, 3.99294, -0.547752, 0, 0)
-mesh = SubResource("CylinderMesh_50pf6")
-skeleton = NodePath("../..")
-script = ExtResource("4_e6afn")
+[node name="SecurityGarageDoor" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.911173, -3.71383e-07, 1.45045e-08, -3.54824e-07, -0.953695, -1.32628e-09, 3.54824e-07, 3.39587e-08, -0.037247, -0.0362242, 0.077903, -1.73526)
+mesh = SubResource("BoxMesh_ul34a")
+surface_material_override/0 = SubResource("StandardMaterial3D_6nf2x")
+script = ExtResource("5_nftug")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="StartButton/RedButton"]
+[node name="SawingBlades" type="AudioStreamPlayer3D" parent="SecurityGarageDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048239, 0.16828, 0.385652)
+stream = ExtResource("7_got7k")
+max_distance = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../StartButton/StartButtonBase/RedButton")
 libraries = {
 "": SubResource("AnimationLibrary_rpmhb")
 }
@@ -266,6 +360,23 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048239, 0.16828, 0.385652)
 stream = ExtResource("6_fhdvh")
 max_distance = 10.0
+
+[node name="StartButton" type="StaticBody3D" parent="."]
+
+[node name="StartButtonBase" type="MeshInstance3D" parent="StartButton"]
+transform = Transform3D(0.0547974, 0, 0, 0, 0.304909, 0, 0, 0, 0.250442, -0.570214, 0.579192, -1.53391)
+mesh = SubResource("BoxMesh_aro7i")
+skeleton = NodePath("../..")
+
+[node name="RedButton" type="MeshInstance3D" parent="StartButton/StartButtonBase"]
+transform = Transform3D(5.43864e-07, -3.64981, 0, 3.27966, 1.95483e-08, 0, 0, 0, 3.99294, -0.547752, 0, 0)
+mesh = SubResource("CylinderMesh_50pf6")
+skeleton = NodePath("../../..")
+script = ExtResource("4_e6afn")
+
+[node name="PressZone" type="CollisionShape3D" parent="StartButton"]
+transform = Transform3D(0.0547974, 1.45519e-11, 0, 3.63798e-12, 0.304909, 0, 0, 0, 0.250442, -0.570214, 0.579192, -1.53391)
+shape = SubResource("ConvexPolygonShape3D_a5qu6")
 
 [connection signal="body_entered" from="ConveyorBelt/Area3D" to="ConveyorBelt" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="ConveyorBelt/Area3D" to="ConveyorBelt" method="_on_area_3d_body_exited"]

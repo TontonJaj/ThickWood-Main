@@ -4,8 +4,8 @@
 extends CharacterBody3D
 
 var speed : float = WALK_SPEED #what 
-const WALK_SPEED = 5.0
-const SPRINT_SPEED = 8.0
+const WALK_SPEED = 4.0
+const SPRINT_SPEED = 6.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
 var camera_pitch = 0.0  # Variable to track the camera's pitch (vertical rotation tracker)
@@ -161,9 +161,6 @@ func _input(event):
 
 func _physics_process(delta):
 	
-	if interaction.is_colliding():
-		var collider = interaction.get_collider()
-		print("Collider detected: ", collider.name)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -211,12 +208,12 @@ func _physics_process(delta):
 				animation_player.play("metarig|walking")
 				animation_player.set_speed_scale(1.0)
 		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 5.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 5.0)
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 10.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 10.0)
 			
 	else: #gradually reduce velocity when player is fixed
-		velocity.x = lerp(velocity.x, 0.0, delta * 5.0)
-		velocity.z = lerp(velocity.z, 0.0, delta * 5.0)
+		velocity.x = lerp(velocity.x, 0.0, delta * 10.0)
+		velocity.z = lerp(velocity.z, 0.0, delta * 10.0)
 		
 	#Head BOB
 	t_bob += delta * velocity.length() * float(is_on_floor())

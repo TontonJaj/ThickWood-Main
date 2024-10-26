@@ -45,6 +45,7 @@ folder_colors={
 
 trees=""
 movable=""
+deadwood=""
 
 [input]
 

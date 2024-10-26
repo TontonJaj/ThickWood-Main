@@ -103,9 +103,10 @@ bus = &"Record"
 [node name="TestBoxes" type="Node" parent="." groups=["movable", "trees"]]
 script = ExtResource("5_o5pl3")
 
-[node name="tree2" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree2" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98125, 1, 4.84084)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree2" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -116,9 +117,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree7" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree7" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96251, 2, 4.68167)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree7" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -129,9 +131,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree3" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree3" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98125, 1, 4.84084)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree3" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -142,9 +145,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree4" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree4" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36863, 1, 6.72159)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree4" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -155,9 +159,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree5" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree5" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2523, 1, 4.84084)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree5" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -168,9 +173,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree6" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree6" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.95965, 1, 6.78169)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree6" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -181,9 +187,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree8" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree8" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.02415, 1, 4.84084)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree8" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -194,9 +201,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_5hm34")
 
-[node name="tree1" type="RigidBody3D" parent="TestBoxes" groups=["movable", "trees"]]
+[node name="tree1" type="RigidBody3D" parent="TestBoxes" groups=["deadwood", "movable", "trees"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98125, 1, 6.72525)
 mass = 75.0
+can_sleep = false
 
 [node name="Mesh2" type="MeshInstance3D" parent="TestBoxes/tree1" groups=["movable", "trees"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

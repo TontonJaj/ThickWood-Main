@@ -21,14 +21,14 @@ func _on_sell_button_body_entered(body: Node3D) -> void:
 		
 		$"../GUI/PlayerInfo/Wallet".update_money(total_value)
 		body.queue_free()
-		$"../GUI/PlayerInfo/StaminaBar".timer_control() # to fix not regening the stam when selling the object witout droping it
-
-		$"../Player".picked = false
-
 		$SellButton/Queching.playing = true
-		$"../Player".staminaDegenStat -= $"../Player".holdDegenValue
-		$"../GUI/PlayerInfo/StaminaBar".timer_control()
+
+		if $"../Player".picked == true: #ensure that staminadegen only - if player still was picking when selled 
+			$"../Player".staminaDegenStat -= $"../Player".holdDegenValue
+			$"../Player".picked = false
+			$"../GUI/PlayerInfo/StaminaBar".timer_control() # to fix not regening the stam when selling the object witout droping it
+		else:
+			$"../GUI/PlayerInfo/StaminaBar".timer_control()
+
 
 		
-	else:
-		print("is missing a condition (ingrouptree/rigidbody3d)")
