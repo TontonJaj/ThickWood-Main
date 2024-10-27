@@ -157,6 +157,34 @@ tracks/1/keys = {
 "values": [Vector3(-0.547752, 0, 0), Vector3(-0.177548, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_bgx10"]
+resource_name = "DroptheWood"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../DoorDrop/Hinge:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.475677, 0, 0.000193506), Vector3(0.475676, 0, 0.000193506)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../DoorDrop/Hinge:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.13163e-14, 8.73115e-11, 4.37491e-18), Vector3(-1.90146e-08, -1.5708, -1.90146e-08)]
+}
+
 [sub_resource type="Animation" id="Animation_ksicn"]
 length = 0.001
 tracks/0/type = "value"
@@ -236,34 +264,6 @@ tracks/0/keys = {
 "values": [Vector3(-0.0362242, 0.077903, -1.73526), Vector3(-0.0366605, 1.0779, -1.73526)]
 }
 
-[sub_resource type="Animation" id="Animation_bgx10"]
-resource_name = "DroptheWood"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../DoorDrop/Hinge:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.475677, 0, 0.000193506), Vector3(0.475676, 0, 0.000193506)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../DoorDrop/Hinge:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(2.13163e-14, 8.73115e-11, 4.37491e-18), Vector3(-1.90146e-08, -1.5708, -1.90146e-08)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rpmhb"]
 _data = {
 "Color change": SubResource("Animation_ifjfb"),
@@ -325,7 +325,7 @@ shape = SubResource("BoxShape3D_f45jn")
 transform = Transform3D(0.932333, 0, 0, 0, -1.00485e-07, 1, 0, -2.29883, -4.37114e-08, -0.0409611, 0.563846, -0.618721)
 
 [node name="Hinge" type="Node3D" parent="DoorDrop"]
-transform = Transform3D(0.999999, -4.37491e-18, 8.73115e-11, 4.37491e-18, 1, -2.13163e-14, -8.73115e-11, 2.13163e-14, 0.999999, 0.475677, 0, 0.000193506)
+transform = Transform3D(0.999999, -4.37491e-18, 8.73114e-11, 4.37491e-18, 1, -2.13163e-14, -8.73114e-11, 2.13163e-14, 0.999999, 0.475677, 0, 0.000193506)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorDrop/Hinge"]
 transform = Transform3D(1, 3.46945e-18, -8.73115e-11, 3.40938e-19, 1, 1.77636e-15, -1.16415e-10, -7.10543e-15, 1, -0.475677, 0, -0.000193626)
