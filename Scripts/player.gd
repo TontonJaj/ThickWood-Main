@@ -36,7 +36,10 @@ var rotation_power = 0.05
 #MOST DEFINITIVIELY SOMETHING TO CARE FOR !!!! WHEN THE FUCKING OBJECT GETS OUT OF CONTROL OF PICKING
 #OR IS SOLD WITHOUT PRESSING 'E' OR CALLING DROP_OBJECT THERE IS NO REINITIALISATION OF STATES!
 
-const pull_power = 8
+const pull_power = 5.0
+var smoothing_factor: float = 5 #adjust this value to control the smoothing speed when grabbing
+var hold_distance: float = 1.0 # Distance from the hand to the object
+var damping_factor : float = 2.0
 
 #PlAYER STAT
 var strength : int = 10
@@ -69,7 +72,7 @@ var XP = 0
 @onready var hand = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Hand
 @onready var animation_player = $AnimationPlayer
 @onready var joint = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Generic6DOFJoint3D
-@onready var staticbody = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/StaticBody3D
+@onready var staticbody = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Hand/StaticBody3D
 @onready var wallet = $"../GUI/PlayerInfo/Wallet"
 #GUI onreadys
 @onready var staminaBar = $"../GUI/PlayerInfo/StaminaBar"
@@ -98,6 +101,7 @@ func _ready():
 
 func pickTreeIfTree():
 	var collider = interaction.get_collider()
+	
 	if collider is RigidBody3D and collider.is_in_group("trees"):
 		picked_object = collider
 		print("eee")
@@ -188,11 +192,10 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("sprint"):
 		speed = WALK_SPEED
-		print("whattheheck2")
 		is_sprinting = false
 		staminaDegenStat -= sprintDegenValue
 		staminaBar.timer_control()
-
+		
 
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	#var direction = -(body.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -226,18 +229,39 @@ func _physics_process(delta):
 	
 	#movement of the log
 	if picked == true and picked_object != null:
-		var a = picked_object.global_transform.origin
-		var b = hand.global_transform.origin 
-		picked_object.set_linear_velocity((b-a) * pull_power)
-	
+		#check distance to determine if we should drop the object			
+		var target_position = hand.global_transform.origin + hand.global_transform.basis.z.normalized()
+		var direction_to_target = target_position - picked_object.global_position  
+		var distance_to_target = direction_to_target.length()
 
-	
+		#ensure the direction is normalized to avoid scaling issues
+		direction_to_target = direction_to_target.normalized()
+
+		print("distance to hand: " , hand.global_position)
+		print("target position:", target_position)
+		print("object position:", picked_object.global_position)
+		print("distance to hand", distance_to_target)
+		if distance_to_target > 4.0: #use a threshold appropriate that makes sense
+			drop_object() 
+			print("dropped the object because out of hand reach.")
+		
+		#apply a continuous force to move the object towards the target position
+		if distance_to_target > 1:
+			var force = direction_to_target * pull_power * strength * distance_to_target
+			print("force being applied:", force)
+			picked_object.apply_force(force, target_position)
+		
+		elif distance_to_target <= 1:
+			var a = picked_object.global_transform.origin
+			var b = hand.global_transform.origin
+			picked_object.set_linear_velocity((b-a) * pull_power)  # Stop the force when close enough
 			
-
+		
+		
+		
 			 
 
 			
-			#$GUI/PlayerInfo/CaracteristicPanel.visible = false
 	
 			
 	move_and_slide()
