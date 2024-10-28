@@ -37,9 +37,10 @@ var rotation_power = 0.05
 #OR IS SOLD WITHOUT PRESSING 'E' OR CALLING DROP_OBJECT THERE IS NO REINITIALISATION OF STATES!
 
 const pull_power = 5.0
-var smoothing_factor: float = 5 #adjust this value to control the smoothing speed when grabbing
-var hold_distance: float = 1.0 # Distance from the hand to the object
-var damping_factor : float = 2.0
+#var smoothing_factor: float = 5 #adjust this value to control the smoothing speed when grabbing
+#var hold_distance: float = 1.0 # Distance from the hand to the object
+#var damping_factor : float = 2.0
+var limit_pull : float = 1.0
 
 #PlAYER STAT
 var strength : int = 10
@@ -166,6 +167,7 @@ func _input(event):
 func _physics_process(delta):
 	
 	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -228,33 +230,33 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	#movement of the log
-	if picked == true and picked_object != null:
+	var collider = interaction.get_collider()
+	if collider is RigidBody3D and picked == true and collider != null:
+		picked_object = collider
+
 		#check distance to determine if we should drop the object			
 		var target_position = hand.global_transform.origin + hand.global_transform.basis.z.normalized()
 		var direction_to_target = target_position - picked_object.global_position  
 		var distance_to_target = direction_to_target.length()
-
+		
 		#ensure the direction is normalized to avoid scaling issues
 		direction_to_target = direction_to_target.normalized()
 
-		print("distance to hand: " , hand.global_position)
-		print("target position:", target_position)
-		print("object position:", picked_object.global_position)
-		print("distance to hand", distance_to_target)
 		if distance_to_target > 4.0: #use a threshold appropriate that makes sense
 			drop_object() 
 			print("dropped the object because out of hand reach.")
 		
 		#apply a continuous force to move the object towards the target position
-		if distance_to_target > 1:
+		elif distance_to_target > limit_pull:
 			var force = direction_to_target * pull_power * strength * distance_to_target
-			print("force being applied:", force)
-			picked_object.apply_force(force, target_position)
+			pulling_from_distance(force, target_position)
+			
 		
-		elif distance_to_target <= 1:
+		elif distance_to_target <= limit_pull:
+			pulling_from_near()
 			var a = picked_object.global_transform.origin
 			var b = hand.global_transform.origin
-			picked_object.set_linear_velocity((b-a) * pull_power)  # Stop the force when close enough
+			picked_object.set_linear_velocity((b-a) * (pull_power/(picked_object.mass/strength)))  # Stop the force when close enough
 			
 		
 		
@@ -266,7 +268,19 @@ func _physics_process(delta):
 			
 	move_and_slide()
 
+
+func pulling_from_distance(force, target_position):
+	picked_object = interaction.get_collider()
+	print("force being applied:", force)
+	picked_object.apply_force(force, target_position)
 	
+func pulling_from_near():
+	picked_object = interaction.get_collider()
+	var a = picked_object.global_transform.origin
+	var b = hand.global_transform.origin
+	limit_pull = 3
+	picked_object.set_linear_velocity((b-a) * pull_power)
+		
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
