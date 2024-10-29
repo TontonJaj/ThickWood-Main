@@ -30,13 +30,13 @@ const FOV_CHANGE = 0.1
 const gravity = 9.8
 
 var picked_object = null
-var rotation_power = 0.05
+var rotation_power = 0.01
 #not sure if we're handling these switches correctly
 
 #MOST DEFINITIVIELY SOMETHING TO CARE FOR !!!! WHEN THE FUCKING OBJECT GETS OUT OF CONTROL OF PICKING
 #OR IS SOLD WITHOUT PRESSING 'E' OR CALLING DROP_OBJECT THERE IS NO REINITIALISATION OF STATES!
 
-const pull_power = 5.0
+const pull_power = 3.0
 #var smoothing_factor: float = 5 #adjust this value to control the smoothing speed when grabbing
 #var hold_distance: float = 1.0 # Distance from the hand to the object
 #var damping_factor : float = 2.0
@@ -230,10 +230,8 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	#movement of the log
-	var collider = interaction.get_collider()
-	if collider is RigidBody3D and picked == true and collider != null:
-		picked_object = collider
-
+	if picked_object is RigidBody3D and picked == true and picked_object != null:
+		
 		#check distance to determine if we should drop the object			
 		var target_position = hand.global_transform.origin + hand.global_transform.basis.z.normalized()
 		var direction_to_target = target_position - picked_object.global_position  
@@ -242,7 +240,7 @@ func _physics_process(delta):
 		#ensure the direction is normalized to avoid scaling issues
 		direction_to_target = direction_to_target.normalized()
 
-		if distance_to_target > 4.0: #use a threshold appropriate that makes sense
+		if distance_to_target > 4: #use a threshold appropriate that makes sense
 			drop_object() 
 			print("dropped the object because out of hand reach.")
 		
@@ -250,6 +248,7 @@ func _physics_process(delta):
 		elif distance_to_target > limit_pull:
 			var force = direction_to_target * pull_power * strength * distance_to_target
 			pulling_from_distance(force, target_position)
+			print("pulling from distance because limit pull is: ", limit_pull)
 			
 		
 		elif distance_to_target <= limit_pull:
@@ -270,12 +269,9 @@ func _physics_process(delta):
 
 
 func pulling_from_distance(force, target_position):
-	picked_object = interaction.get_collider()
-	print("force being applied:", force)
 	picked_object.apply_force(force, target_position)
 	
 func pulling_from_near():
-	picked_object = interaction.get_collider()
 	var a = picked_object.global_transform.origin
 	var b = hand.global_transform.origin
 	limit_pull = 3
