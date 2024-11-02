@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btxlxprvjnfc3"
+path="res://.godot/imported/6262288438394880 (1).wav-b200af90450b79aa14e424dcea39e20b.sample"
+
+[deps]
+
+source_file="res://Assets/DoneByJaj/6262288438394880 (1).wav"
+dest_files=["res://.godot/imported/6262288438394880 (1).wav-b200af90450b79aa14e424dcea39e20b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

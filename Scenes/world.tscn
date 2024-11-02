@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dymsy6owlnnt7"]
+[gd_scene load_steps=32 format=3 uid="uid://dymsy6owlnnt7"]
 
 [ext_resource type="Script" path="res://Scripts/Global.gd" id="1_k5w1b"]
 [ext_resource type="ArrayMesh" uid="uid://dk87llpm7efn4" path="res://Assets/Static/MetalBox.obj" id="3_5lrt0"]
@@ -14,6 +14,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bel1e3f7oymxf" path="res://Assets/Static/deadTree.obj" id="8_sd1jf"]
 [ext_resource type="PackedScene" uid="uid://hglbwfbuebi7" path="res://Assets/DoneByJaj/FirstSaw.tscn" id="9_hf427"]
 [ext_resource type="ArrayMesh" uid="uid://tk53k7blx22i" path="res://Assets/Static/RockBench collection/rockbench.obj" id="10_1d5r4"]
+[ext_resource type="AudioStream" uid="uid://d8dd7q4x2sie" path="res://Assets/Sound/FirstMusicLoop.wav" id="15_8xhwu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5ylk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -300,5 +301,10 @@ mesh = SubResource("PrismMesh_a0otb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("ConvexPolygonShape3D_db5p5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_8xhwu")
+autoplay = true
+playback_type = 1
 
 [connection signal="body_entered" from="AdventurerGuildCounter/SellButton" to="AdventurerGuildCounter" method="_on_sell_button_body_entered"]
