@@ -31,6 +31,7 @@ const gravity = 9.8
 
 var picked_object = null
 var rotation_power = 0.01
+var push_force = 8.0
 #not sure if we're handling these switches correctly
 
 #MOST DEFINITIVIELY SOMETHING TO CARE FOR !!!! WHEN THE FUCKING OBJECT GETS OUT OF CONTROL OF PICKING
@@ -172,6 +173,8 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+
+
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor() and playerFixed != true and staminaValue >= 15:
 		velocity.y = JUMP_VELOCITY
@@ -267,6 +270,11 @@ func _physics_process(delta):
 			
 	move_and_slide()
 
+	
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 func pulling_from_distance(force, target_position):
 	picked_object.apply_force(force, target_position)

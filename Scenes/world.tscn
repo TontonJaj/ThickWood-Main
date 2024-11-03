@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dymsy6owlnnt7"]
+[gd_scene load_steps=33 format=3 uid="uid://dymsy6owlnnt7"]
 
 [ext_resource type="Script" path="res://Scripts/Global.gd" id="1_k5w1b"]
 [ext_resource type="ArrayMesh" uid="uid://dk87llpm7efn4" path="res://Assets/Static/MetalBox.obj" id="3_5lrt0"]
@@ -14,7 +14,8 @@
 [ext_resource type="ArrayMesh" uid="uid://bel1e3f7oymxf" path="res://Assets/Static/deadTree.obj" id="8_sd1jf"]
 [ext_resource type="PackedScene" uid="uid://hglbwfbuebi7" path="res://Assets/DoneByJaj/FirstSaw.tscn" id="9_hf427"]
 [ext_resource type="ArrayMesh" uid="uid://tk53k7blx22i" path="res://Assets/Static/RockBench collection/rockbench.obj" id="10_1d5r4"]
-[ext_resource type="AudioStream" uid="uid://d8dd7q4x2sie" path="res://Assets/Sound/FirstMusicLoop.wav" id="15_8xhwu"]
+[ext_resource type="AudioStream" uid="uid://dxj66xa47kklk" path="res://Assets/Sound/FirstMusicLoop.wav" id="15_8xhwu"]
+[ext_resource type="PackedScene" uid="uid://dwq0g61x4jihl" path="res://Assets/DoneByJaj/Charrette.tscn" id="16_f1jor"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5ylk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -267,6 +268,7 @@ transform = Transform3D(0.704257, 0, 0, 0, 1, 0, 0, 0, 0.702894, 0.0643392, 0.56
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441655, 0)
 
 [node name="Player" parent="." instance=ExtResource("8_hfw0x")]
+collision_layer = 2
 
 [node name="first_camp" parent="." instance=ExtResource("7_41opg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 3)
@@ -306,5 +308,8 @@ shape = SubResource("ConvexPolygonShape3D_db5p5")
 stream = ExtResource("15_8xhwu")
 autoplay = true
 playback_type = 1
+
+[node name="Node3D" parent="." instance=ExtResource("16_f1jor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 5)
 
 [connection signal="body_entered" from="AdventurerGuildCounter/SellButton" to="AdventurerGuildCounter" method="_on_sell_button_body_entered"]
