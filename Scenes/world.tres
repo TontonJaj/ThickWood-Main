@@ -1,0 +1,17 @@
+[gd_resource type="VisualShader" format=3 uid="uid://cll5e5pjmo0lq"]
+
+[resource]
+code = "shader_type sky;
+
+
+
+void sky() {
+}
+"
+graph_offset = Vector2(-253.463, -55.0504)
+mode = 3
+flags/use_half_res_pass = false
+flags/use_quarter_res_pass = false
+flags/disable_fog = false
+flags/use_debanding = false
+nodes/sky/0/position = Vector2(400, 160)

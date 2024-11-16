@@ -21,7 +21,7 @@ func _on_sell_button_body_entered(body: Node3D) -> void:
 		var tree_name = body.name
 		var calculated_value = test_boxes.get_tree_value(tree_name)
 		print("selling zone want to give :", calculated_value)
-		$"../GUI/PlayerInfo/Wallet".update_money(calculated_value)
+		$"../GUI/PlayerInfo/UiBoardLargeParchment/Wallet".update_money(calculated_value)
 		player.picked_object = null
 		body.queue_free()
 		$SellButton/Queching.playing = true

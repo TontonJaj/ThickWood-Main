@@ -1,43 +1,41 @@
-[gd_scene load_steps=28 format=3 uid="uid://ddrfi243l4qre"]
+[gd_scene load_steps=29 format=3 uid="uid://ddrfi243l4qre"]
 
-[ext_resource type="Texture2D" uid="uid://btu4otarreqm2" path="res://Assets/GUI/CP.png" id="1_aw4v5"]
-[ext_resource type="Texture2D" uid="uid://kmbldcubu316" path="res://Assets/GUI/crown-coin (5).png" id="2_feo3s"]
-[ext_resource type="Texture2D" uid="uid://cffpbw1lwx3y3" path="res://Assets/GUI/crown-coin (6).png" id="3_18jrs"]
-[ext_resource type="Texture2D" uid="uid://dlqwrc6ktt8h7" path="res://Assets/GUI/PP.png" id="4_pemld"]
+[ext_resource type="Texture2D" uid="uid://24stgpgmbi3t" path="res://Assets/GUI/Untitled design (1).png" id="1_4axn0"]
+[ext_resource type="Texture2D" uid="uid://b5fayjq1bwu6g" path="res://Assets/GUI/Coin/basecoin-removebg-preview-removebg-preview.png" id="1_6wghf"]
+[ext_resource type="Texture2D" uid="uid://dyjnvodnya65p" path="res://Assets/GUI/Coin/Silvercoin-removebg-preview-removebg-preview.png" id="2_j5ft4"]
+[ext_resource type="Texture2D" uid="uid://by3ije83660nk" path="res://Assets/GUI/Coin/goldcoin-removebg-preview-removebg-preview.png" id="3_d60wb"]
+[ext_resource type="Texture2D" uid="uid://cq8s7x8uw4tgp" path="res://Assets/GUI/Coin/Platinecoin-removebg-preview (1).png" id="4_8nv3r"]
 [ext_resource type="Script" path="res://Scripts/wallet.gd" id="5_c8auf"]
 [ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="6_4fwqr"]
 [ext_resource type="Texture2D" uid="uid://gmn6l4nmom4c" path="res://Assets/GUI/imageedit_15_9719256775.png" id="6_shwbf"]
+[ext_resource type="FontFile" uid="uid://b0gs2dvurpelr" path="res://Assets/GUI/Fantasy Wooden GUI  Free/Font/Fonts/KnightWarrior-w16n8.otf" id="7_ur5wp"]
 [ext_resource type="Script" path="res://Scripts/caracteristic_panel.gd" id="8_hcgq1"]
 [ext_resource type="Texture2D" uid="uid://nkj3d567uegu" path="res://Assets/GUI/Unpressed_button-removebg-preview.png" id="9_0svvb"]
 [ext_resource type="Shader" path="res://Scenes/GUI.gdshader" id="9_2oc24"]
 [ext_resource type="Texture2D" uid="uid://dt22jm43iywo0" path="res://Assets/GUI/Pressed_button-removebg-preview.png" id="10_gt65h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gic5w"]
-bg_color = Color(0.933333, 0.803922, 0.67451, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.236166, 0.160594, 0.0367937, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2unfk"]
-blend_mode = 2
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pug8v"]
+light_mode = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_nm4rs"]
-font_size = 33
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qqs80"]
-font_size = 33
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_o11rb"]
-font_size = 33
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gpwre"]
-font_size = 33
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_heg72"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -185,150 +183,146 @@ _data = {
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 298.0
+offset_bottom = 648.0
 
-[node name="MoneyInfo" type="Panel" parent="PlayerInfo"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 199.0
-offset_bottom = 145.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
+[node name="UiBoardLargeParchment" type="Sprite2D" parent="PlayerInfo"]
+position = Vector2(136, 109.5)
+scale = Vector2(0.55, 0.4525)
+texture = ExtResource("1_4axn0")
 
-[node name="MoneyInfo" type="Panel" parent="PlayerInfo/MoneyInfo"]
-layout_mode = 0
-offset_top = 34.0
-offset_right = 175.0
-offset_bottom = 155.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_gic5w")
-
-[node name="Wallet" type="ItemList" parent="PlayerInfo/MoneyInfo/MoneyInfo"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = -27.0
-offset_right = 168.0
-offset_bottom = -4.0
-
-[node name="Title" type="Label" parent="PlayerInfo/MoneyInfo/MoneyInfo/Wallet"]
-material = SubResource("CanvasItemMaterial_2unfk")
-layout_mode = 1
-offset_left = 13.0
-offset_top = -4.0
-offset_right = 185.0
-offset_bottom = 42.0
-scale = Vector2(0.65, 0.65)
-text = "Wallet"
-label_settings = SubResource("LabelSettings_nm4rs")
-
-[node name="CP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
-layout_mode = 1
+[node name="CP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
 anchors_preset = -1
 anchor_left = 0.0552326
 anchor_top = 0.0645161
 anchor_right = 0.142442
 anchor_bottom = 0.306452
-offset_left = 1.3343
-offset_top = 33.1936
-offset_right = 16.0726
-offset_bottom = 33.9193
+offset_left = -167.252
+offset_top = -173.898
+offset_right = -4.60055
+offset_bottom = -172.689
 grow_vertical = 2
-texture = ExtResource("1_aw4v5")
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("1_6wghf")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="SP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
-layout_mode = 1
+[node name="SP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
 anchors_preset = -1
 anchor_left = 0.0552326
 anchor_top = 0.274194
 anchor_right = 0.142442
 anchor_bottom = 0.516129
-offset_left = 1.3343
-offset_top = 33.1936
-offset_right = 16.0726
-offset_bottom = 33.9194
+offset_left = -167.548
+offset_top = -175.67
+offset_right = -104.931
+offset_bottom = -174.944
 grow_vertical = 2
-texture = ExtResource("2_feo3s")
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("2_j5ft4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="GP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
-layout_mode = 1
+[node name="GP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
 anchors_preset = -1
 anchor_left = 0.0552326
 anchor_top = 0.483871
 anchor_right = 0.142442
 anchor_bottom = 0.725806
-offset_left = 1.3343
-offset_top = 33.1936
-offset_right = 16.0726
-offset_bottom = 33.9194
+offset_left = -167.548
+offset_top = -175.134
+offset_right = -104.931
+offset_bottom = -174.408
 grow_vertical = 2
-texture = ExtResource("3_18jrs")
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("3_d60wb")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="PP" type="TextureRect" parent="PlayerInfo/MoneyInfo"]
-layout_mode = 1
+[node name="PP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
 anchors_preset = -1
 anchor_left = 0.0552326
 anchor_top = 0.693548
-anchor_right = 0.142442
+anchor_right = 1.26
 anchor_bottom = 0.935484
-offset_left = 1.3343
-offset_top = 33.1936
-offset_right = 16.0726
-offset_bottom = 33.9193
+offset_left = -167.548
+offset_top = -177.311
+offset_right = -104.932
+offset_bottom = -176.586
 grow_vertical = 2
-texture = ExtResource("4_pemld")
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("4_8nv3r")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Wallet" type="ItemList" parent="PlayerInfo"]
-layout_mode = 0
-offset_left = 71.0
-offset_top = 64.0
-offset_right = 191.0
-offset_bottom = 172.0
+[node name="Wallet" type="ItemList" parent="PlayerInfo/UiBoardLargeParchment"]
+material = SubResource("CanvasItemMaterial_pug8v")
+anchors_preset = -1
+anchor_left = -0.118
+anchor_top = -0.105
+anchor_right = -0.118
+anchor_bottom = -0.105
+offset_left = -20.3306
+offset_top = -118.221
+offset_right = 220.669
+offset_bottom = 217.779
 script = ExtResource("5_c8auf")
 
-[node name="CPQTY" type="Label" parent="PlayerInfo/Wallet"]
+[node name="CPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
 layout_mode = 1
-offset_left = 6.0
-offset_top = 1.0
-offset_right = 178.0
-offset_bottom = 47.0
+anchors_preset = -1
+anchor_right = 1.07
+anchor_bottom = 1.0
+offset_left = 3.27276
+offset_top = -4.06078
+offset_right = -82.5973
+offset_bottom = -226.061
 scale = Vector2(0.65, 0.65)
-text = "4"
+text = "0"
 label_settings = SubResource("LabelSettings_nm4rs")
 
-[node name="SPQTY" type="Label" parent="PlayerInfo/Wallet"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 26.0
-offset_right = 178.0
-offset_bottom = 72.0
+[node name="SPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.231
+anchor_right = 1.07
+anchor_bottom = 0.452
+offset_left = -0.363608
+offset_top = 0.0911789
+offset_right = -86.2336
+offset_bottom = 39.8352
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_qqs80")
 
-[node name="GPQTY" type="Label" parent="PlayerInfo/Wallet"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 52.0
-offset_right = 178.0
-offset_bottom = 98.0
+[node name="GPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.452
+anchor_right = 1.07
+anchor_bottom = 0.708
+offset_left = -0.363617
+offset_top = 12.023
+offset_right = -86.2336
+offset_bottom = 40.007
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_o11rb")
 
-[node name="PPQTY" type="Label" parent="PlayerInfo/Wallet"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 77.0
-offset_right = 178.0
-offset_bottom = 123.0
+[node name="PPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.731
+anchor_right = 1.07
+anchor_bottom = 0.952
+offset_left = -0.363609
+offset_top = 0.0470276
+offset_right = -86.2336
+offset_bottom = 39.791
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_gpwre")
@@ -387,10 +381,11 @@ wait_time = 0.05
 [node name="RichTextLabel" type="RichTextLabel" parent="PlayerInfo/StaminaBar/ProgressBar"]
 material = SubResource("CanvasItemMaterial_sy064")
 layout_mode = 0
-offset_left = 15.0
-offset_top = -3.0
-offset_right = 342.0
-offset_bottom = 17.0
+offset_left = 5.5
+offset_top = -0.499996
+offset_right = 104.5
+offset_bottom = 18.5
+theme_override_fonts/normal_font = ExtResource("7_ur5wp")
 text = "Stamina"
 scroll_active = false
 autowrap_mode = 2

@@ -31,7 +31,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/multimesh_scatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/yamms/plugin.cfg")
 
 [file_customization]
 
@@ -47,6 +47,7 @@ trees=""
 movable=""
 deadwood=""
 processed=""
+player=""
 
 [input]
 
@@ -110,10 +111,14 @@ rotate={
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
-3d/default_linear_damp=0.4
-3d/default_angular_damp=0.4
 jolt_3d/continuous_cd/movement_threshold=100.0
 jolt_3d/continuous_cd/max_penetration=0.0
+jolt_3d/limits/max_linear_velocity=14.0
+jolt_3d/limits/max_angular_velocity=1500.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
 
 [shader_globals]
 

@@ -517,11 +517,11 @@ inherit_velocity_ratio = 0.205
 radius = 0.05
 height = 0.05
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544341, 0)
 script = ExtResource("1_wxev7")
 
-[node name="Capsule collision" type="CollisionShape3D" parent="."]
+[node name="Capsule_collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, -9.36624e-38, 5.31519e-23, 3.72529e-09, 1, -2.98023e-08, 1.62838e-16, 2.98023e-08, 1, 2.98023e-08, 0.9, 2.38419e-07)
 shape = SubResource("CapsuleShape3D_4i14b")
 

@@ -75,7 +75,7 @@ var XP = 0
 @onready var animation_player = $AnimationPlayer
 @onready var joint = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Generic6DOFJoint3D
 @onready var staticbody = $metarig/Skeleton3D/HeadCamera/Head/Camera3D/Hand/StaticBody3D
-@onready var wallet = $"../GUI/PlayerInfo/Wallet"
+@onready var wallet = $"../GUI/PlayerInfo/UiBoardLargeParchment/Wallet"
 #GUI onreadys
 @onready var staminaBar = $"../GUI/PlayerInfo/StaminaBar"
 
