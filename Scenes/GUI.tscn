@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://ddrfi243l4qre"]
 
-[ext_resource type="Texture2D" uid="uid://24stgpgmbi3t" path="res://Assets/GUI/Untitled design (1).png" id="1_4axn0"]
 [ext_resource type="Texture2D" uid="uid://b5fayjq1bwu6g" path="res://Assets/GUI/Coin/basecoin-removebg-preview-removebg-preview.png" id="1_6wghf"]
+[ext_resource type="Texture2D" uid="uid://gxrxoq7ltget" path="res://Assets/GUI/1-Photoroom.png" id="1_067vl"]
 [ext_resource type="Texture2D" uid="uid://dyjnvodnya65p" path="res://Assets/GUI/Coin/Silvercoin-removebg-preview-removebg-preview.png" id="2_j5ft4"]
 [ext_resource type="Texture2D" uid="uid://by3ije83660nk" path="res://Assets/GUI/Coin/goldcoin-removebg-preview-removebg-preview.png" id="3_d60wb"]
 [ext_resource type="Texture2D" uid="uid://cq8s7x8uw4tgp" path="res://Assets/GUI/Coin/Platinecoin-removebg-preview (1).png" id="4_8nv3r"]
@@ -187,9 +187,9 @@ offset_right = 298.0
 offset_bottom = 648.0
 
 [node name="UiBoardLargeParchment" type="Sprite2D" parent="PlayerInfo"]
-position = Vector2(136, 109.5)
+position = Vector2(143, 109.5)
 scale = Vector2(0.55, 0.4525)
-texture = ExtResource("1_4axn0")
+texture = ExtResource("1_067vl")
 
 [node name="CP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
 z_index = 1
@@ -198,15 +198,16 @@ anchor_left = 0.0552326
 anchor_top = 0.0645161
 anchor_right = 0.142442
 anchor_bottom = 0.306452
-offset_left = -167.252
-offset_top = -173.898
-offset_right = -4.60055
-offset_bottom = -172.689
+offset_left = -175.446
+offset_top = -193.979
+offset_right = -12.7943
+offset_bottom = -192.77
 grow_vertical = 2
 scale = Vector2(0.455, 0.455)
 texture = ExtResource("1_6wghf")
 expand_mode = 2
 stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="SP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
 z_index = 1
@@ -215,15 +216,16 @@ anchor_left = 0.0552326
 anchor_top = 0.274194
 anchor_right = 0.142442
 anchor_bottom = 0.516129
-offset_left = -167.548
-offset_top = -175.67
-offset_right = -104.931
-offset_bottom = -174.944
+offset_left = -174.821
+offset_top = -215.449
+offset_right = -103.143
+offset_bottom = -214.723
 grow_vertical = 2
 scale = Vector2(0.455, 0.455)
 texture = ExtResource("2_j5ft4")
 expand_mode = 2
 stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="GP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
 z_index = 1
@@ -232,15 +234,16 @@ anchor_left = 0.0552326
 anchor_top = 0.483871
 anchor_right = 0.142442
 anchor_bottom = 0.725806
-offset_left = -167.548
-offset_top = -175.134
-offset_right = -104.931
-offset_bottom = -174.408
+offset_left = -174.821
+offset_top = -228.173
+offset_right = -103.143
+offset_bottom = -227.447
 grow_vertical = 2
 scale = Vector2(0.455, 0.455)
 texture = ExtResource("3_d60wb")
 expand_mode = 2
 stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="PP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
 z_index = 1
@@ -249,15 +252,16 @@ anchor_left = 0.0552326
 anchor_top = 0.693548
 anchor_right = 1.26
 anchor_bottom = 0.935484
-offset_left = -167.548
-offset_top = -177.311
-offset_right = -104.932
-offset_bottom = -176.586
+offset_left = -174.821
+offset_top = -250.239
+offset_right = -112.205
+offset_bottom = -249.514
 grow_vertical = 2
 scale = Vector2(0.455, 0.455)
 texture = ExtResource("4_8nv3r")
 expand_mode = 2
 stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="Wallet" type="ItemList" parent="PlayerInfo/UiBoardLargeParchment"]
 material = SubResource("CanvasItemMaterial_pug8v")
@@ -271,19 +275,21 @@ offset_top = -118.221
 offset_right = 220.669
 offset_bottom = 217.779
 script = ExtResource("5_c8auf")
+metadata/_edit_use_anchors_ = true
 
 [node name="CPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.07
 anchor_bottom = 1.0
-offset_left = 3.27276
+offset_left = -3.99998
 offset_top = -4.06078
-offset_right = -82.5973
+offset_right = -89.87
 offset_bottom = -226.061
 scale = Vector2(0.65, 0.65)
 text = "0"
 label_settings = SubResource("LabelSettings_nm4rs")
+metadata/_edit_use_anchors_ = true
 
 [node name="SPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
 layout_mode = 1
@@ -291,13 +297,14 @@ anchors_preset = -1
 anchor_top = 0.231
 anchor_right = 1.07
 anchor_bottom = 0.452
-offset_left = -0.363608
-offset_top = 0.0911789
-offset_right = -86.2336
+offset_left = -3.99998
+offset_top = 0.0911484
+offset_right = -89.87
 offset_bottom = 39.8352
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_qqs80")
+metadata/_edit_use_anchors_ = true
 
 [node name="GPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
 layout_mode = 1
@@ -305,13 +312,14 @@ anchors_preset = -1
 anchor_top = 0.452
 anchor_right = 1.07
 anchor_bottom = 0.708
-offset_left = -0.363617
+offset_left = -4.00002
 offset_top = 12.023
-offset_right = -86.2336
+offset_right = -89.87
 offset_bottom = 40.007
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_o11rb")
+metadata/_edit_use_anchors_ = true
 
 [node name="PPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
 layout_mode = 1
@@ -319,13 +327,14 @@ anchors_preset = -1
 anchor_top = 0.731
 anchor_right = 1.07
 anchor_bottom = 0.952
-offset_left = -0.363609
+offset_left = -3.99998
 offset_top = 0.0470276
-offset_right = -86.2336
+offset_right = -89.87
 offset_bottom = 39.791
 scale = Vector2(0.65, 0.65)
 text = "4"
 label_settings = SubResource("LabelSettings_gpwre")
+metadata/_edit_use_anchors_ = true
 
 [node name="StaminaBar" type="Panel" parent="PlayerInfo"]
 layout_mode = 0
