@@ -1,0 +1,640 @@
+[gd_scene load_steps=29 format=3 uid="uid://ddrfi243l4qre"]
+
+[ext_resource type="Texture2D" uid="uid://b5fayjq1bwu6g" path="res://Assets/GUI/Coin/basecoin-removebg-preview-removebg-preview.png" id="1_6wghf"]
+[ext_resource type="Texture2D" uid="uid://gxrxoq7ltget" path="res://Assets/GUI/1-Photoroom.png" id="1_067vl"]
+[ext_resource type="Texture2D" uid="uid://dyjnvodnya65p" path="res://Assets/GUI/Coin/Silvercoin-removebg-preview-removebg-preview.png" id="2_j5ft4"]
+[ext_resource type="Texture2D" uid="uid://by3ije83660nk" path="res://Assets/GUI/Coin/goldcoin-removebg-preview-removebg-preview.png" id="3_d60wb"]
+[ext_resource type="Texture2D" uid="uid://cq8s7x8uw4tgp" path="res://Assets/GUI/Coin/Platinecoin-removebg-preview (1).png" id="4_8nv3r"]
+[ext_resource type="Script" path="res://Scripts/wallet.gd" id="5_c8auf"]
+[ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="6_4fwqr"]
+[ext_resource type="Texture2D" uid="uid://gmn6l4nmom4c" path="res://Assets/GUI/imageedit_15_9719256775.png" id="6_shwbf"]
+[ext_resource type="FontFile" uid="uid://b0gs2dvurpelr" path="res://Assets/GUI/Fantasy Wooden GUI  Free/Font/Fonts/KnightWarrior-w16n8.otf" id="7_ur5wp"]
+[ext_resource type="Script" path="res://Scripts/caracteristic_panel.gd" id="8_hcgq1"]
+[ext_resource type="Texture2D" uid="uid://nkj3d567uegu" path="res://Assets/GUI/Unpressed_button-removebg-preview.png" id="9_0svvb"]
+[ext_resource type="Shader" path="res://Scenes/GUI.gdshader" id="9_2oc24"]
+[ext_resource type="Texture2D" uid="uid://dt22jm43iywo0" path="res://Assets/GUI/Pressed_button-removebg-preview.png" id="10_gt65h"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pug8v"]
+light_mode = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_nm4rs"]
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qqs80"]
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o11rb"]
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gpwre"]
+font = ExtResource("7_ur5wp")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_heg72"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wb1p"]
+bg_color = Color(0.948019, 0.380459, 0.481297, 1)
+
+[sub_resource type="Theme" id="Theme_swy74"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sy064"]
+blend_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s3ip"]
+bg_color = Color(0.942114, 0.842112, 0.739063, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xjtp"]
+shader = ExtResource("9_2oc24")
+shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flara"]
+bg_color = Color(0.933913, 0.805819, 0.675461, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mb5jl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SkillList:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xsgjm"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.103]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SkillList:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgt2p"]
+_data = {
+"RESET": SubResource("Animation_mb5jl"),
+"blur": SubResource("Animation_xsgjm")
+}
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="PlayerInfo" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 298.0
+offset_bottom = 648.0
+
+[node name="UiBoardLargeParchment" type="Sprite2D" parent="PlayerInfo"]
+position = Vector2(143, 109.5)
+scale = Vector2(0.55, 0.4525)
+texture = ExtResource("1_067vl")
+
+[node name="CP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.0552326
+anchor_top = 0.0645161
+anchor_right = 0.142442
+anchor_bottom = 0.306452
+offset_left = -175.446
+offset_top = -193.979
+offset_right = -12.7943
+offset_bottom = -192.77
+grow_vertical = 2
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("1_6wghf")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="SP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.0552326
+anchor_top = 0.274194
+anchor_right = 0.142442
+anchor_bottom = 0.516129
+offset_left = -174.821
+offset_top = -215.449
+offset_right = -103.143
+offset_bottom = -214.723
+grow_vertical = 2
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("2_j5ft4")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="GP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.0552326
+anchor_top = 0.483871
+anchor_right = 0.142442
+anchor_bottom = 0.725806
+offset_left = -174.821
+offset_top = -228.173
+offset_right = -103.143
+offset_bottom = -227.447
+grow_vertical = 2
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("3_d60wb")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="PP" type="TextureRect" parent="PlayerInfo/UiBoardLargeParchment"]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.0552326
+anchor_top = 0.693548
+anchor_right = 1.26
+anchor_bottom = 0.935484
+offset_left = -174.821
+offset_top = -250.239
+offset_right = -112.205
+offset_bottom = -249.514
+grow_vertical = 2
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("4_8nv3r")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Wallet" type="ItemList" parent="PlayerInfo/UiBoardLargeParchment"]
+material = SubResource("CanvasItemMaterial_pug8v")
+anchors_preset = -1
+anchor_left = -0.118
+anchor_top = -0.105
+anchor_right = -0.118
+anchor_bottom = -0.105
+offset_left = -20.3306
+offset_top = -118.221
+offset_right = 220.669
+offset_bottom = 217.779
+script = ExtResource("5_c8auf")
+metadata/_edit_use_anchors_ = true
+
+[node name="CPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.07
+anchor_bottom = 1.0
+offset_left = -3.99998
+offset_top = -4.06078
+offset_right = -89.87
+offset_bottom = -226.061
+scale = Vector2(0.65, 0.65)
+text = "0"
+label_settings = SubResource("LabelSettings_nm4rs")
+metadata/_edit_use_anchors_ = true
+
+[node name="SPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.231
+anchor_right = 1.07
+anchor_bottom = 0.452
+offset_left = -3.99998
+offset_top = 0.0911484
+offset_right = -89.87
+offset_bottom = 39.8352
+scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_qqs80")
+metadata/_edit_use_anchors_ = true
+
+[node name="GPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.452
+anchor_right = 1.07
+anchor_bottom = 0.708
+offset_left = -4.00002
+offset_top = 12.023
+offset_right = -89.87
+offset_bottom = 40.007
+scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_o11rb")
+metadata/_edit_use_anchors_ = true
+
+[node name="PPQTY" type="Label" parent="PlayerInfo/UiBoardLargeParchment/Wallet"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.731
+anchor_right = 1.07
+anchor_bottom = 0.952
+offset_left = -3.99998
+offset_top = 0.0470276
+offset_right = -89.87
+offset_bottom = 39.791
+scale = Vector2(0.65, 0.65)
+text = "4"
+label_settings = SubResource("LabelSettings_gpwre")
+metadata/_edit_use_anchors_ = true
+
+[node name="StaminaBar" type="Panel" parent="PlayerInfo"]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 26.0
+offset_right = 1128.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_heg72")
+script = ExtResource("6_4fwqr")
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerInfo/StaminaBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0343915
+anchor_top = 0.235294
+anchor_right = 0.965608
+anchor_bottom = 0.764706
+offset_left = 2.32804
+offset_top = 0.264706
+offset_right = 2.32803
+offset_bottom = 0.264706
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_8wb1p")
+step = 0.1
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/StaminaBar/ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.328
+offset_top = -17.2647
+offset_right = 186.672
+offset_bottom = 16.7353
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_swy74")
+texture = ExtResource("6_shwbf")
+
+[node name="StaminaRegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
+wait_time = 0.05
+autostart = true
+
+[node name="StaminaDegen" type="Timer" parent="PlayerInfo/StaminaBar/ProgressBar"]
+wait_time = 0.05
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerInfo/StaminaBar/ProgressBar"]
+material = SubResource("CanvasItemMaterial_sy064")
+layout_mode = 0
+offset_left = 5.5
+offset_top = -0.499996
+offset_right = 104.5
+offset_bottom = 18.5
+theme_override_fonts/normal_font = ExtResource("7_ur5wp")
+text = "Stamina"
+scroll_active = false
+autowrap_mode = 2
+tab_size = 1
+shortcut_keys_enabled = false
+text_direction = 1
+
+[node name="CaracteristicPanel" type="Panel" parent="PlayerInfo"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 26.0
+offset_top = 205.0
+offset_right = 246.0
+offset_bottom = 636.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4s3ip")
+script = ExtResource("8_hcgq1")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerInfo/CaracteristicPanel"]
+material = SubResource("ShaderMaterial_7xjtp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="PlayerInfo/CaracteristicPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 127.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_flara")
+
+[node name="PlayerName" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 4.0
+offset_right = 106.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "JAJ"
+
+[node name="Level" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 44.0
+offset_right = 98.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+
+[node name="PlayerTitle" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 91.0
+offset_right = 215.0
+offset_bottom = 114.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "The new guy"
+
+[node name="TitleName" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 61.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Name :"
+
+[node name="TitleLevel" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 44.0
+offset_right = 53.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Level :"
+
+[node name="TitlePlayerTitle" type="Label" parent="PlayerInfo/CaracteristicPanel/Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 86.0
+offset_right = 44.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Title :"
+
+[node name="SkillList" type="Panel" parent="PlayerInfo/CaracteristicPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 142.0
+offset_right = 210.0
+offset_bottom = 419.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_flara")
+
+[node name="Strength" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 6.0
+offset_right = 166.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="Stamina" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 47.0
+offset_right = 166.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1908"
+horizontal_alignment = 2
+
+[node name="Charisma" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 88.0
+offset_right = 166.0
+offset_bottom = 111.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="TitleStrength" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 61.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Strength :"
+
+[node name="TitleStamina" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 44.0
+offset_right = 53.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Stamina :"
+
+[node name="TitleCharisma" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 86.0
+offset_right = 44.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Charisma :"
+
+[node name="TitleAgility" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 125.0
+offset_right = 66.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Agility :"
+
+[node name="Agility" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 127.0
+offset_right = 166.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 2
+
+[node name="TitleStatsPoints" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 250.0
+offset_right = 105.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Stats Points :"
+
+[node name="StatsPoints" type="Label" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 250.0
+offset_right = 181.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 1
+
+[node name="UpButtonStrength" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 4.0
+offset_right = 582.0
+offset_bottom = 310.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="UpButtonStamina" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 44.0
+offset_right = 582.0
+offset_bottom = 350.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="UpButtonCharisma" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 86.0
+offset_right = 582.0
+offset_bottom = 392.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="UpButtonAgility" type="TextureButton" parent="PlayerInfo/CaracteristicPanel/SkillList"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 125.0
+offset_right = 582.0
+offset_bottom = 431.0
+scale = Vector2(0.0800006, 0.0800006)
+texture_normal = ExtResource("9_0svvb")
+texture_pressed = ExtResource("10_gt65h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerInfo/CaracteristicPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_mgt2p")
+}
+
+[connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaRegen" to="PlayerInfo/StaminaBar" method="_on_stamina_regen_timeout"]
+[connection signal="timeout" from="PlayerInfo/StaminaBar/ProgressBar/StaminaDegen" to="PlayerInfo/StaminaBar" method="_on_stamina_degen_timeout"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonStrength" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_strength_button_up"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonStamina" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_stamina_button_up"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonCharisma" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_charisma_button_up"]
+[connection signal="button_up" from="PlayerInfo/CaracteristicPanel/SkillList/UpButtonAgility" to="PlayerInfo/CaracteristicPanel" method="_on_up_button_agility_button_up"]

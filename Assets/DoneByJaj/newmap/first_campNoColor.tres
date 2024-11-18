@@ -1,0 +1,105 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://bvu78n1j7k5fo"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_3awr2"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+constant = Color(0.0615512, 0.145648, 0.0552595, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_fvvly"]
+constant = Color(0.127749, 0.0889774, 0.0266418, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_cxosc"]
+input_name = "normal"
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_06u28"]
+constant = Vector3(0, 1, 0)
+
+[sub_resource type="VisualShaderNodeDotProduct" id="VisualShaderNodeDotProduct_toyc3"]
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_ynu5s"]
+default_input_values = [0, 0.0, 1, 0.8, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_jq854"]
+input_name = "view_matrix"
+
+[sub_resource type="VisualShaderNodeTransformVecMult" id="VisualShaderNodeTransformVecMult_fiplt"]
+operator = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+
+void fragment() {
+// Input:8
+	mat4 n_out8p0 = VIEW_MATRIX;
+
+
+// Input:4
+	vec3 n_out4p0 = NORMAL;
+
+
+// TransformVectorMult:9
+	vec3 n_out9p0 = (vec4(n_out4p0, 1.0) * n_out8p0).xyz;
+
+
+// Vector3Constant:5
+	vec3 n_out5p0 = vec3(0.000000, 1.000000, 0.000000);
+
+
+// DotProduct:6
+	float n_out6p0 = dot(n_out9p0, n_out5p0);
+
+
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(0.061551, 0.145648, 0.055259, 1.000000);
+
+
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(0.127749, 0.088977, 0.026642, 1.000000);
+
+
+	vec3 n_out7p0;
+// If:7
+	float n_in7p1 = 0.80000;
+	float n_in7p2 = 0.00001;
+	if(abs(n_out6p0 - n_in7p1) < n_in7p2)
+	{
+		n_out7p0 = vec3(n_out2p0.xyz);
+	}
+	else if(n_out6p0 < n_in7p1)
+	{
+		n_out7p0 = vec3(n_out3p0.xyz);
+	}
+	else
+	{
+		n_out7p0 = vec3(n_out2p0.xyz);
+	}
+
+
+// Output:0
+	ALBEDO = n_out7p0;
+
+
+}
+"
+nodes/fragment/0/position = Vector2(700, -40)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_3awr2")
+nodes/fragment/2/position = Vector2(-40, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_fvvly")
+nodes/fragment/3/position = Vector2(60, 320)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_cxosc")
+nodes/fragment/4/position = Vector2(-540, -140)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVec3Constant_06u28")
+nodes/fragment/5/position = Vector2(-460, 120)
+nodes/fragment/6/node = SubResource("VisualShaderNodeDotProduct_toyc3")
+nodes/fragment/6/position = Vector2(120, -160)
+nodes/fragment/7/node = SubResource("VisualShaderNodeIf_ynu5s")
+nodes/fragment/7/position = Vector2(360, -100)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_jq854")
+nodes/fragment/8/position = Vector2(-460, -260)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTransformVecMult_fiplt")
+nodes/fragment/9/position = Vector2(-160, -240)
+nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 3, 0, 7, 5, 2, 0, 7, 4, 5, 0, 6, 1, 4, 0, 9, 1, 8, 0, 9, 0, 9, 0, 6, 0, 2, 0, 7, 3, 7, 0, 0, 0)

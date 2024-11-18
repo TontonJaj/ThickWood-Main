@@ -1,19 +1,40 @@
 extends Node
 
-# already declared in PlayerStats.gd ?
-#var CP = 0
-#var SP = 0
-#var GP = 0
-#var XP = 0
 
+
+#player caracteristic
+#@export STOPTHATSHIT CA MA ENCORE FAIT PERDRE 2H!!!! wtf man..je me repend au sein de lesprit de la grande sainteté ammen
+
+
+
+func _ready() -> void:
+	pass
+			
+	
 #@export what ? 
-var picked = false #this is global and easy to hack and bug. also see comment @player.gd
-	#log value # Replace with function body. tehfuck
+ #this is global and easy to hack and bug. also see comment @player.gd
 		
 
-func _ready():
-	# Initialize your game here
-	pass
+func list_node_and_children(node: Node, indent: int = 0, is_last: bool = true):
+	# Create the indentation string
+	var indentation = ""
+	for i in range(indent - 1):
+		indentation += "│  " if i < indent - 1 else "   "
+	
+	if indent > 0:
+		indentation += "└─ " if is_last else "├─ "
+	
+	# Print the current node's name with indentation for hierarchy
+	print(indentation + node.name)
+	
+	# Iterate over each child and recursively call the function
+	var children = node.get_children()
+	for i in range(children.size()):
+		var child = children[i]
+		list_node_and_children(child, indent + 1, i == children.size() - 1)
+
+
+	
 
 func _input(event):
 	# Check for 'end' input every frame
@@ -22,13 +43,11 @@ func _input(event):
 		get_tree().quit()
 
 #selling wood if wood is wood ~ this should have it's own script (eg : 'sellbutton.gd')
-func _on_sell_button_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	print(str(body) + "has entered the selling button")
-	if body.is_in_group("trees") and body is RigidBody3D:
-		Global.picked = false
-		#trying to take size of the wood and * it by value of wood type
-		var bodyvalue = body.mass
-		print(bodyvalue)
-		body.queue_free()
-	else:
-		print("is missing a condition (ingrouptree/rigidbody3d)")
+	
+		
+func pause():
+	get_tree().paused = true
+
+func resume():
+	get_tree().paused = false #Used for pausing and depausing when in the caraC MENU  rn but someday it will only be for pause menu
+	

@@ -1,3 +1,5 @@
 # ThickWood Main
  
-#Just two numbnuts
+JUST DO IT. !!!!
+
+btw one of the devs is homosexual(and gay)
