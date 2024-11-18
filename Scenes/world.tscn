@@ -1,7 +1,7 @@
 [gd_scene load_steps=50 format=3 uid="uid://dymsy6owlnnt7"]
 
 [ext_resource type="Script" path="res://Scripts/Global.gd" id="1_k5w1b"]
-[ext_resource type="ArrayMesh" uid="uid://dk87llpm7efn4" path="res://Assets/Static/MetalBox.obj" id="3_5lrt0"]
+[ext_resource type="ArrayMesh" uid="uid://dk87llpm7efn4" path="res://importedFromAPProject/Obj/MetalBox.obj" id="3_5lrt0"]
 [ext_resource type="Script" path="res://Scenes/adventurer_guild_counter.gd" id="3_dersf"]
 [ext_resource type="Shader" path="res://Scenes/world.gdshader" id="3_dwp4t"]
 [ext_resource type="Texture2D" uid="uid://bbbgymmd0nkfn" path="res://Assets/StylizedSky/Sun.png" id="4_fuo5k"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ddrfi243l4qre" path="res://Scenes/GUI.tscn" id="8_h47ps"]
 [ext_resource type="PackedScene" uid="uid://xlamdf1enuv0" path="res://Scenes/player.tscn" id="8_hfw0x"]
 [ext_resource type="Script" path="res://Scripts/Trees.gd" id="8_n57h2"]
-[ext_resource type="ArrayMesh" uid="uid://bel1e3f7oymxf" path="res://Assets/Static/deadTree.obj" id="8_sd1jf"]
+[ext_resource type="ArrayMesh" uid="uid://bel1e3f7oymxf" path="res://importedFromAPProject/Obj/deadTree.obj" id="8_sd1jf"]
 [ext_resource type="PackedScene" uid="uid://hglbwfbuebi7" path="res://Assets/DoneByJaj/To Clean/FirstSaw.tscn" id="9_hf427"]
 [ext_resource type="ArrayMesh" uid="uid://tk53k7blx22i" path="res://Assets/Static/RockBench collection/rockbench.obj" id="10_1d5r4"]
 [ext_resource type="AudioStream" uid="uid://dxj66xa47kklk" path="res://Assets/Sound/FirstMusicLoop.wav" id="15_8xhwu"]

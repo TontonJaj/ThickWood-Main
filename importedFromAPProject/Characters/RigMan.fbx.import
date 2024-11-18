@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b3aetjrenha6r"
-path="res://.godot/imported/RigMan.fbx-d9ac9c502ac51b26155ae4454ec3f642.scn"
+path="res://.godot/imported/RigMan.fbx-a35930d86ac92a6006568df09602205e.scn"
 
 [deps]
 
-source_file="res://Characters/RigMan.fbx"
-dest_files=["res://.godot/imported/RigMan.fbx-d9ac9c502ac51b26155ae4454ec3f642.scn"]
+source_file="res://importedFromAPProject/Characters/RigMan.fbx"
+dest_files=["res://.godot/imported/RigMan.fbx-a35930d86ac92a6006568df09602205e.scn"]
 
 [params]
 

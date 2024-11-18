@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://dk87llpm7efn4"
-path="res://.godot/imported/MetalBox.obj-8d00f02a77bdf64442a5dea293912d28.mesh"
+path="res://.godot/imported/MetalBox.obj-07ade1c9086216a43db27edecefecc5f.mesh"
 
 [deps]
 
-files=["res://.godot/imported/MetalBox.obj-8d00f02a77bdf64442a5dea293912d28.mesh"]
+files=["res://.godot/imported/MetalBox.obj-07ade1c9086216a43db27edecefecc5f.mesh"]
 
-source_file="res://Obj/MetalBox.obj"
-dest_files=["res://.godot/imported/MetalBox.obj-8d00f02a77bdf64442a5dea293912d28.mesh", "res://.godot/imported/MetalBox.obj-8d00f02a77bdf64442a5dea293912d28.mesh"]
+source_file="res://importedFromAPProject/Obj/MetalBox.obj"
+dest_files=["res://.godot/imported/MetalBox.obj-07ade1c9086216a43db27edecefecc5f.mesh", "res://.godot/imported/MetalBox.obj-07ade1c9086216a43db27edecefecc5f.mesh"]
 
 [params]
 

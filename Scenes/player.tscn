@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=4 uid="uid://xlamdf1enuv0"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_wxev7"]
-[ext_resource type="PackedScene" uid="uid://covfw3xr2pjoj" path="res://Assets/axe/axe.tscn" id="2_andwq"]
+[ext_resource type="PackedScene" uid="uid://covfw3xr2pjoj" path="res://importedFromAPProject/Tools/axe.tscn" id="2_andwq"]
 [ext_resource type="AudioStream" uid="uid://dqgjg2xucriwc" path="res://Assets/Sound/Jump.mp3" id="3_lpger"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4i14b"]
