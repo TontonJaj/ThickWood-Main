@@ -1,7 +1,7 @@
 extends Panel
 
 var is_open = false
-@onready var player = $"../../../Player"
+@onready var player = get_node("/root/Global/Local_Player")
 @onready var strengthDisplayed = $SkillList/Strength
 @onready var staminaDisplayed = $SkillList/Stamina
 @onready var charismaDisplayed = $SkillList/Charisma

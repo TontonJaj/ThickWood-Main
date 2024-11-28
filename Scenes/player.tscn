@@ -517,7 +517,7 @@ inherit_velocity_ratio = 0.205
 radius = 0.05
 height = 0.05
 
-[node name="Player" type="CharacterBody3D" groups=["player"]]
+[node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544341, 0)
 script = ExtResource("1_wxev7")
 
@@ -807,7 +807,6 @@ linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_tfxh1")
 }
