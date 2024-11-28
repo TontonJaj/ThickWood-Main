@@ -1,7 +1,7 @@
 extends Area3D
 
 @onready var WoodTransformer = $"."
-@onready var test_box = $"../../TestBoxes"
+@onready var test_box = get_node("/root/Global/First_Camp/Interactive_Parent/TestBoxes")
 # Called when the node enters the scene tree for the first time.
 
 var volume : float = 0.0
@@ -15,7 +15,7 @@ func _ready():
 
 func _on_body_entered(body: Node3D):
 	#Check if the body is a meshInstance3D
-	if body is RigidBody3D and body.is_in_group("trees"):
+	if body is RigidBody3D: #and add if group ok or whatever
 		var mesh_instance = find_mesh_instance(body)
 		if mesh_instance:
 			var current_volume = calculate_volume(mesh_instance)		

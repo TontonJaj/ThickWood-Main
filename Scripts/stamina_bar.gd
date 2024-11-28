@@ -1,6 +1,6 @@
 extends Panel
 
-@onready var player = $"../../../Player"
+@onready var player = get_node("/root/Global/Local_Player")
 @onready var progressbar = $ProgressBar
 
 

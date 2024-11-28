@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 @onready var animation_player = $"../../../AnimationPlayer"
-@onready var interaction = $"../../../../Player".interaction
+@onready var interaction = get_node("/root/Global/Local_Player").interaction
 
 # Called when the node enters the scene tree for the first time.
 var is_pressed = false

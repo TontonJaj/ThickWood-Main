@@ -19,11 +19,6 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="res://Assets/Sound/default_bus_layout.tres"
 
-[autoload]
-
-Global="*res://Scripts/Global.gd"
-PlayerStats="*res://Scripts/PlayerStats.gd"
-
 [display]
 
 window/stretch/mode="viewport"
@@ -31,7 +26,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/yamms/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
@@ -41,13 +36,9 @@ folder_colors={
 "res://Scripts/": "yellow"
 }
 
-[global_group]
+[filesystem]
 
-trees=""
-movable=""
-deadwood=""
-processed=""
-player=""
+import/blender/enabled=false
 
 [input]
 

@@ -1,7 +1,7 @@
 extends Node
 
-@onready var test_boxes = $"../TestBoxes"
-@onready var player = $"../Player"
+@onready var test_boxes = get_node("/root/Global/First_Camp/Interactive_Parent/TestBoxes")
+@onready var player = get_node("/root/Global/Local_Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 #this whole function need revisiting. having so many direct references dependecies is wrong and calling timer_control() twice is wak.
 	
 func _on_sell_button_body_entered(body: Node3D) -> void:
-	if body.is_in_group("trees") and body is RigidBody3D:
+	if body is RigidBody3D:
 		#trying to take size of the wood and * it by value of wood type
 		
 		var tree_name = body.name
